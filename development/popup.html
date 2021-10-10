@@ -1,11 +1,39 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Dopabeans</title>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <h1>Dopabeans</h1>
-    <button id="submit">Click this button!</button>
-  </body>
+
+<head>
+  <title>Dopabeans</title>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="home-page">
+      <div>
+        <div class="header">
+          <div class="profile"></div>
+          <h1 class="page-title">Dopabeans</h1>
+        </div>
+        <div class="create_board">
+          <button>screenshot</button>
+          <div class="current-url">
+            <input type="text" id="copy-link" disabled></input>
+            <button onclick="takeScreenshot"><i class="fa fa-link"></i></button>
+          </div>
+        </div>
+        <div class="board-container">
+          <div class="cell">1.</div>
+          <div class="cell">2.</div>
+          <div class="cell">3.</div>
+          <div class="cell">4.</div>
+          <div class="cell">5.</div>
+          <div class="cell">6.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
