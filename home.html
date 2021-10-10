@@ -22,14 +22,13 @@
             font-size: 3rem;
             text-align: center;
             padding: 4rem;
-        }
-
-        .cell-1 {
             background: deepskyblue;
-            margin: 5px;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js">
+    </script>
+
 </head>
 
 <body>
@@ -41,11 +40,15 @@
                     <h1 class="page-title">Dopabeans</h1>
                 </div>
                 <div class="create_board">
-                    <button>screenshot</button>
+                    <button onclick="takeshot()">screenshot</button>
                     <div class="current-url">
                         <input type="text" id="copy-link" disabled></input>
                         <button onclick="copiedText()"><i class="fa fa-link"></i></button>
                     </div>
+                </div>
+                <div class="screenshot">
+                    <h1>Screenshot:</h1>
+                    <div id="output"></div>
                 </div>
                 <div class="board-container">
                     <div class="cell">1.</div>
