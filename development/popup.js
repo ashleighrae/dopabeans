@@ -14,4 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("Copied the text: " + window.location.href);
   })
 
+    /* Test different extension views */
+    var checkLoginButton = document.getElementById("test")
+
+    checkLoginButton.addEventListener("click", (e) => {
+      if (document.getElementById("home").style.display === "none") {
+        document.getElementById("home").style.display = "block";
+        document.getElementById("login").style.display = "none";
+      } else {
+        document.getElementById("home").style.display = "none";
+        document.getElementById("login").style.display = "block";
+      }
+    })
+
 })

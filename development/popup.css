@@ -20,3 +20,11 @@
     background-color: deepskyblue;
     margin: 5px;
 }
+
+#login {
+    display: none;
+}
+
+#home {
+    display: none;
+}
