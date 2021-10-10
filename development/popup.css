@@ -19,6 +19,7 @@
     padding: 2rem;
     background-color: deepskyblue;
     margin: 5px;
+    cursor: pointer;
 }
 
 #login {

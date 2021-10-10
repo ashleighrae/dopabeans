@@ -1,30 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* Add href link to input */
-  document.getElementById('copy-link').value = window.location.href;
+  chrome.tabs.query(
+    {
+      currentWindow: true,
+      active: true
+    },
+    function (foundTabs) {
+      if (foundTabs.length > 0) {
+        var url = foundTabs[0].url;
 
-  /* Copy link to clipboard */
-  var button = document.getElementById("copy-link")
+        document.getElementById('copy-link').value = url;
 
-  button.addEventListener("click", (e) => {
-    /* Copy the text inside the text field */
-    navigator.clipboard.writeText(window.location.href);
+        /* Copy link to clipboard */
+        var button = document.getElementById("copy-link-button")
 
-    /* Alert the copied text */
-    alert("Copied the text: " + window.location.href);
+        button.addEventListener("click", (e) => {
+          /* Copy the text inside the text field */
+          navigator.clipboard.writeText(url);
+        })
+
+      } else {
+        document.getElementsByClassName("current-url").style.display = "none";
+      }
+    }
+  );
+
+  /* Test different extension views */
+  var checkLoginButton = document.getElementById("test")
+
+  checkLoginButton.addEventListener("click", (e) => {
+    if (document.getElementById("home").style.display === "none") {
+      document.getElementById("home").style.display = "block";
+      document.getElementById("login").style.display = "none";
+    } else {
+      document.getElementById("home").style.display = "none";
+      document.getElementById("login").style.display = "block";
+    }
   })
 
-    /* Test different extension views */
-    var checkLoginButton = document.getElementById("test")
+  // Open seperate window for login
+  var loginButton = document.getElementById("open-login")
 
-    checkLoginButton.addEventListener("click", (e) => {
-      if (document.getElementById("home").style.display === "none") {
-        document.getElementById("home").style.display = "block";
-        document.getElementById("login").style.display = "none";
-      } else {
-        document.getElementById("home").style.display = "none";
-        document.getElementById("login").style.display = "block";
-      }
-    })
-
+  loginButton.addEventListener("click", (e) => {
+    window.open("https://www.rollingstone.com/wp-content/uploads/2019/08/20190723_Rolling_Stone_Harry_Styles_Rocks_0119_03_ext_RGB-LEAD-NEW.jpg?resize=1800,1200&w=1800", '_blank').focus();
+  })
 })
