@@ -1,11 +1,49 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Dopabeans</title>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <h1>Dopabeans</h1>
-    <button id="submit">Click this button!</button>
-  </body>
+
+<head>
+  <title>Kozmos</title>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="home-page">
+      <div>
+        <div class="header">
+          <h1 class="page-title">Dopabeans</h1>
+          <!-- Button does not have to style -->
+          <button id="test">button to switch between login and home page view</button>
+        </div>
+        <div id="login">
+          <button id="open-login">Login</button>
+        </div>
+        <div id="home">
+          <div class="create_board">
+            <button>screenshot</button>
+            <div class="current-url">
+              <input type="text" id="copy-link" disabled></input>
+              <button id="copy-link-button"><i class="fa fa-link"></i></button>
+            </div>
+          </div>
+          <div class="board-container">
+            <div class="cell" onclick="location.href='#';">1.<a
+                href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
+            <div class="cell">2.<a href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
+            <div class="cell">3.<a href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
+            <div class="cell">4.<a href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
+            <div class="cell">5.<a style="visibility: hidden"
+                href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
+            <div class="cell">6.<a style="visibility: hidden"
+                href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
+          </div>
+          <button id="open-website">Add a board</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

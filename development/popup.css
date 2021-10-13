@@ -1,0 +1,31 @@
+#app {
+    width: 300px;
+    overflow-x: hidden;
+    padding: 5px;
+}
+.header {
+    background-color: aqua;
+}
+
+.board-container {
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.cell {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    padding: 2rem;
+    background-color: deepskyblue;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#login {
+    display: none;
+}
+
+#home {
+    display: none;
+}
