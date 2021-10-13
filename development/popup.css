@@ -67,3 +67,7 @@ button {
     fill: white;
     padding-right: 0.3rem;
 }
+
+.tooltip {
+    display: none;
+}
