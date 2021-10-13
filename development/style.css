@@ -17,6 +17,10 @@ body {
   margin-top: 55px;
 }
 
+.page {
+  padding: 0px 10%;
+}
+
 i a {
   font-family: 'Montserrat', sans-serif;
 }
@@ -30,10 +34,10 @@ h1 {
   margin: 0px;
 }
 
-.grid {
+/* .grid {
   margin-right: 100px;
   margin-left: 110px;
-}
+} */
 
 /* MASONRY GRID */
 .grid-sizer,
@@ -103,7 +107,7 @@ a:hover {
 background-color: rgba(20, 17, 19, 0);
 } */
 
-/* #mainNavbarMenu .logo {
+#mainNavbarMenu .logo {
   font-size: 1.2em;
   line-height: 1em;
   width: 10%;
@@ -112,7 +116,12 @@ background-color: rgba(20, 17, 19, 0);
 #mainNavbarMenu .logo a {
   display: flex;
   padding-top: -14px;
-} */
+}
+
+#mainNavbarMenu .logo a:hover {
+  background-color: inherit;
+  color: white;
+}
 
 #mainNavbarMenu a {
   display: block;
@@ -129,6 +138,9 @@ background-color: rgba(20, 17, 19, 0);
   display: flex;
   padding-inline-start: 0px;
   z-index: inherit;
+  justify-content: start;
+  padding-left: 15px;
+
 }
 
 #mainNavbarMenu ul {
@@ -205,10 +217,15 @@ li:hover .dropdown {
 }
 
 @media only screen and (min-width: 830px) {
+  #mainNavbarMenu {
+    width: 100vw;
+    padding: 0px 10%;
+  }
+  
   #mainNavbarMenu ul {
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: center;
     margin: 0px 0px;
     padding-inline-start: 0px;
   }
