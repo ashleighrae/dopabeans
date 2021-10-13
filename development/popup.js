@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Open seperate window for login */
   var loginButton = document.getElementById("open-login")
   loginButton.addEventListener("click", (e) => {
-    window.open("https://www.rollingstone.com/wp-content/uploads/2019/08/20190723_Rolling_Stone_Harry_Styles_Rocks_0119_03_ext_RGB-LEAD-NEW.jpg?resize=1800,1200&w=1800", '_blank').focus();
+    window.open("index.html", '_blank').focus();
   })
 
   /* Open a seperate window for creating board (open website)  */
   var createBoardButton = document.getElementById("open-website")
   createBoardButton.addEventListener("click", (e) => {
-    window.open("https://www.rollingstone.com/wp-content/uploads/2019/08/20190723_Rolling_Stone_Harry_Styles_Rocks_0119_03_ext_RGB-LEAD-NEW.jpg?resize=1800,1200&w=1800", '_blank').focus();
+    window.open("index.html", '_blank').focus();
   })
 
 

@@ -1,18 +1,7 @@
-// Firebase configuration
-var config = {
-    apiKey: "AIzaSyAK6BS-eYLMsXlJK2t8-cQfjQF8rh_idDQ",
-    authDomain: "dopabeans-cb511.firebaseapp.com",
-    projectId: "dopabeans-cb511",
-    storageBucket: "dopabeans-cb511.appspot.com",
-    messagingSenderId: "402132301454",
-    appId: "1:402132301454:web:b5a2006a303f66f0bcfbdf",
-    measurementId: "G-498CLKKQYT"
-};
-
-firebase.initializeApp(config);
-
-// Get a reference to the database service
-var database = firebase.database();
+// // Firebase configuration
+// const firebase = require("firebase");
+// // Required for side-effects
+// require("firebase/firestore");
 
 document.addEventListener("DOMContentLoaded", () => {
     var modal = document.getElementById("create-resource-modal");
@@ -84,14 +73,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Handle successful uploads on complete
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                        var postKey = database.ref('Board_images/').push().key;
+                        var postKey = firebase.database().ref('Board_images/').push().key;
                         var updates = {};
                         var postData = {
                             url: downloadURL
                         }
                         updates['/Board_images/' + postKey] = postData;
                         console.log('File available at', downloadURL);
-                        database.ref().update(updates);
+                        firebase.database().ref().update(updates);
                     });
                 }
             );

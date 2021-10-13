@@ -9,6 +9,11 @@ body * {
     font-family: 'Montserrat', sans-serif;
 }
 
+
+button {
+  cursor: pointer;
+}
+
 #app {
     width: 300px;
     overflow-x: hidden;
