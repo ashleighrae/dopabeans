@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // var starCountRef = firebase.database().ref('posts/' + postId + '/starCount');
-  // starCountRef.on('value', (snapshot) => {
-  //   const data = snapshot.val();
-  //   updateStarCount(postElement, data);
-  // });
-
   /* Copy current chrome tab href */
   chrome.tabs.query(
     {
