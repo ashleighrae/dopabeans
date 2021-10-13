@@ -4,6 +4,7 @@
 <head>
      <title>Index page</title>
      <script src="index.js"></script>
+     <script src="addResource.js"></script>
      <meta charset="utf-8" />
      <link rel="stylesheet" href="index.css">
 </head>
@@ -40,7 +41,7 @@
      <div id="create-resource-modal" class="modal">
           <div class="modal-content">
                <span class="close">&times;</span>
-               <form>
+               
                     <label for="title">Title:</label><br>
                     <input type="text" id="title" name="title"><br>
                     <label for="link">Link:</label><br>
@@ -48,15 +49,25 @@
                     <label for="desc">Description:</label><br>
                     <input type="text" id="desc" name="desc"><br>
                     <!-- Need ability to access board here from DB -->
+
+                    <div id="board-options">
                     <select name="boards" id="boards">
                          <option value="board 1">Board 1</option>
                     </select>
 
                     <!-- Need ability to add new board -->
-                    <button>Create New Board</button><br>
+                    <button id="create-board-button">Create New Board</button><br>
+               </div>
 
-                    <input class="form-submit-add-resource" type="submit" value="Add Resource">
-               </form>
+                    <div class="create-board">
+                         <label for="board-name">Board Name:</label>
+                         <input type="text" id="board-name" name="board-name">
+                         <button id="submit-new-board">Create Board</button>
+                    </div>
+
+
+                    <button class="form-submit-add-resource">Add Resource</button>
+               
           </div>
      </div>
 </body>

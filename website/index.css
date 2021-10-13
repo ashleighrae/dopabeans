@@ -1,6 +1,6 @@
 /* Create Resource Pop-Up */
 .modal {
-    display: none; 
+    display: none;
     position: fixed; 
     z-index: 1; 
     left: 0;
@@ -32,4 +32,9 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  /* Hide create board form */
+  .create-board {
+    display: none;
   }
