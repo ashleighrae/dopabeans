@@ -49,21 +49,30 @@
  </script>
 
  <!-- Create Resource Pop-Up Modal -->
- <button id="create-resource-modal-button">Open Modal</button>
+ <button id="create-resource-modal-button">Add a resource</button>
  <div id="create-resource-modal" class="modal">
       <div class="modal-content">
-           <span class="close">&times;</span>
-
-           <label for="title">Title:</label><br>
-           <input type="text" id="title" name="title"><br>
-           <label for="link">Link:</label><br>
-           <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
+              <span class="close">&times;</span>
+            <h1>Add a Resource</h1>
+              <section class="title-link">
+                <div>
+                  <label for="title">Title:</label><br>
+                  <input type="text" id="title" name="title"><br>
+                </div>
+                <div>
+                  <label for="link">Link:</label><br>
+                  <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
+                </div>
+              </section>
            <div> 
                 <label for="link">Upload Image:</label><br>
                 <input type="file" id="boardFile" name="filename"><br>
            </div>
-           <label for="desc">Description:</label><br>
-           <input type="text" id="desc" name="desc"><br>
+           <div>
+              <label for="desc">Description:</label><br>
+              <input type="text" id="desc" name="desc"><br>
+           </div>
+           
            <!-- Need ability to access board here from DB -->
 
            <div id="board-options">
