@@ -5,6 +5,9 @@
   <title>Kozmos</title>
   <script src="popup.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="popup.css">
 </head>
 
@@ -22,7 +25,6 @@
         </div>
         <div id="home">
           <div class="create_board">
-            <button>screenshot</button>
             <div class="current-url">
               <input type="text" id="copy-link" disabled></input>
               <button id="copy-link-button"><i class="fa fa-link"></i></button>
@@ -42,7 +44,12 @@
             <div class="cell">6.<a style="visibility: hidden"
                 href="https://github.com/ashleighrae/dopabeans/projects/2"></a></div>
           </div>
-          <button id="open-website">Add a board</button>
+          <button id="open-website">
+            <span>
+              <svg class="icon-plus" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24"><path d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/></svg>
+            </span>
+            <p>Add a board</p>
+          </button>
         </div>
       </div>
     </div>
