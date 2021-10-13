@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var btn = document.getElementById("create-resource-modal-button");
     var span = document.getElementsByClassName("close")[0];
     var boardButton = document.getElementById("create-board-button");
+    var existingBoardButton = document.getElementById("existing-board-button");
     var createBoardDiv = document.getElementsByClassName("create-board")[0];
     var currentBoard = document.getElementById("board-options");
     var boardFile = document.getElementById("boardFile");
@@ -33,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
     boardButton.addEventListener("click", (e) => {
         currentBoard.style.display = "none";
         createBoardDiv.style.display = "block";
+    });
+
+    existingBoardButton.addEventListener("click", (e) => {
+        currentBoard.style.display = "block";
+        createBoardDiv.style.display = "none";
     });
 
     /* Upload file to database */
