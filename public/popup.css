@@ -1,0 +1,116 @@
+/* blue/grey: #A1D2D4 */
+/* light blue/grey: #B3D4DD */
+/* dull purple: #9F9EAD */
+/* bright purple: #B498BF */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+body {
+    margin: 0px;
+}
+
+body * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    margin: 0px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#app {
+    width: 325px;
+    overflow-x: hidden;
+    padding: 0px;
+}
+.header {
+    background-color:  #4C4475;
+    color: white;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-container {
+    flex-wrap: wrap;
+    display: flex;
+    margin: 1rem 0px;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    justify-content: center;
+}
+
+.create_board {
+    margin: 1rem;
+}
+
+.cell {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    padding: 2rem;
+    background-color: #569493;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 80px
+}
+
+#login {
+    display: none;
+}
+
+#home {
+    display: none;
+}
+
+.create_board .current-url {
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+}
+
+#copy-link {
+    width: 85%;
+}
+
+#copy-link-button {
+    background-color: #4c4475;
+    border-radius: 0px;
+    color: white;
+    border: 0px;
+    cursor: pointer;
+    padding: 2.5px 6px;
+}
+
+#open-website {
+    width: 100%;
+    height: 3rem;
+    background: #4c4475;
+    color: white;
+    font-size: 1rem;
+    border: 2px solid #4c4475;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+    margin: 1rem;
+}
+
+#open-website .icon-plus {
+    fill: white;
+    padding-right: 0.3rem;
+}
+
+.tooltip {
+    display: none;
+}
