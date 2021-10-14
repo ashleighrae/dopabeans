@@ -1,3 +1,5 @@
+import {ref, getStorage, uploadBytesResumable } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-storage.js';
+
 // Hamburger
 function toggle() {
     var x = document.getElementById("burglinks");
