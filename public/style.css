@@ -50,20 +50,52 @@ a:hover {
   margin-bottom: 10px;
 }
 
-img {
+.grid-item img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .grid-item {
-  /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
+  border-radius: 10px;
 }
+
 /* Add some padding inside the card container */
 .container {
   padding: 2px 16px;
 }
+
+.grid-item h4 {
+  font-size: 1em;
+  margin: 10px 0;
+}
+
+.grid-item p {
+  font-size: 0.8em;
+}
+
+/* Category Grids */
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+
+}
+
+.category {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
+
+}
+
+.category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
 
 /* NAVIGATION */
 /*Main Navbar */
