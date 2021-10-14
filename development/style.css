@@ -85,7 +85,7 @@ a:hover {
 .category {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
-
+  position: relative;
 }
 
 .category img {
@@ -95,7 +95,26 @@ a:hover {
   border-radius: 10px;
 }
 
+.category div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(18, 18, 18, 0.6);
+  border-radius: 10px;
+}
 
+.category h4 {
+  margin: 0;
+  color: #f8f8f8;
+  padding: 8%;
+}
 
 /* NAVIGATION */
 /*Main Navbar */
