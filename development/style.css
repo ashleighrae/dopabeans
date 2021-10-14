@@ -132,7 +132,7 @@ img {
 
 .active {
   color: white;
-  background-color: #6e65a4;
+  background-color: #h1;
 }
 
 #mainNavbarMenu a:hover {
@@ -357,6 +357,14 @@ footer .footermenuitems {
 }
 
 /* Create Resource Pop-Up */
+#create-resource-modal-button {
+  border: 0px;
+  background-color: #4c4475;
+  color: white;
+  padding: 0.7rem;
+  border-radius: 0px;
+}
+
 .modal {
   display: none;
   position: fixed; 
@@ -375,7 +383,56 @@ footer .footermenuitems {
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
-  width: 60%; 
+  width: 80%; 
+  max-width: 700px;
+}
+
+.modal-content h1 {
+  color: #6e65a4;
+}
+
+.modal-content > div {
+  padding: 1rem 0;
+}
+
+.modal-content input {
+  height: 1.35rem;
+}
+
+.modal-content #link {
+  width: 350px;
+}
+
+.modal-content button {
+  border: 0px;
+  background-color: #4c4475;
+  color: white;
+  padding: 0.7rem;
+  border-radius: 0px;
+}
+
+.modal-content .title-link {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  column-gap: 1.5rem;
+}
+
+.modal-content #desc {
+  width: 555px;
+}
+
+.modal-content .form-submit-add-resource{
+  margin-top: 1.5rem
+}
+
+#board-options #boards {
+  height: 2.35rem;
+  width: 150px;
+}
+
+#create-board-button {
+  background-color: #569493;
 }
 
 .close {

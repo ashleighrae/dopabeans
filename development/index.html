@@ -20,69 +20,54 @@
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <title>Dopabeans</title>
-    <script src="index.js"></script>
-    <script src="addResource.js"></script>
+    <script src="../src/index.js"></script>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="index.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="script.js"></script>
   </head>
   <body>
-    <script>
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from 'firebase/app';
-      import { getAnalytics } from 'firebase/analytics';
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+    <nav id="mainNavbarMenu" class="transparent" height="15x"></nav>
 
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: 'AIzaSyAK6BS-eYLMsXlJK2t8-cQfjQF8rh_idDQ',
-        authDomain: 'dopabeans-cb511.firebaseapp.com',
-        projectId: 'dopabeans-cb511',
-        storageBucket: 'dopabeans-cb511.appspot.com',
-        messagingSenderId: '402132301454',
-        appId: '1:402132301454:web:b5a2006a303f66f0bcfbdf',
-        measurementId: 'G-498CLKKQYT',
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-    </script>
-
-    <!-- Create Resource Pop-Up Modal -->
-    <button id="create-resource-modal-button">Open Modal</button>
-    <div id="create-resource-modal" class="modal">
+ <!-- Create Resource Pop-Up Modal -->
+ <button id="create-resource-modal-button">Add a resource</button>
+ <div id="create-resource-modal" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
+              <span class="close">&times;</span>
+            <h1>Add a Resource</h1>
+              <section class="title-link">
+                <div>
+                  <label for="title">Title:</label><br>
+                  <input type="text" id="title" name="title"><br>
+                </div>
+                <div>
+                  <label for="link">Link:</label><br>
+                  <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
+                </div>
+              </section>
+           <div> 
+                <label for="link">Upload Image:</label><br>
+                <input type="file" id="boardFile" name="filename"><br>
+           </div>
+           <div>
+              <label for="desc">Description:</label><br>
+              <input type="text" id="desc" name="desc"><br>
+           </div>
+           
+           <!-- Need ability to access board here from DB -->
 
-        <label for="title">Title:</label><br />
-        <input type="text" id="title" name="title" /><br />
-        <label for="link">Link:</label><br />
-        <input
-          type="text"
-          id="link"
-          name="link"
-          placeholder="Enter Image or Resource Link"
-        /><br />
-        <div>
-          <label for="link">Upload Image:</label><br />
-          <input type="file" id="boardFile" name="filename" /><br />
-        </div>
-        <label for="desc">Description:</label><br />
-        <input type="text" id="desc" name="desc" /><br />
-        <!-- Need ability to access board here from DB -->
+           <div id="board-options">
+                <select name="boards" id="boards">
+                     <option value="board 1">Board 1</option>
+                </select>
 
-        <div id="board-options">
-          <select name="boards" id="boards">
-            <option value="board 1">Board 1</option>
-          </select>
+                <!-- Need ability to add new board -->
+                <button id="create-board-button">Create New Board</button>
+           </div>
 
-          <!-- Need ability to add new board -->
-          <button id="create-board-button">Create New Board</button><br />
-        </div>
+           <div class="create-board">
+                <label for="board-name">Board Name:</label>
+                <input type="text" id="board-name" name="board-name">
+                <button id="submit-new-board">Create Board</button>
+                <button id="existing-board-button">Use Existing Board</button><br>
+           </div>
 
         <div class="create-board">
           <label for="board-name">Board Name:</label>
