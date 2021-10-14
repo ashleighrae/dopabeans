@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../style.css" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
       rel="stylesheet"
@@ -20,15 +20,143 @@
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <title>Dopabeans</title>
-    <script src="script.js"></script>
+    <script src="/../../src/index.js"></script>
     <meta charset="utf-8" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
   </head>
   <body>
     <nav id="mainNavbarMenu" class="transparent" height="15x"></nav>
 
- <!-- Create Resource Pop-Up Modal -->
+    <!-- Navigation menu -->
+    <nav id="mainNavbarMenu" height="20px">
+      <ul class="nav logo m0">
+        <li>
+          <a href="../index.html"><h1>Kozmos</h1></a>
+        </li>
+      </ul>
+      <div id="burglinks">
+        <ul class="nav">
+          <li>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="../explore.html">Explore</a>
+          </li>
+          <li class="dropdown">
+            <a href="../spaces.html" class="active">Spaces</a>
+            <div class="dropdownContent">
+              <a href="../#">My Spaces</a>
+              <a href="../#">Following</a>
+              <a href="../#">Add New <i class="fas fa-plus"></i></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="nav userNav">
+        <a id="rando" href="#">
+          <!-- dynamically added in script.js -->
+        </a>
+      </div>
+      <div class="hamburgerhide">
+        <a href="../javascript:" class="hamburger" onclick="toggle()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </nav>
+    <section class="page">
+      <div class="space">
+          <h1>
+              Ancient Oceans
+          </h1>
+      </div>
+      <div>
+        <h2>Collections</h2>
+        <div class="categoryGrid">
+          <div class="category">
+            <img src="../img/fishy.jpg" alt="" />
+            <a href="../spaces/ancient-oceans.html">
+              <div>
+                <h4 class="categoryTitle">Ancient Oceans</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/timescale.jpg" alt="" />
+            <a href="../spaces/geological-timescale.html">
+              <div>
+                <h4>Geological Timescale</h4>
+              </div>
+              </a>
+          </div>
+          <div class="category">
+            <img src="../img/asd-women.jpg" alt="" />
+            <a href="../spaces/women-with-asd.html">
+              <div>
+                <h4>Women with ASD</h4>
+                </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/banksia.jpg" alt="" />
+            <a href="../spaces/australian-plants.html">
+              <div>
+                <h4>Australian Plants</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/brain.jpg" alt="" />
+            <a href="../spaces/the-brain.html">
+              <div>
+                <h4>The Brain</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/paint.jpg" alt="" />
+            <a href="../spaces/painting-sketching.html">
+              <div>
+                <h4>Painting & Sketching</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/fossil.jpg" alt="" />
+            <a href="../spaces/fossils.html">
+              <div>
+                <h4>Fossils</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/autism.jpg" alt="" />
+            <a href="../spaces/adult-autism.html">
+              <div>
+                <h4>Adult Autism</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/fungi.jpg" alt="" />
+            <a href="../spaces/ancient-oceans.html">
+              <div>
+                <h4>Fungi Friends</h4>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="../img/tardigrade-digital.jpg" alt="" />
+            <a href="../spaces/weird-animals.html">
+              <div>
+                <h4>Weird Animals</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Resource Pop-Up Modal -->
  <button id="create-resource-modal-button">Add a resource</button>
  <div id="create-resource-modal" class="modal">
       <div class="modal-content">
@@ -81,253 +209,126 @@
       </div>
     </div>
 
-    <!-- Navigation menu -->
-    <nav id="mainNavbarMenu" height="20px">
-      <ul class="nav logo m0">
-        <li>
-          <a href="index.html"><h1>Kozmos</h1></a>
-        </li>
-      </ul>
-      <div id="burglinks">
-        <ul class="nav">
-          <li>
-            <a href="index.html" class="active">Home</a>
-          </li>
-          <li>
-            <a href="explore.html">Explore</a>
-          </li>
-          <li class="dropdown">
-            <a href="spaces.html" class="">Spaces</a>
-            <div class="dropdownContent">
-              <a href="#">My Spaces</a>
-              <a href="#">Following</a>
-              <a href="#">Add New <i class="fas fa-plus"></i></a>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="nav userNav">
-        <a id="rando" href="#">
-          <!-- dynamically added in script.js -->
-        </a>
-      </div>
-      <div class="hamburgerhide">
-        <a href="javascript:" class="hamburger" onclick="toggle()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </nav>
-    <section class="page">
-      <div class="searchBar">
-        <form>
-          <input type="text" placeholder="Explore... ">
-        </form>
-      </div>
       <div>
-        <h2>Spaces</h2>
-        <div class="categoryGrid">
-          <div class="category">
-            <img src="img/fishy.jpg" alt="" />
-            <a href="/spaces/ancient-oceans.html">
-              <div>
-                <h4 class="categoryTitle">Ancient Oceans</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/timescale.jpg" alt="" />
-            <a href="/spaces/geological-timescale.html">
-              <div>
-                <h4>Geological Timescale</h4>
-              </div>
-              </a>
-          </div>
-          <div class="category">
-            <img src="img/asd-women.jpg" alt="" />
-            <a href="/spaces/women-with-asd.html">
-              <div>
-                <h4>Women with ASD</h4>
-              </div>
-              </a>
-          </div>
-          <div class="category">
-            <img src="img/banksia.jpg" alt="" />
-            <a href="/spaces/australian-plants.html">
-              <div>
-                <h4>Australian Plants</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/brain.jpg" alt="" />
-            <a href="/spaces/the-brain.html">
-              <div>
-                <h4>The Brain</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/paint.jpg" alt="" />
-            <a href="/spaces/painting-sketching.html">
-              <div>
-                <h4>Painting & Sketching</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/fossil.jpg" alt="" />
-            <a href="/spaces/fossils.html">
-              <div>
-                <h4>Fossils</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/autism.jpg" alt="" />
-            <a href="/spaces/adult-autism.html">
-              <div>
-                <h4>Adult Autism</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/fungi.jpg" alt="" />
-            <a href="/spaces/ancient-oceans.html">
-              <div>
-                <h4>Fungi Friends</h4>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/tardigrade-digital.jpg" alt="" />
-            <a href="/spaces/weird-animals.html">
-              <div>
-                <h4>Weird Animals</h4>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h2>Recent posts</h2>
+        <h2>All posts</h2>
       <!-- Masonary Grid -->
       <!-- Need functionality to auto populate -->
         <div class="grid">
           <div class="grid-sizer"></div>
           <div class="grid-item">
-            <img src="img/temp/0.jpg" alt="" />
+            <img src="../img/temp/0.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/00.jpg" alt="" />
+            <img src="../img/temp/00.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/1.jpg" alt="" />
+            <img src="../img/temp/1.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé. </p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/2.jpg" alt="" />
+            <img src="../img/temp/2.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Biscuit ice cream cheesecake. </p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/3.jpg" alt="" />
+            <img src="../img/temp/3.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/4.jpg" alt="" />
+            <img src="../img/temp/4.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/5.jpg" alt="" />
+            <img src="../img/temp/5.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/6.jpg" alt="" />
+            <img src="../img/temp/6.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/7.jpg" alt="" />
+            <img src="../img/temp/7.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/8.jpg" alt="" />
+            <img src="../img/temp/8.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/9.jpg" alt="" />
+            <img src="../img/temp/9.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/11.jpg" alt="" />
+            <img src="../img/temp/11.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/22.jpg" alt="" />
+            <img src="../img/temp/22.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/33.jpg" alt="" />
+            <img src="../img/temp/33.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/44.jpg" alt="" />
+            <img src="../img/temp/44.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/55.jpg" alt="" />
+            <img src="../img/temp/55.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
             </div>
           </div>
           <div class="grid-item">
-            <img src="img/temp/66.jpg" alt="" />
+            <img src="../img/temp/66.jpg" alt="" />
             <div class="container">
               <h4><b>Cheesecake biscuit</b></h4>
               <p>Biscuit ice cream cheesecake.</p>
@@ -343,16 +344,16 @@
           <h3 class="">Quick Links</h3>
           <ul class="footermenuitems m0">
             <li>
-              <a href="#">Collections</a>
+              <a href="../#">Collections</a>
             </li>
             <li>
-              <a href="#">Profile</a>
+              <a href="../#">Profile</a>
             </li>
             <li>
-              <a href="#">Account settings</a>
+              <a href="../#">Account settings</a>
             </li>
             <li>
-              <a href="#">Get in touch</a>
+              <a href="../#">Get in touch</a>
             </li>
           </ul>
         </div>
@@ -366,16 +367,16 @@
         <div>
           <ul>
             <li>
-              <a href="#">Terms & Conditions</a>
+              <a href="../#">Terms & Conditions</a>
             </li>
             <li>
-              <a href="#" target="_blank">Privacy policy</a>
+              <a href="../#" target="_blank">Privacy policy</a>
             </li>
           </ul>
         </div>
       </div>
     </footer>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="masonry.js"></script>
+    <script src="../masonry.js"></script>
   </body>
 </html>
