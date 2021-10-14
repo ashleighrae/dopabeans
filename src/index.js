@@ -341,22 +341,16 @@
    mediaCaptureElement.click();
  });
  mediaCaptureElement.addEventListener('change', onMediaFileSelected);
- 
- const firebaseAppConfig = getFirebaseConfig();
- // TODO 0: Initialize Firebase
- 
+
  // TODO 12: Initialize Firebase Performance Monitoring
  
  initFirebaseAuth();
  loadMessages();
 
+ const firebaseAppConfig = getFirebaseConfig();
+ initializeApp(firebaseAppConfig);
 
-
-
-// // Firebase configuration
-// const firebase = require("firebase");
-// // Required for side-effects
-// require("firebase/firestore");
+// Custom Scripts
 
 document.addEventListener("DOMContentLoaded", () => {
     var modal = document.getElementById("create-resource-modal");
