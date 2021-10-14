@@ -14,7 +14,7 @@ body {
   width: 100%;
   margin: 0px 0px;
   overflow-wrap: break-word;
-  margin-top: 55px;
+  margin-top: 49.09px;
 }
 
 .page > * {
@@ -79,7 +79,12 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+}
 
+.categoryGrid a {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .category {
@@ -515,5 +520,17 @@ footer .footermenuitems {
   display: none;
 }
 
+/* SPACES */
+.space {
+  background-color: #569493;
+  height: 15vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
 
-
+.space h1 {
+  color: #f8f8f8;
+  font-weight: 700;
+  font-size: 2.5em;
+}
