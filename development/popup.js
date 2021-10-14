@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* Variables */
+  var linkAddress = document.getElementById('copy-link');
+
   /* Copy current chrome tab href */
   chrome.tabs.query(
     {
@@ -10,14 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
       if (foundTabs.length > 0) {
         var url = foundTabs[0].url;
 
-        document.getElementById('copy-link').value = url;
+        linkAddress.value = url;
 
         /* Copy link to clipboard */
-        var button = document.getElementById("copy-link-button")
+        var button = document.getElementById("copy-link-button");
 
         button.addEventListener("click", (e) => {
           /* Copy the text inside the text field */
           navigator.clipboard.writeText(url);
+
+          /* Show 'link copied' message */
+          linkAddress.value = "Link Copied!";
+
+          setTimeout(function () {
+            linkAddress.value = url
+          }, 2000);
         })
 
       } else {
@@ -42,13 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Open seperate window for login */
   var loginButton = document.getElementById("open-login")
   loginButton.addEventListener("click", (e) => {
-    window.open("https://www.rollingstone.com/wp-content/uploads/2019/08/20190723_Rolling_Stone_Harry_Styles_Rocks_0119_03_ext_RGB-LEAD-NEW.jpg?resize=1800,1200&w=1800", '_blank').focus();
+    window.open("index.html", '_blank').focus();
   })
 
   /* Open a seperate window for creating board (open website)  */
   var createBoardButton = document.getElementById("open-website")
   createBoardButton.addEventListener("click", (e) => {
-    window.open("https://www.rollingstone.com/wp-content/uploads/2019/08/20190723_Rolling_Stone_Harry_Styles_Rocks_0119_03_ext_RGB-LEAD-NEW.jpg?resize=1800,1200&w=1800", '_blank').focus();
+    window.open("index.html", '_blank').focus();
   })
 
 

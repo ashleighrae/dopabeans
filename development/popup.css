@@ -17,6 +17,10 @@ h1 {
     margin: 0px;
 }
 
+button {
+    cursor: pointer;
+}
+
 #app {
     width: 325px;
     overflow-x: hidden;
@@ -105,4 +109,8 @@ h1 {
 #open-website .icon-plus {
     fill: white;
     padding-right: 0.3rem;
+}
+
+.tooltip {
+    display: none;
 }
