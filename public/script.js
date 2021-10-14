@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedFile = e.target.files[0];
     })
 
+    /* Add file to storage on firebase */
     function addBoardImage() {
         // if (selectedFile) {
         //     var filename = selectedFile.name;
