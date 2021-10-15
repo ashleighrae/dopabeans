@@ -1,4 +1,28 @@
-import {ref, getStorage, uploadBytesResumable } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-storage.js';
+import { ref, getStorage, uploadBytesResumable } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-storage.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js';
+import { getDatabase, onValue } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js';
+import { collection, addDoc, getFirestore, setDoc, getDocs, doc } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAK6BS-eYLMsXlJK2t8-cQfjQF8rh_idDQ",
+    authDomain: "dopabeans-cb511.firebaseapp.com",
+    databaseURL: "https://dopabeans-cb511-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "dopabeans-cb511",
+    storageBucket: "dopabeans-cb511.appspot.com",
+    messagingSenderId: "402132301454",
+    appId: "1:402132301454:web:b5a2006a303f66f0bcfbdf",
+    measurementId: "G-498CLKKQYT"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+const db = getFirestore();
+
+const person = collection(db, "person");
 
 // Hamburger
 function toggle() {
@@ -136,9 +160,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    async function setAndGetPeople(datab) {
+        await setDoc(doc(person, "Cassia"), {
+            first_name: "Cassia", last_name: "G", 
+            good_at_coding: true, 
+        });
+
+        const peopleCol = collection(datab, 'person');
+        const citySnapshot = await getDocs(peopleCol);
+        const cityList = citySnapshot.docs.map(doc => doc.data());
+        console.log(cityList);
+    }
+
     createResource.addEventListener("click", (e) => {
-        addBoardImage();
-        console.log("here");
+        //addBoardImage();
+
+        setAndGetPeople(db);
     });
 
 })
