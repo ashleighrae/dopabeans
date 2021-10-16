@@ -472,7 +472,7 @@ a:hover {
 
 }
 
-@media only screen and (min-width: 1023px) {
+@media only screen and (min-width: 1700px) {
   #mainNavbarMenu {
     padding: 0px 15%;
     width: 70%;
