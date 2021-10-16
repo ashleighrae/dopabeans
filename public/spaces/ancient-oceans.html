@@ -20,61 +20,62 @@
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <title>Dopabeans</title>
-    <script src="/../../src/index.js"></script>
     <meta charset="utf-8" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="../script.js"></script>
+    <script src="../script.js" type="module"></script>
   </head>
   <body>
     <div id="create-resource-modal" class="modal">
-        <div class="modal-content">
-        <span class="close">&times;</span>
-        <h1>Add a Resource</h1>
-        <section class="title-link">
-            <div>
-            <label for="title">Title:</label><br>
-                <input type="text" id="title" name="title"><br>
-            </div>
+      <div class="modal-content">
+              <span class="close">&times;</span>
+            <h1>Add a Resource</h1>
+              <section class="title-link">
                 <div>
-                <label for="link">Link:</label><br>
-                <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
+                  <label for="title">Title:</label><br>
+                  <input type="text" id="title" name="title"><br>
                 </div>
-        </section>
-        <div> 
-            <label for="link">Upload Image:</label><br>
-            <input type="file" id="boardFile" name="filename"><br>
-        </div>
-        <div>
-            <label for="desc">Description:</label><br>
-            <input type="text" id="desc" name="desc"><br>
-        </div>
-        <!-- Need ability to access board here from DB -->
+                <div>
+                  <label for="link">Link:</label><br>
+                  <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
+                </div>
+              </section>
+           <div> 
+                <label for="link">Upload Image:</label><br>
+                <input type="file" id="boardFile" name="filename"><br>
+           </div>
+           <div>
+              <label for="desc">Description:</label><br>
+              <input type="text" id="desc" name="desc"><br>
+           </div>
+           
+           <!-- Need ability to access board here from DB -->
 
-        <div id="board-options">
-            <select name="boards" id="boards">
-            <option value="board 1">Board 1</option>
-            </select>
+           <div id="board-options">
+                <select name="boards" id="boards">
+                     <option value="board 1">Board 1</option>
+                </select>
 
-            <!-- Need ability to add new board -->
-            <button id="create-board-button">Create New Board</button>
-        </div>
+                <!-- Need ability to add new board -->
+                <button id="create-board-button">Create New Board</button>
+           </div>
+
+           <div class="create-board">
+                <label for="board-name">Board Name:</label>
+                <input type="text" id="board-name" name="board-name">
+                <button id="submit-new-board">Create Board</button>
+                <button id="existing-board-button">Use Existing Board</button><br>
+           </div>
 
         <div class="create-board">
-            <label for="board-name">Board Name:</label>
-            <input type="text" id="board-name" name="board-name">
-            <button id="submit-new-board">Create Board</button>
-            <button id="existing-board-button">Use Existing Board</button><br>
-        </div>
-
-        <div class="create-board">
-            <label for="board-name">Board Name:</label>
-            <input type="text" id="board-name" name="board-name" />
-            <button id="submit-new-board">Create Board</button>
+          <label for="board-name">Board Name:</label>
+          <input type="text" id="board-name" name="board-name" />
+          <button id="submit-new-board">Create Board</button>
         </div>
 
         <button class="form-submit-add-resource">Add Resource</button>
-        </div>
+      </div>
     </div>
+    
     <!-- Navigation menu -->
     <nav id="mainNavbarMenu" height="20px">
       <ul class="nav logo m0">
