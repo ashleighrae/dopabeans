@@ -27,57 +27,46 @@
   <body>
     <div id="create-resource-modal" class="modal">
       <div class="modal-content">
-              <span class="close">&times;</span>
-            <h1>Add a Resource</h1>
-              <section class="title-link">
-                <div>
-                  <label for="title">Title:</label><br>
-                  <input type="text" id="title" name="title"><br>
-                </div>
-                <div>
-                  <label for="link">Link:</label><br>
-                  <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
-                </div>
-              </section>
-           <div> 
-                <label for="link">Upload Image:</label><br>
-                <input type="file" id="boardFile" name="filename"><br>
-           </div>
-           <div>
-              <label for="desc">Description:</label><br>
-              <input type="text" id="desc" name="desc"><br>
-           </div>
-           
-           <!-- Need ability to access board here from DB -->
-
-           <div id="board-options">
-                <select name="boards" id="boards">
-                     <option value="board 1">Board 1</option>
-                </select>
-
-                <!-- Need ability to add new board -->
-                <button id="create-board-button">Create New Board</button>
-           </div>
-
-           <div class="create-board">
-                <label for="board-name">Board Name:</label>
-                <input type="text" id="board-name" name="board-name">
-                <button id="submit-new-board">Create Board</button>
-                <button id="existing-board-button">Use Existing Board</button><br>
-           </div>
-
-        <div class="create-board">
-          <label for="board-name">Board Name:</label>
-          <input type="text" id="board-name" name="board-name" />
-          <button id="submit-new-board">Create Board</button>
+        <span class="close">&times;</span>
+        <div>
+          <h1>Start a new collection</h1>
         </div>
-
-        <button class="form-submit-add-resource">Add Resource</button>
+        <div>
+          <h2>Collection title:</h2>
+          <label for="title" class="hiddenLabel">Collection title</label>
+          <input type="text" id="title" name="title" />
+        </div>
+        <div class="flex">
+          <h2>Choose a cover image:</h2>
+          <section class="inline">
+            <h3>Enter a URL</h3>
+            <label for="link" class="hiddenLabel">Enter an image URL:</label>
+            <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
+          </section>
+          <section class="inline">
+            <h3>Or upload your own</h3>
+            <label for="boardFile" class="hiddenLabel">Or upload your own:</label>
+            <input type="file" id="boardFile" name="filename" />
+          </section>
+        </div>
+        <div>
+          <h2>Description:</h2>
+          <label for="desc" class="hiddenLabel">Description:</label>
+          <textarea
+            rows="4"
+            id="desc"
+            name="desc"
+            placeholder="What's this collection about?"
+          ></textarea>
+        </div>
+        <div>
+          <button class="form-submit-add-resource">Create Collection</button>
+        </div>
       </div>
     </div>
-    
+
     <!-- Navigation menu -->
-    <nav id="mainNavbarMenu" height="20px">
+    <nav id="mainNavbarMenu">
       <ul class="nav logo m0">
         <li>
           <a href="../index.html"><h1>Kozmos</h1></a>
@@ -107,16 +96,17 @@
         </a>
       </div>
       <div class="hamburgerhide">
-        <a href="../javascript:" class="hamburger" onclick="toggle()">
+        <a href="javascript:" class="hamburger" onclick="toggle()">
           <i class="fa fa-bars"></i>
         </a>
       </div>
     </nav>
     <section class="page">
       <div class="space">
-          <h1>
-              Ancient Oceans
-          </h1>
+        <h1>
+          <!-- Need to add dynamically -->
+          Ancient Oceans
+        </h1>
       </div>
       <div>
         <h2>Collections</h2>
@@ -125,7 +115,7 @@
             <img src="../img/fishy.jpg" alt="" />
             <a href="../spaces/ancient-oceans.html">
               <div>
-                <h4 class="categoryTitle">Ancient Oceans</h4>
+                <h3 class="categoryTitle">Ancient Oceans</h3>
               </div>
             </a>
           </div>
@@ -133,23 +123,23 @@
             <img src="../img/timescale.jpg" alt="" />
             <a href="../spaces/geological-timescale.html">
               <div>
-                <h4>Geological Timescale</h4>
+                <h3>Geological Timescale</h3>
               </div>
-              </a>
+            </a>
           </div>
           <div class="category">
             <img src="../img/asd-women.jpg" alt="" />
             <a href="../spaces/women-with-asd.html">
               <div>
-                <h4>Women with ASD</h4>
-                </div>
+                <h3>Women with ASD</h3>
+              </div>
             </a>
           </div>
           <div class="category">
             <img src="../img/banksia.jpg" alt="" />
             <a href="../spaces/australian-plants.html">
               <div>
-                <h4>Australian Plants</h4>
+                <h3>Australian Plants</h3>
               </div>
             </a>
           </div>
@@ -157,7 +147,7 @@
             <img src="../img/brain.jpg" alt="" />
             <a href="../spaces/the-brain.html">
               <div>
-                <h4>The Brain</h4>
+                <h3>The Brain</h3>
               </div>
             </a>
           </div>
@@ -165,7 +155,7 @@
             <img src="../img/paint.jpg" alt="" />
             <a href="../spaces/painting-sketching.html">
               <div>
-                <h4>Painting & Sketching</h4>
+                <h3>Painting & Sketching</h3>
               </div>
             </a>
           </div>
@@ -173,7 +163,7 @@
             <img src="../img/fossil.jpg" alt="" />
             <a href="../spaces/fossils.html">
               <div>
-                <h4>Fossils</h4>
+                <h3>Fossils</h3>
               </div>
             </a>
           </div>
@@ -181,7 +171,7 @@
             <img src="../img/autism.jpg" alt="" />
             <a href="../spaces/adult-autism.html">
               <div>
-                <h4>Adult Autism</h4>
+                <h3>Adult Autism</h3>
               </div>
             </a>
           </div>
@@ -189,147 +179,167 @@
             <img src="../img/fungi.jpg" alt="" />
             <a href="../spaces/ancient-oceans.html">
               <div>
-                <h4>Fungi Friends</h4>
+                <h3>Fungi Friends</h3>
               </div>
             </a>
           </div>
-          <div class="category">
-            <img src="../img/tardigrade-digital.jpg" alt="" />
-            <a href="../spaces/weird-animals.html">
-              <div>
-                <h4>Weird Animals</h4>
-              </div>
-            </a>
-          </div>
+          <div class="category addItem">
             <!-- Create Resource Pop-Up Modal -->
-            <button class="" id="create-resource-modal-button">Add a resource <br> <i class="fas fa-plus"></i></button>
-            </div>
+            <button id="create-resource-modal-button">
+              <h3><i class="fas fa-plus"></i><br />New collection</h3>
+            </button>
+          </div>
+        </div>
       </div>
 
-      
-
-      <div>
+      <div class="posts">
         <h2>All posts</h2>
-      <!-- Masonary Grid -->
-      <!-- Need functionality to auto populate -->
+        <!-- Masonary Grid -->
+        <!-- Need functionality to auto populate -->
         <div class="grid">
           <div class="grid-sizer"></div>
           <div class="grid-item">
             <img src="../img/temp/0.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/00.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
+              <h3><b>Cheesecake biscuit</b></h3>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/1.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé. </p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/2.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Biscuit ice cream cheesecake. </p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/3.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Caramels chocolate bar jelly beans jelly-o shortbread shortbread
+                soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/4.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Caramels chocolate bar jelly beans jelly-o shortbread shortbread
+                soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/5.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/6.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
+              <h3><b>Cheesecake biscuit</b></h3>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/7.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/8.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/9.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
+              <h3><b>Cheesecake biscuit</b></h3>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/11.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/22.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Caramels chocolate bar jelly beans jelly-o shortbread shortbread
+                soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/33.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
+              <h3><b>Cheesecake biscuit</b></h3>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/44.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Jelly gingerbread pudding cotton candy toffee donut soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/55.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+              <h3><b>Cheesecake biscuit</b></h3>
+              <p>
+                Caramels chocolate bar jelly beans jelly-o shortbread shortbread
+                soufflé.
+              </p>
             </div>
           </div>
           <div class="grid-item">
             <img src="../img/temp/66.jpg" alt="" />
             <div class="container">
-              <h4><b>Cheesecake biscuit</b></h4>
+              <h3><b>Cheesecake biscuit</b></h3>
               <p>Biscuit ice cream cheesecake.</p>
             </div>
           </div>

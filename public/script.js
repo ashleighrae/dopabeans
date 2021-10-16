@@ -161,8 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function setAndGetPeople(datab) {
-        await setDoc(doc(person, "Cassia"), {
-            first_name: "Cassia", last_name: "G", 
+        await setDoc(doc(person, "Cassie"), {
+            first_name: "Cassie", last_name: "C", 
             good_at_coding: true, 
         });
 
