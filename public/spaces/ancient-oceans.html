@@ -153,61 +153,61 @@
               </div>
             </a>
           </div>
-        </div>
-      </div>
-
-      <!-- Create Resource Pop-Up Modal -->
- <button id="create-resource-modal-button">Add a resource</button>
- <div id="create-resource-modal" class="modal">
-      <div class="modal-content">
-              <span class="close">&times;</span>
+            <!-- Create Resource Pop-Up Modal -->
+            <button class="" id="create-resource-modal-button">Add a resource <br> <i class="fas fa-plus"></i></button>
+        <div id="create-resource-modal" class="modal">
+            <div class="modal-content">
+            <span class="close">&times;</span>
             <h1>Add a Resource</h1>
-              <section class="title-link">
+            <section class="title-link">
                 <div>
-                  <label for="title">Title:</label><br>
-                  <input type="text" id="title" name="title"><br>
+                <label for="title">Title:</label><br>
+                    <input type="text" id="title" name="title"><br>
                 </div>
-                <div>
-                  <label for="link">Link:</label><br>
-                  <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
-                </div>
-              </section>
-           <div> 
+                    <div>
+                    <label for="link">Link:</label><br>
+                    <input type="text" id="link" name="link" placeholder="Enter Image or Resource Link"><br>
+                    </div>
+            </section>
+            <div> 
                 <label for="link">Upload Image:</label><br>
                 <input type="file" id="boardFile" name="filename"><br>
-           </div>
-           <div>
-              <label for="desc">Description:</label><br>
-              <input type="text" id="desc" name="desc"><br>
-           </div>
-           
-           <!-- Need ability to access board here from DB -->
+            </div>
+            <div>
+                <label for="desc">Description:</label><br>
+                <input type="text" id="desc" name="desc"><br>
+            </div>
+            <!-- Need ability to access board here from DB -->
 
-           <div id="board-options">
+            <div id="board-options">
                 <select name="boards" id="boards">
-                     <option value="board 1">Board 1</option>
+                <option value="board 1">Board 1</option>
                 </select>
 
                 <!-- Need ability to add new board -->
                 <button id="create-board-button">Create New Board</button>
-           </div>
+            </div>
 
-           <div class="create-board">
+            <div class="create-board">
                 <label for="board-name">Board Name:</label>
                 <input type="text" id="board-name" name="board-name">
                 <button id="submit-new-board">Create Board</button>
                 <button id="existing-board-button">Use Existing Board</button><br>
-           </div>
+            </div>
 
-        <div class="create-board">
-          <label for="board-name">Board Name:</label>
-          <input type="text" id="board-name" name="board-name" />
-          <button id="submit-new-board">Create Board</button>
+            <div class="create-board">
+                <label for="board-name">Board Name:</label>
+                <input type="text" id="board-name" name="board-name" />
+                <button id="submit-new-board">Create Board</button>
+            </div>
+
+            <button class="form-submit-add-resource">Add Resource</button>
+            </div>
         </div>
-
-        <button class="form-submit-add-resource">Add Resource</button>
+        </div>
       </div>
-    </div>
+
+      
 
       <div>
         <h2>All posts</h2>
