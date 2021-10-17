@@ -59,13 +59,6 @@ button {
     width: 80px
 }
 
-#login {
-    display: none;
-}
-
-#home {
-    display: none;
-}
 
 .create_board .current-url {
     width: 100%;
