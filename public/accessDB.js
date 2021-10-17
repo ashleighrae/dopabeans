@@ -76,7 +76,7 @@ async function getSpacesHomepage(datab) {
 }
 
 // Populate collection page
-async function populateCollectionPage(datab, space, docType, link, localLink) {
+async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
     for (let i = 0; i < docType.length; i++) {
@@ -120,7 +120,79 @@ async function populateCollectionPage(datab, space, docType, link, localLink) {
 
             // Set current collection
             if (pageLink) addEventListener("click", (e) => {
-                localStorage.setItem(localLink, JSON.stringify(collection)); //set
+                localStorage.setItem(localLink, JSON.stringify(collection));
+            });
+        }
+    }
+}
+
+// Populate collection page
+async function populateCollectionPage(datab, space, docType, link, localLink) {
+    document.getElementById('pageHeader').innerHTML = space.title;
+
+    for (let i = 0; i < docType.length; i++) {
+
+        // Get resource details
+        const docRef = doc(datab, "resources", toKebabCase(docType[i]));
+        const docSnap = await getDoc(docRef);
+        const resource = docSnap.data();
+
+        if (resource) {
+            console.log(resource);
+
+        //     <div class="grid-item">
+        //     <img src="../img/temp/0.jpg" alt="" />
+        //     <div class="container">
+        //       <h3><b>Cheesecake biscuit</b></h3>
+        //       <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+        //     </div>
+        //   </div>
+
+            // Add div to category section
+            const categoryDiv = document.createElement("div");
+            categoryDiv.classList.add("grid-item");
+
+            // Add image
+            if (resource.image) {
+                var img = document.createElement('img');
+                img.src = resource.image;
+                categoryDiv.appendChild(img);
+            }
+
+            // Add container div
+            const containerDiv = document.createElement("div");
+            containerDiv.classList.add("container");
+
+            // Add link
+            const pageLink = document.createElement("a");
+            pageLink.href = link;
+            categoryDiv.appendChild(pageLink);
+
+            // Add header
+            if (resource.title) {
+                const header = document.createElement("h3");
+                const title = document.createTextNode(resource.title);
+                header.appendChild(title);
+                containerDiv.appendChild(header);
+            }
+
+            // Add description
+            if (resource.description) {
+                const para = document.createElement("p");
+                const desc = document.createTextNode(resource.description);
+                para.appendChild(desc);
+                containerDiv.appendChild(para);
+            }
+
+            categoryDiv.appendChild(containerDiv);
+
+            // Add collection objects to grid space
+            var div = document.getElementsByClassName('grid')[0];
+            div.prepend(categoryDiv);
+
+            // Set current collection
+            if (pageLink) addEventListener("click", (e) => {
+                localStorage.setItem(localLink, JSON.stringify(collection));
             });
         }
     }
@@ -133,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Populate space page
     if (window.location.href.includes("space.html"))
-        populateCollectionPage(
+        populateSpacePage(
             db,
             JSON.parse(localStorage.getItem('currentSpace')),
             JSON.parse(localStorage.getItem('currentSpace')).collections,
