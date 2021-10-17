@@ -519,8 +519,17 @@ async function getSpacesHomepage(datab) {
 // Custom Scripts
 
 document.addEventListener("DOMContentLoaded", () => {
-    var modal = document.getElementById("create-resource-modal");
-    var btn = document.getElementById("create-resource-modal-button");
+    var spaceModal = document.getElementById("create-space-modal");
+
+    var addSpaceBtn = document.getElementById("create-space-modal-button");
+    var addCollectionBtn = document.getElementById("create-collection-modal-button");
+    var addResourceBtn = document.getElementById("create-resource-modal-button");
+
+    var submitAddSpaceBtn = document.getElementById("form-submit-add-space");
+    var submitAddCollectionBtn = document.getElementById("form-submit-add-space");
+    var submitAddResourceBtn = document.getElementById("form-submit-add-space");
+
+
     var span = document.getElementsByClassName("close")[0];
     var boardButton = document.getElementById("create-board-button");
     var existingBoardButton = document.getElementById("existing-board-button");
@@ -536,20 +545,58 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Current resource: ", localStorage.getItem('currentResource'));
 
     /* Create resource pop-up */
-    if (btn) {
-        btn.addEventListener("click", (e) => {
-            modal.style.display = "block";
+    if (addSpaceBtn) {
+        addSpaceBtn.addEventListener("click", (e) => {
+            spaceModal.style.display = "block";
         });
     }
+
+    const toKebabCase = str =>
+        str &&
+        str
+            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+            .map(x => x.toLowerCase())
+            .join('-');
+
+    if (submitAddSpaceBtn) {
+        submitAddSpaceBtn.addEventListener("click", (e) => {
+
+            // console.log(e.data);
+
+            // e.preventDefault();
+
+            //Get Form Values
+            let title = document.querySelector('#create-spaces-modal #title').value;
+
+            let image = document.getElementById('image-link').value;
+            let id = toKebabCase(title);
+            let description = document.getElementById('desc').value;
+
+            //Save Form Data To Firebase
+            setDoc(doc(db, "spaces", id), {
+                title: title,
+                image: image,
+                description: description
+            }).then(() => {
+                console.log("Data saved")
+            }).catch((error) => {
+                console.log(error)
+            });
+
+            //alert
+            alert("Your Form Has Been Submitted Successfully")
+        })
+    }
+
     if (span) {
         span.addEventListener("click", (e) => {
-            modal.style.display = "none";
+            spaceModal.style.display = "none";
         });
     }
 
     window.addEventListener("click", (e) => {
-        if (e.target == modal) {
-            modal.style.display = "none";
+        if (e.target == addSpaceBtn) {
+            addSpaceBtn.style.display = "none";
         }
     });
 

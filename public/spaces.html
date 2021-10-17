@@ -25,7 +25,7 @@
     <script src="../script.js" type="module"></script>
   </head>
   <body>
-    <div id="create-resource-modal" class="modal">
+    <div id="create-space-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <div>
@@ -41,12 +41,7 @@
           <section class="inline">
             <h3>Enter a URL</h3>
             <label for="link" class="hiddenLabel">Enter an image URL:</label>
-            <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
-          </section>
-          <section class="inline">
-            <h3>Or upload your own</h3>
-            <label for="boardFile" class="hiddenLabel">Or upload your own:</label>
-            <input type="file" id="boardFile" name="filename" />
+            <input type="text" id="image-link" name="link" placeholder="Enter an image URL"/>
           </section>
         </div>
         <div>
@@ -60,7 +55,7 @@
           ></textarea>
         </div>
         <div>
-          <button class="form-submit-add-resource">Create Space</button>
+          <button id="form-submit-add-space">Create Space</button>
         </div>
       </div>
     </div>
@@ -184,7 +179,7 @@
           </div>
           <div class="category addItem">
             <!-- Create Resource Pop-Up Modal -->
-            <button id="create-resource-modal-button">
+            <button id="create-space-modal-button">
               <h3><i class="fas fa-plus"></i><br />Create a space</h3>
             </button>
           </div>
