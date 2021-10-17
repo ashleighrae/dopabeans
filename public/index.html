@@ -1,342 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="style.css" />
-    
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,400;0,700;1,100;1,500;1,600&family=ZCOOL+QingKe+HuangYou&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
-    />
-    <title>Dopabeans</title>
-    <meta charset="utf-8" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="script.js" type="module"></script>
-    <script src="accessDB.js" type="module"></script>
-  </head>
-  <body>
-    
-    <!-- Navigation menu -->
-    <nav id="mainNavbarMenu" height="20px">
-      <ul class="nav logo m0">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="style.css" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,400;0,700;1,100;1,500;1,600&family=ZCOOL+QingKe+HuangYou&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <title>Dopabeans</title>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="script.js" type="module"></script>
+  <script src="accessDB.js" type="module"></script>
+</head>
+
+<body>
+
+  <!-- Navigation menu -->
+  <nav id="mainNavbarMenu" height="20px">
+    <ul class="nav logo m0">
+      <li>
+        <a href="index.html">
+          <h1>Kozmos</h1>
+        </a>
+      </li>
+    </ul>
+    <div id="burglinks">
+      <ul class="nav">
         <li>
-          <a href="index.html"><h1>Kozmos</h1></a>
+          <a href="index.html" class="active">Home</a>
+        </li>
+        <li>
+          <a href="explore.html">Explore</a>
+        </li>
+        <li class="dropdown">
+          <a href="spaces.html" class="">Spaces</a>
+          <div class="dropdownContent">
+            <a href="#">My Spaces</a>
+            <a href="#">Following</a>
+            <a href="#">Add New <i class="fas fa-plus"></i></a>
+          </div>
         </li>
       </ul>
-      <div id="burglinks">
-        <ul class="nav">
-          <li>
-            <a href="index.html" class="active">Home</a>
-          </li>
-          <li>
-            <a href="explore.html">Explore</a>
-          </li>
-          <li class="dropdown">
-            <a href="spaces.html" class="">Spaces</a>
-            <div class="dropdownContent">
-              <a href="#">My Spaces</a>
-              <a href="#">Following</a>
-              <a href="#">Add New <i class="fas fa-plus"></i></a>
+    </div>
+    <div id="user-container">
+      <div hidden id="user-pic"></div>
+      <div hidden id="user-name"></div>
+      <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+        Sign-out
+      </button>
+      <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+        <i class="material-icons"></i>Sign-in with Google
+      </button>
+    </div>
+    <div class="hamburgerhide">
+      <a href="javascript:" class="hamburger" onclick="toggle()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </nav>
+  <section class="page">
+    <div class="searchBar">
+      <form>
+        <label class="hiddenLabel">Search</label>
+        <input type="text" placeholder="Explore... ">
+      </form>
+    </div>
+    <div>
+      <h2>Spaces</h2>
+      <div class="categoryGridSpace">
+        <div class="category">
+          <img src="img/fishy.jpg" alt="" />
+          <a href="/spaces/ancient-oceans.html">
+            <div>
+              <h3 class="categoryTitle">Ancient Oceans</h3>
             </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/timescale.jpg" alt="" />
+          <a href="/spaces/geological-timescale.html">
+            <div>
+              <h3>Geological Timescale</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/asd-women.jpg" alt="" />
+          <a href="/spaces/women-with-asd.html">
+            <div>
+              <h3>Women with ASD</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/banksia.jpg" alt="" />
+          <a href="/spaces/australian-plants.html">
+            <div>
+              <h3>Australian Plants</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/brain.jpg" alt="" />
+          <a href="/spaces/the-brain.html">
+            <div>
+              <h3>The Brain</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/paint.jpg" alt="" />
+          <a href="/spaces/painting-sketching.html">
+            <div>
+              <h3>Painting & Sketching</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/fossil.jpg" alt="" />
+          <a href="/spaces/fossils.html">
+            <div>
+              <h3>Fossils</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/autism.jpg" alt="" />
+          <a href="/spaces/adult-autism.html">
+            <div>
+              <h3>Adult Autism</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/fungi.jpg" alt="" />
+          <a href="/spaces/ancient-oceans.html">
+            <div>
+              <h3>Fungi Friends</h3>
+            </div>
+          </a>
+        </div>
+        <div class="category">
+          <img src="img/tardigrade-digital.jpg" alt="" />
+          <a href="/spaces/weird-animals.html">
+            <div>
+              <h3>Weird Animals</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Recent posts</h2>
+      <!-- Masonary Grid -->
+      <!-- Need functionality to auto populate -->
+      <div class="grid">
+        <div class="grid-sizer"></div>
+        <div class="grid-item">
+          <img src="img/temp/0.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/00.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Biscuit ice cream cheesecake.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/1.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé. </p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/2.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Biscuit ice cream cheesecake. </p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/3.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/4.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/5.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/6.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Biscuit ice cream cheesecake.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/7.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/8.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/9.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Biscuit ice cream cheesecake.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/11.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/22.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/33.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Biscuit ice cream cheesecake.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/44.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/55.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="img/temp/66.jpg" alt="" />
+          <div class="container">
+            <h3><b>Cheesecake biscuit</b></h3>
+            <p>Biscuit ice cream cheesecake.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+      <div class="mdl-snackbar__text"></div>
+      <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="rowfooter">
+      <div>
+        <h3 class="">Quick Links</h3>
+        <ul class="footermenuitems m0">
+          <li>
+            <a href="#">Collections</a>
+          </li>
+          <li>
+            <a href="#">Profile</a>
+          </li>
+          <li>
+            <a href="#">Account settings</a>
+          </li>
+          <li>
+            <a href="#">Get in touch</a>
           </li>
         </ul>
       </div>
-      <div id="user-container">
-        <div hidden id="user-pic"></div>
-        <div hidden id="user-name"></div>
-        <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-          Sign-out
-        </button>
-        <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-          <i class="material-icons"></i>Sign-in with Google
-        </button>
-      </div>
-      <div class="hamburgerhide">
-        <a href="javascript:" class="hamburger" onclick="toggle()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </nav>
-    <section class="page">
-      <div class="searchBar">
-        <form>
-          <label class="hiddenLabel">Search</label>
-          <input type="text" placeholder="Explore... ">
-        </form>
-      </div>
-      <div>
-        <h2>Spaces</h2>
-        <div class="categoryGridSpace">
-          <div class="category">
-            <img src="img/fishy.jpg" alt="" />
-            <a href="/spaces/ancient-oceans.html">
-              <div>
-                <h3 class="categoryTitle">Ancient Oceans</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/timescale.jpg" alt="" />
-            <a href="/spaces/geological-timescale.html">
-              <div>
-                <h3>Geological Timescale</h3>
-              </div>
-              </a>
-          </div>
-          <div class="category">
-            <img src="img/asd-women.jpg" alt="" />
-            <a href="/spaces/women-with-asd.html">
-              <div>
-                <h3>Women with ASD</h3>
-              </div>
-              </a>
-          </div>
-          <div class="category">
-            <img src="img/banksia.jpg" alt="" />
-            <a href="/spaces/australian-plants.html">
-              <div>
-                <h3>Australian Plants</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/brain.jpg" alt="" />
-            <a href="/spaces/the-brain.html">
-              <div>
-                <h3>The Brain</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/paint.jpg" alt="" />
-            <a href="/spaces/painting-sketching.html">
-              <div>
-                <h3>Painting & Sketching</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/fossil.jpg" alt="" />
-            <a href="/spaces/fossils.html">
-              <div>
-                <h3>Fossils</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/autism.jpg" alt="" />
-            <a href="/spaces/adult-autism.html">
-              <div>
-                <h3>Adult Autism</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/fungi.jpg" alt="" />
-            <a href="/spaces/ancient-oceans.html">
-              <div>
-                <h3>Fungi Friends</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/tardigrade-digital.jpg" alt="" />
-            <a href="/spaces/weird-animals.html">
-              <div>
-                <h3>Weird Animals</h3>
-              </div>
-            </a>
-          </div>
+      <div class="socialmedialinks">
+        <h3 class="">Follow Us</h3>
+        <div>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
         </div>
       </div>
       <div>
-        <h2>Recent posts</h2>
-      <!-- Masonary Grid -->
-      <!-- Need functionality to auto populate -->
-        <div class="grid">
-          <div class="grid-sizer"></div>
-          <div class="grid-item">
-            <img src="img/temp/0.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/00.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Biscuit ice cream cheesecake.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/1.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé. </p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/2.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Biscuit ice cream cheesecake. </p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/3.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/4.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/5.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/6.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Biscuit ice cream cheesecake.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/7.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/8.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/9.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Biscuit ice cream cheesecake.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/11.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/22.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/33.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Biscuit ice cream cheesecake.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/44.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/55.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Caramels chocolate bar jelly beans jelly-o shortbread shortbread soufflé.</p>
-            </div>
-          </div>
-          <div class="grid-item">
-            <img src="img/temp/66.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Biscuit ice cream cheesecake.</p>
-            </div>
-          </div>
-        </div>
+        <ul>
+          <li>
+            <a href="#">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">Privacy policy</a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="masonry.js"></script>
+</body>
 
-      <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button class="mdl-snackbar__action" type="button"></button>
-      </div>
-
-    </section>
-    <!-- Footer -->
-    <footer>
-      <div class="rowfooter">
-        <div>
-          <h3 class="">Quick Links</h3>
-          <ul class="footermenuitems m0">
-            <li>
-              <a href="#">Collections</a>
-            </li>
-            <li>
-              <a href="#">Profile</a>
-            </li>
-            <li>
-              <a href="#">Account settings</a>
-            </li>
-            <li>
-              <a href="#">Get in touch</a>
-            </li>
-          </ul>
-        </div>
-        <div class="socialmedialinks">
-          <h3 class="">Follow Us</h3>
-          <div>
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-          </div>
-        </div>
-        <div>
-          <ul>
-            <li>
-              <a href="#">Terms & Conditions</a>
-            </li>
-            <li>
-              <a href="#" target="_blank">Privacy policy</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="masonry.js"></script>
-  </body>
 </html>
