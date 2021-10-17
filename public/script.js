@@ -448,7 +448,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var createBoardDiv = document.getElementsByClassName("create-board")[0];
     var currentBoard = document.getElementById("board-options");
     var boardFile = document.getElementById("boardFile");
-    var createResource = document.getElementsByClassName("form-submit-add-resource")[0];
     var selectedFile;
 
     /* Log current space */
@@ -471,24 +470,21 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    // async function populateSpacesSelect() {
+    //     const spaceCol = collection(db, 'spaces');
+    //     const spaceSnapshot = await getDocs(spaceCol);
+    //     const spaceList = spaceSnapshot.docs.map(doc => doc.data());
 
-    async function populateSpacesSelect() {
-        const spaceCol = collection(db, 'spaces');
-        const spaceSnapshot = await getDocs(spaceCol);
-        const spaceList = spaceSnapshot.docs.map(doc => doc.data());
+    //     let max = spaceList.length;
+    //     let select = document.getElementById("space-select");
 
-        let max = spaceList.length;
-        let select = document.getElementById("space-select");
-
-        for (var i = 0; i <= max; i++) {
-            var opt = document.createElement('option');
-            opt.value = spaceList[i].title;
-            opt.innerHTML = spaceList[i].title;
-            select.appendChild(opt);
-        }
-    }
-
-
+    //     for (var i = 0; i <= max; i++) {
+    //         var opt = document.createElement('option');
+    //         opt.value = spaceList[i].title;
+    //         opt.innerHTML = spaceList[i].title;
+    //         select.appendChild(opt);
+    //     }
+    // }
 
     const toKebabCase = str =>
         str &&
@@ -601,6 +597,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (submitAddResourceBtn) {
         submitAddResourceBtn.addEventListener("click", (e) => {
 
+            console.log("OJIJNIJIJ")
+
+
             //Get Form Values
             let title = document.querySelector('#title').value;
 
@@ -619,7 +618,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 image = 'https://i.some-random-api.ml/onUSIniyyq.png';
             }
 
-            console.log("OJIJNIJIJ")
 
             // Add the new collection to the collections db 
             setDoc(doc(db, "resources", resourceId), {
@@ -651,6 +649,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log(error);
                 });
             }
+
+            updateCollection();
 
             saveCollectionData();
 
