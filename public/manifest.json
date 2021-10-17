@@ -1,8 +1,17 @@
 {
-  "name": "Friendly Chat",
-  "short_name": "Friendly Chat",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "orientation": "portrait",
-  "gcm_sender_id": "103953800507"
+  "manifest_version": 2,
+  "name": "Dopabeans",
+  "version": "1.0",
+  "description": "This extension will create a popup for....",
+  "permissions": ["activeTab", "declarativeContent", "storage", "<all_urls>", "tabs"],
+  
+  "browser_action": {
+    "default_title": "Does a thing when you do a thing",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/beans.png",
+      "32": "icons/beans.png",
+      "128": "icons/beans.png"
+    }
+  }
 }
