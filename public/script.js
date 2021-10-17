@@ -287,85 +287,88 @@ function addSizeToGoogleProfilePic(url) {
 // A loading image URL.
 var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
 
-//   // Delete a Message from the UI.
-//   function deleteMessage(id) {
-//     var div = document.getElementById(id);
-//     // If an element for that message exists we delete it.
-//     if (div) {
-//       div.parentNode.removeChild(div);
-//     }
-//   }
+// Delete a Message from the UI.
+function deleteMessage(id) {
+    var div = document.getElementById(id);
+    // If an element for that message exists we delete it.
+    if (div) {
+        div.parentNode.removeChild(div);
+    }
+}
 
-//   function createAndInsertMessage(id, timestamp) {
-//     const container = document.createElement('div');
-//     container.innerHTML = MESSAGE_TEMPLATE;
-//     const div = container.firstChild;
-//     div.setAttribute('id', id);
+function createAndInsertMessage(id, timestamp) {
+    const container = document.createElement('div');
+    container.innerHTML = MESSAGE_TEMPLATE;
+    const div = container.firstChild;
+    div.setAttribute('id', id);
 
-//     // If timestamp is null, assume we've gotten a brand new message.
-//     // https://stackoverflow.com/a/47781432/4816918
-//     timestamp = timestamp ? timestamp.toMillis() : Date.now();
-//     div.setAttribute('timestamp', timestamp);
+    // If timestamp is null, assume we've gotten a brand new message.
+    // https://stackoverflow.com/a/47781432/4816918
+    timestamp = timestamp ? timestamp.toMillis() : Date.now();
+    div.setAttribute('timestamp', timestamp);
 
-//     // figure out where to insert new message
-//     const existingMessages = messageListElement.children;
-//     if (existingMessages.length === 0) {
-//       messageListElement.appendChild(div);
-//     } else {
-//       let messageListNode = existingMessages[0];
+    if (messageListElement != null) {
+        // figure out where to insert new message
+        const existingMessages = messageListElement.children;
+        if (existingMessages.length === 0) {
+            messageListElement.appendChild(div);
+        } else {
+            let messageListNode = existingMessages[0];
 
-//       while (messageListNode) {
-//         const messageListNodeTime = messageListNode.getAttribute('timestamp');
+            while (messageListNode) {
+                const messageListNodeTime = messageListNode.getAttribute('timestamp');
 
-//         if (!messageListNodeTime) {
-//           throw new Error(
-//             `Child ${messageListNode.id} has no 'timestamp' attribute`
-//           );
-//         }
+                if (!messageListNodeTime) {
+                    throw new Error(
+                        `Child ${messageListNode.id} has no 'timestamp' attribute`
+                    );
+                }
 
-//         if (messageListNodeTime > timestamp) {
-//           break;
-//         }
+                if (messageListNodeTime > timestamp) {
+                    break;
+                }
 
-//         messageListNode = messageListNode.nextSibling;
-//       }
+                messageListNode = messageListNode.nextSibling;
+            }
 
-//       messageListElement.insertBefore(div, messageListNode);
-//     }
+            messageListElement.insertBefore(div, messageListNode);
+        }
+    }
+    return div;
+}
 
-//     return div;
-//   }
+// Displays a Message in the UI.
+function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
+    var div = document.getElementById(id) || createAndInsertMessage(id, timestamp);
 
-//   // Displays a Message in the UI.
-//   function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
-//     var div = document.getElementById(id) || createAndInsertMessage(id, timestamp);
+    // profile picture
+    if (picUrl) {
+        div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
+    }
 
-//     // profile picture
-//     if (picUrl) {
-//       div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
-//     }
+    div.querySelector('.name').textContent = name;
+    var messageElement = div.querySelector('.message');
 
-//     div.querySelector('.name').textContent = name;
-//     var messageElement = div.querySelector('.message');
-
-//     if (text) { // If the message is text.
-//       messageElement.textContent = text;
-//       // Replace all line breaks by <br>.
-//       messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-//     } else if (imageUrl) { // If the message is an image.
-//       var image = document.createElement('img');
-//       image.addEventListener('load', function() {
-//         messageListElement.scrollTop = messageListElement.scrollHeight;
-//       });
-//       image.src = imageUrl + '&' + new Date().getTime();
-//       messageElement.innerHTML = '';
-//       messageElement.appendChild(image);
-//     }
-//     // Show the card fading-in and scroll to view the new message.
-//     setTimeout(function() {div.classList.add('visible')}, 1);
-//     messageListElement.scrollTop = messageListElement.scrollHeight;
-//     messageInputElement.focus();
-//   }
+    if (messageListElement != null) {
+        if (text) { // If the message is text.
+            messageElement.textContent = text;
+            // Replace all line breaks by <br>.
+            messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+        } else if (imageUrl) { // If the message is an image.
+            var image = document.createElement('img');
+            image.addEventListener('load', function () {
+                messageListElement.scrollTop = messageListElement.scrollHeight;
+            });
+            image.src = imageUrl + '&' + new Date().getTime();
+            messageElement.innerHTML = '';
+            messageElement.appendChild(image);
+        }
+        // Show the card fading-in and scroll to view the new message.
+        setTimeout(function () { div.classList.add('visible') }, 1);
+        messageListElement.scrollTop = messageListElement.scrollHeight;
+        messageInputElement.focus();
+    }
+}
 
 // Enables or disables the submit button depending on the values of the input
 // fields.
@@ -392,24 +395,34 @@ var signOutButtonElement = document.getElementById('sign-out');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
 // Saves message on form submit.
-//   messageFormElement.addEventListener('submit', onMessageFormSubmit);
-if (signOutButtonElement) signOutButtonElement.addEventListener('click', signOutUser);
-if (signInButtonElement) signInButtonElement.addEventListener('click', signIn);
+if (messageFormElement != null) {
+    messageFormElement.addEventListener('submit', onMessageFormSubmit);
+}
+if (signOutButtonElement != null) {
+    signOutButtonElement.addEventListener('click', signOutUser);
+}
+if (signInButtonElement != null) {
+    signInButtonElement.addEventListener('click', signIn);
+}
 
 // Toggle for the button.
-//   messageInputElement.addEventListener('keyup', toggleButton);
-//   messageInputElement.addEventListener('change', toggleButton);
+if (messageInputElement != null) {
+    messageInputElement.addEventListener('keyup', toggleButton);
+    messageInputElement.addEventListener('change', toggleButton);
+}
 
 // Events for image upload.
-//   imageButtonElement.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     mediaCaptureElement.click();
-//   });
-//   mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+if (mediaCaptureElement && imageButtonElement != null) {
+    imageButtonElement.addEventListener('click', function (e) {
+        e.preventDefault();
+        mediaCaptureElement.click();
+    });
+    mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+}
 
 getPerformance();
 initFirebaseAuth();
-//  loadMessages();
+loadMessages();
 
 // Custom Scripts
 
@@ -445,6 +458,12 @@ document.addEventListener("DOMContentLoaded", () => {
         addSpaceBtn.addEventListener("click", (e) => {
             spaceModal.style.display = "block";
         });
+    } else if (addCollectionBtn) {
+        addCollectionBtn.addEventListener("click", (e) => {
+            collectionModal.style.display = "block";
+        });
+    } else if (addResourceBtn) {
+
     }
 
     const toKebabCase = str =>
@@ -468,6 +487,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
+            if (!image) {
+                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+            }
+
             //Save Form Data To Firebase
             setDoc(doc(db, "spaces", id), {
                 title: title,
@@ -482,6 +505,39 @@ document.addEventListener("DOMContentLoaded", () => {
             //alert
             alert("Your new space was added successfully!");
             spaceModal.style.display = "none";
+        })
+    }
+
+    if (submitAddCollectionBtn) {
+        submitAddCollectionBtn.addEventListener("click", (e) => {
+
+            //Get Form Values
+            let title = document.querySelector('#title').value;
+
+            console.log(title);
+
+            let image = document.getElementById('image-link').value;
+            let id = toKebabCase(title);
+            let description = document.getElementById('desc').value;
+
+            if (!image) {
+                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+            }
+
+            // //Save Form Data To Firebase
+            // setDoc(doc(db, "spaces", id), {
+            //     title: title,
+            //     image: image,
+            //     description: description
+            // }).then(() => {
+            //     console.log("Data saved")
+            // }).catch((error) => {
+            //     console.log(error)
+            // });
+
+            // //alert
+            // alert("Your new space was added successfully!");
+            // spaceModal.style.display = "none";
         })
     }
 
