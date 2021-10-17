@@ -2,7 +2,7 @@ import { ref, getStorage, uploadBytesResumable, getDownloadURL } from 'https://w
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js';
 import { getDatabase, onValue } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js';
-import { collection, addDoc, getFirestore, setDoc, getDocs, doc, query, orderBy, limit, onSnapshot, updateDoc, serverTimestamp, getDoc} from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
+import { collection, addDoc, getFirestore, setDoc, getDocs, doc, query, orderBy, limit, onSnapshot, updateDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js";
 
 import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-messaging.js';
@@ -411,111 +411,6 @@ getPerformance();
 initFirebaseAuth();
 //  loadMessages();
 
-
-
-
-
-
-
-// $("#rando").append(
-//     $('<img id="profilePicture" src="' + photo + '">'));
-// $("#rando").append($('<h3>').text(name).append('<i class="fas fa-chevron-down"></i>'));
-
-
-// Add spaces to to home page
-async function getSpacesHomepage(datab) {
-    const spaceCol = collection(datab, 'spaces');
-    const spaceSnapshot = await getDocs(spaceCol);
-    const spaceList = spaceSnapshot.docs.map(doc => doc.data());
-    console.log("Spaces: ", spaceList);
-
-    spaceList.forEach(element => {
-        // Add div to category section
-        const categoryDiv = document.createElement("div");
-        categoryDiv.classList.add("category");
-
-        // Add image
-        var img = document.createElement('img');
-        img.src = element.image;
-        categoryDiv.appendChild(img);
-
-        // Add link
-        const spacePageLink = document.createElement("a");
-        spacePageLink.href = "/spaces/space.html";
-        categoryDiv.appendChild(spacePageLink);
-
-        // Add header
-        const header = document.createElement("h3");
-        const title = document.createTextNode(element.title);
-        header.appendChild(title);
-        const headerDiv = document.createElement("div");
-        headerDiv.appendChild(header);
-        spacePageLink.appendChild(headerDiv);
-
-        // Add space objects to grid space
-        var spaceDiv = document.getElementsByClassName('categoryGridSpace')[0];
-        spaceDiv.prepend(categoryDiv);
-
-        // Set current space
-        if (spacePageLink) {
-            spacePageLink.addEventListener("click", (e) => {
-                localStorage.setItem('currentSpace', JSON.stringify(element)); //set
-
-                /* Log current space */
-                console.log("Current space on click: ", localStorage.getItem('currentSpace'));
-            });
-        }
-    });
-}
-
-// Populate collection page
-// async function populateSpaceCollectionPage(datab) {
-//     const space = JSON.parse(localStorage.getItem('currentSpace'));
-
-//     for (let i = 0; i < space.collections.length; i++) {
- 
-//         // Get collection details
-//         const docRef = doc(datab, "collections", space.collections[i]);
-//         const docSnap = await getDoc(docRef);
-//         const collection = docSnap.data();
-
-//         // Add div to category section
-//         const categoryDiv = document.createElement("div");
-//         categoryDiv.classList.add("category");
-
-//         // Add image
-//         var img = document.createElement('img');
-//         img.src = collection.image;
-//         categoryDiv.appendChild(img);
-
-//         // Add link
-//         const pageLink = document.createElement("a");
-//         pageLink.href = "/collections/collection.html";
-//         categoryDiv.appendChild(pageLink);
-
-//         // Add header
-//         const header = document.createElement("h3");
-//         const title = document.createTextNode(collection.title);
-//         header.appendChild(title);
-//         const headerDiv = document.createElement("div");
-//         headerDiv.appendChild(header);
-//         pageLink.appendChild(headerDiv);
-
-//         // Add collection objects to grid space
-//         var div = document.getElementsByClassName('categoryGrid')[0];
-//         div.prepend(categoryDiv);
-
-//         // Set current collection
-//         if (pageLink) addEventListener("click", (e) => {
-//             localStorage.setItem('currentCollection', JSON.stringify(collection)); //set
-
-//             /* Log current collection */
-//             console.log("Current collection: ", localStorage.getItem('currentCollection'));
-//         });
-//     }
-// }
-
-
 // Custom Scripts
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -615,75 +510,4 @@ document.addEventListener("DOMContentLoaded", () => {
             createBoardDiv.style.display = "none";
         });
     }
-
-
-    /* Upload file to database */
-    if (boardFile) {
-        boardFile.addEventListener("change", (e) => {
-            selectedFile = e.target.files[0];
-        })
-
-        /* Add file to storage on firebase */
-        function addBoardImage() {
-            // if (selectedFile) {
-            //     var filename = selectedFile.name;
-            //     var storageRef = firebase.storage().ref('/board_images' * filename);
-            //     var uploadTask = storageRef.put(selectedFile);
-
-            //     // Register three observers:
-            //     // 1. 'state_changed' observer, called any time the state changes
-            //     // 2. Error observer, called on failure
-            //     // 3. Completion observer, called on successful completion
-            //     uploadTask.on('state_changed',
-            //         (snapshot) => {
-            //             // Observe state change events such as progress, pause, and resume
-            //             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            //             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            //             console.log('Upload is ' + progress + '% done');
-            //             switch (snapshot.state) {
-            //                 case firebase.storage.TaskState.PAUSED: // or 'paused'
-            //                     console.log('Upload is paused');
-            //                     break;
-            //                 case firebase.storage.TaskState.RUNNING: // or 'running'
-            //                     console.log('Upload is running');
-            //                     break;
-            //             }
-            //         },
-            //         (error) => {
-            //             // Handle unsuccessful uploads
-            //         },
-            //         () => {
-            //             // Handle successful uploads on complete
-            //             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            //             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            //                 var postKey = firebase.database().ref('Board_images/').push().key;
-            //                 var updates = {};
-            //                 var postData = {
-            //                     url: downloadURL
-            //                 }
-            //                 updates['/Board_images/' + postKey] = postData;
-            //                 console.log('File available at', downloadURL);
-            //                 firebase.database().ref().update(updates);
-            //             });
-            //         }
-            //     );
-
-            //     selectedFile = null;
-            // }
-
-            if (selectedFile) {
-                const storage = getStorage();
-                var storageRef = ref(storage, '/board_images' * selectedFile.name);
-
-                // Upload the file and metadata
-                const uploadTask = uploadBytesResumable(storageRef, selectedFile);
-            }
-        }
-    }
-
-    // Add spaces to home page
-    if (window.location.href.includes("index") || window.location.href.includes("spaces.html")) getSpacesHomepage(db);
-
-    // Populate space page
-    if (window.location.href.includes("space.html")) populateSpacePage(db);
-})
+});
