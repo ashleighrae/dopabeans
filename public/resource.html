@@ -55,80 +55,81 @@
           <!-- dynamically added in script.js -->
         </a>
       </div>
+      <div id="user-container">
+        <div hidden id="user-pic"></div>
+        <div hidden id="user-name"></div>
+        <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+          Sign-out
+        </button>
+        <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+          <i class="material-icons"></i>Sign-in with Google
+        </button>
+      </div>
       <div class="hamburgerhide">
         <a href="javascript:" class="hamburger" onclick="toggle()">
           <i class="fa fa-bars"></i>
         </a>
       </div>
     </nav>
-    <section class="page">
-      <div class="space">
-          <h1>
-            <!-- Need to add dynamically -->
-              Ancient Oceans
-          </h1>
+    <section class="page singleResource">
+        <div>
+            <h1 class="resourceTitle">Immortal jellyfish</h1>
+        </div>
+      <div class="resourceLink">
+        <a href=""><i class="fas fa-link"></i> Resources Link</a>
       </div>
       <div>
-          <div class="category addItem">
-            <!-- Create Resource Pop-Up Modal -->
-            <button id="create-resource-modal-button"><h3><i class="fas fa-plus"></i><br>New collection</h3></button>
-          </div>
+        <div class="resourceImage">
+            <img src="../img/temp/0.jpg" alt="" />
         </div>
       </div>
-
-      <div class="posts">
-        <h2>All posts</h2>
-      <!-- Masonary Grid -->
-      <!-- Need functionality to auto populate -->
-        <div class="grid">
-          <div class="grid-item">
-            <img src="../img/temp/0.jpg" alt="" />
-            <div class="container">
-              <h3><b>Cheesecake biscuit</b></h3>
-              <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            </div>
-          </div>
+      <div class="resourceDescription">
+        <h2>Description</h2>
+        <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+      </div>
+    </section>
+    <section>
+      <div class="comments"></div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div class="rowfooter">
+        <div>
+          <h3 class="">Quick Links</h3>
+          <ul class="footermenuitems m0">
+            <li>
+              <a href="../#">Collections</a>
+            </li>
+            <li>
+              <a href="../#">Profile</a>
+            </li>
+            <li>
+              <a href="../#">Account settings</a>
+            </li>
+            <li>
+              <a href="../#">Get in touch</a>
+            </li>
           </ul>
         </div>
-        <!-- Footer -->
-    <footer>
-        <div class="rowfooter">
+        <div class="socialmedialinks">
+          <h3 class="">Follow Us</h3>
           <div>
-            <h3 class="">Quick Links</h3>
-            <ul class="footermenuitems m0">
-              <li>
-                <a href="../#">Collections</a>
-              </li>
-              <li>
-                <a href="../#">Profile</a>
-              </li>
-              <li>
-                <a href="../#">Account settings</a>
-              </li>
-              <li>
-                <a href="../#">Get in touch</a>
-              </li>
-            </ul>
-          </div>
-          <div class="socialmedialinks">
-            <h3 class="">Follow Us</h3>
-            <div>
-              <i class="fab fa-facebook"></i>
-              <i class="fab fa-instagram"></i>
-            </div>
-          </div>
-          <div>
-            <ul>
-              <li>
-                <a href="../#">Terms & Conditions</a>
-              </li>
-              <li>
-                <a href="../#" target="_blank">Privacy policy</a>
-              </li>
-            </ul>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
           </div>
         </div>
-      </footer>
+        <div>
+          <ul>
+            <li>
+              <a href="../#">Terms & Conditions</a>
+            </li>
+            <li>
+              <a href="../#" target="_blank">Privacy policy</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="../masonry.js"></script>
   </body>
