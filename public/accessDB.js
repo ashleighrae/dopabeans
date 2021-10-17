@@ -75,7 +75,7 @@ async function getSpacesHomepage(datab) {
     });
 }
 
-// Populate collection page
+// Populate space page
 async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
@@ -140,13 +140,13 @@ async function populateCollectionPage(datab, space, docType, link, localLink) {
         if (resource) {
             console.log(resource);
 
-        //     <div class="grid-item">
-        //     <img src="../img/temp/0.jpg" alt="" />
-        //     <div class="container">
-        //       <h3><b>Cheesecake biscuit</b></h3>
-        //       <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-        //     </div>
-        //   </div>
+            //     <div class="grid-item">
+            //     <img src="../img/temp/0.jpg" alt="" />
+            //     <div class="container">
+            //       <h3><b>Cheesecake biscuit</b></h3>
+            //       <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
+            //     </div>
+            //   </div>
 
             // Add div to category section
             const categoryDiv = document.createElement("div");
@@ -159,21 +159,26 @@ async function populateCollectionPage(datab, space, docType, link, localLink) {
                 categoryDiv.appendChild(img);
             }
 
+            // Add link
+            if (resource.link) {
+                const linkObject = document.createElement("a");
+                linkObject.href = resource.link;
+                categoryDiv.appendChild(linkObject);
+            }
+
             // Add container div
             const containerDiv = document.createElement("div");
             containerDiv.classList.add("container");
 
-            // Add link
+            // Add header and link
             const pageLink = document.createElement("a");
             pageLink.href = link;
-            categoryDiv.appendChild(pageLink);
-
-            // Add header
             if (resource.title) {
                 const header = document.createElement("h3");
                 const title = document.createTextNode(resource.title);
                 header.appendChild(title);
-                containerDiv.appendChild(header);
+                pageLink.appendChild(header);
+                containerDiv.appendChild(pageLink);
             }
 
             // Add description
@@ -217,5 +222,5 @@ document.addEventListener("DOMContentLoaded", () => {
             db,
             JSON.parse(localStorage.getItem('currentCollection')),
             JSON.parse(localStorage.getItem('currentCollection')).resources,
-            "resource.html", "currentResource");
+            "../resource.html", "currentResource");
 })
