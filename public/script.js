@@ -415,6 +415,7 @@ initFirebaseAuth();
 
 document.addEventListener("DOMContentLoaded", () => {
     var spaceModal = document.getElementById("create-space-modal");
+    var collectionModal = document.getElementById("create-collection-modal");
 
     var addSpaceBtn = document.getElementById("create-space-modal-button");
     var addCollectionBtn = document.getElementById("create-collection-modal-button");
@@ -425,7 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var submitAddResourceBtn = document.getElementById("form-submit-add-space");
 
 
-    var span = document.getElementsByClassName("close")[0];
+    var closeButton = document.getElementsByClassName("close")[0];
     var boardButton = document.getElementById("create-board-button");
     var existingBoardButton = document.getElementById("existing-board-button");
     var createBoardDiv = document.getElementsByClassName("create-board")[0];
@@ -461,7 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // e.preventDefault();
 
             //Get Form Values
-            let title = document.querySelector('#create-spaces-modal #title').value;
+            let title = document.querySelector('#create-space-modal #title').value;
 
             let image = document.getElementById('image-link').value;
             let id = toKebabCase(title);
@@ -479,13 +480,18 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             //alert
-            alert("Your Form Has Been Submitted Successfully")
+            alert("Your new space was added successfully!");
+            spaceModal.style.display = "none";
         })
     }
 
-    if (span) {
-        span.addEventListener("click", (e) => {
-            spaceModal.style.display = "none";
+    if (closeButton) {
+        closeButton.addEventListener("click", (e) => {
+            if (spaceModal) {
+                spaceModal.style.display = "none";
+            } else if (collectionModal) {
+                collectionModal.style.display = "none";
+            }
         });
     }
 
