@@ -428,16 +428,6 @@ async function getSpacesHomepage(datab) {
     console.log("Spaces: ", spaceList);
 
     spaceList.forEach(element => {
-
-        //     <div class="category">
-        //     <img src="img/fishy.jpg" alt="" />
-        //     <a href="/spaces/ancient-oceans.html">
-        //       <div>
-        //         <h3 class="categoryTitle">Ancient Oceans</h3>
-        //       </div>
-        //     </a>
-        //   </div>
-
         const categoryDiv = document.createElement("div");
         categoryDiv.classList.add("category");
 
@@ -448,6 +438,7 @@ async function getSpacesHomepage(datab) {
 
         // Add link
         const spacePageLink = document.createElement("a");
+        spacePageLink.href = "/spaces/space-template.html";
         categoryDiv.appendChild(spacePageLink);
 
         // Add header
@@ -458,8 +449,16 @@ async function getSpacesHomepage(datab) {
         headerDiv.appendChild(header);
         spacePageLink.appendChild(headerDiv);
 
-        var spaceDiv = document.getElementsByClassName('categoryGrid')[0];
-        spaceDiv.appendChild(categoryDiv);
+        var spaceDiv = document.getElementsByClassName('categoryGridSpace')[0];
+        spaceDiv.prepend(categoryDiv);
+
+        // Set current space
+        if (spacePageLink) addEventListener("click", (e) => {
+            localStorage.setItem('currentSpace', element); //set
+
+            /* Log current space */
+            console.log("Current space: ", localStorage.getItem('currentSpace'));
+        });
     });
 }
 
@@ -477,6 +476,11 @@ document.addEventListener("DOMContentLoaded", () => {
     var boardFile = document.getElementById("boardFile");
     var createResource = document.getElementsByClassName("form-submit-add-resource")[0];
     var selectedFile;
+
+    /* Log current space */
+    console.log("Current space: ", localStorage.getItem('currentSpace'));
+    console.log("Current collection: ", localStorage.getItem('currentCollection'));
+    console.log("Current resource: ", localStorage.getItem('currentResource'));
 
     /* Create resource pop-up */
     if (btn) {
@@ -578,7 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Add spaces to home page
-    getSpacesHomepage(db);
+    if (window.location.href.includes("index") || window.location.href.includes("spaces.html")) getSpacesHomepage(db);
 
     if (createResource) {
 
