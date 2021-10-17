@@ -484,29 +484,40 @@ a:hover {
 /* Search bar */
 .searchBar {
   display: flex;
+  justify-content: center;
 }
 
-form {
+.searchBar form {
   width: 100%;
   justify-content: center;
   display: flex;
+  background-color: #dfeaf0;
+  position: relative;
+  border-radius: 25px;
+  align-items: center;
+  max-width: 1000px;
 }
 
-input {
-  background-color: #dfeaf0;
+.searchBar .icon-search svg {
+  height: 35px;
+}
+
+.searchBar input {
   color: #121212;
   font-weight: 600;
   text-indent: 5%;
-  border-radius: 25px;
   cursor: default;
   padding: 6px 0;
   border: none;
-  width: 80%;
+  width: 90%;
   height: 25px;
   justify-content: center;
+  font-size: 1.25rem;
+  height: 3rem;
+  background-color: inherit;
 }
 
-textarea {
+.searchBar textarea {
   background-color: #dfeaf0;
   color: #121212;
   font-weight: 600;
