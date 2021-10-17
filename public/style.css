@@ -1012,7 +1012,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5% 10%;
+  padding: 5% 10% 4% 10%;
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
@@ -1095,4 +1095,11 @@ header {
 .resourceLink {
   width: fit-content;
   padding-top: 0;
+}
+
+
+.comments {
+  width: 100%;
+  height: 500px;
+  background-color: #dfeaf0;
 }
