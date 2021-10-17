@@ -150,7 +150,7 @@ a:hover {
 }
 
 /* Category Grids */
-.categoryGrid {
+.categoryGrid, .categoryGridSpace {
   display: grid;
   margin: 0 10px;;
   grid-template-columns: repeat(2, 1fr);
@@ -158,7 +158,7 @@ a:hover {
   gap: 10px;
 }
 
-.categoryGrid a {
+.categoryGrid a, .categoryGridSpace a {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -207,7 +207,7 @@ a:hover {
   }
 
   /* Category Grids */
-  .categoryGrid {
+  .categoryGrid, .categoryGridSpace {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 10px;
