@@ -24,6 +24,13 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore();
 
+const toKebabCase = str =>
+    str &&
+    str
+        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+        .map(x => x.toLowerCase())
+        .join('-');
+
 // Add spaces to to home page
 async function getSpacesHomepage(datab) {
     const spaceCol = collection(datab, 'spaces');
@@ -69,13 +76,13 @@ async function getSpacesHomepage(datab) {
 }
 
 // Populate collection page
-async function populateSpaceOrCollectionPage(datab, space, docType, link, localLink) {
+async function populateCollectionPage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
     for (let i = 0; i < docType.length; i++) {
 
         // Get collection details
-        const docRef = doc(datab, "collections", docType[i]);
+        const docRef = doc(datab, "collections", toKebabCase(docType[i]));
         const docSnap = await getDoc(docRef);
         const collection = docSnap.data();
 
@@ -126,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Populate space page
     if (window.location.href.includes("space.html"))
-        populateSpaceOrCollectionPage(
+        populateCollectionPage(
             db,
             JSON.parse(localStorage.getItem('currentSpace')),
             JSON.parse(localStorage.getItem('currentSpace')).collections,
@@ -134,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Populate collection page
     if (window.location.href.includes("collection.html"))
-        populateSpaceOrCollectionPage(
+        populateCollectionPage(
             db,
             JSON.parse(localStorage.getItem('currentCollection')),
             JSON.parse(localStorage.getItem('currentCollection')).resources,
