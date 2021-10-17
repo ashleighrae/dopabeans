@@ -57,6 +57,15 @@ $.ajax({
     }
 });
 
+// Add spaces to to home page
+async function getSpacesHomepage(datab) {
+    const spaceCol = collection(datab, 'spaces');
+    const spaceSnapshot = await getDocs(spaceCol);
+    const spaceList = spaceSnapshot.docs.map(doc => doc.data());
+    console.log("Spaces: ", spaceList);
+}
+
+
 // Custom Scripts
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -72,13 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
     var selectedFile;
 
     /* Create resource pop-up */
-    btn.addEventListener("click", (e) => {
-        modal.style.display = "block";
-    });
-
-    span.addEventListener("click", (e) => {
-        modal.style.display = "none";
-    });
+    if (btn) {
+        btn.addEventListener("click", (e) => {
+            modal.style.display = "block";
+        });
+    }
+    if (span) {
+        span.addEventListener("click", (e) => {
+            modal.style.display = "none";
+        });
+    }
 
     window.addEventListener("click", (e) => {
         if (e.target == modal) {
@@ -86,96 +98,95 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    /* Create Board */
-    boardButton.addEventListener("click", (e) => {
-        currentBoard.style.display = "none";
-        createBoardDiv.style.display = "block";
-    });
 
-    existingBoardButton.addEventListener("click", (e) => {
-        currentBoard.style.display = "block";
-        createBoardDiv.style.display = "none";
-    });
+    if (boardButton) {
+        /* Create Board */
+        boardButton.addEventListener("click", (e) => {
+            currentBoard.style.display = "none";
+            createBoardDiv.style.display = "block";
+        });
+    }
+
+    if (existingBoardButton) {
+        existingBoardButton.addEventListener("click", (e) => {
+            currentBoard.style.display = "block";
+            createBoardDiv.style.display = "none";
+        });
+    }
+
 
     /* Upload file to database */
+    if (boardFile) {
+        boardFile.addEventListener("change", (e) => {
+            selectedFile = e.target.files[0];
+        })
 
-    boardFile.addEventListener("change", (e) => {
-        selectedFile = e.target.files[0];
-    })
+        /* Add file to storage on firebase */
+        function addBoardImage() {
+            // if (selectedFile) {
+            //     var filename = selectedFile.name;
+            //     var storageRef = firebase.storage().ref('/board_images' * filename);
+            //     var uploadTask = storageRef.put(selectedFile);
 
-    /* Add file to storage on firebase */
-    function addBoardImage() {
-        // if (selectedFile) {
-        //     var filename = selectedFile.name;
-        //     var storageRef = firebase.storage().ref('/board_images' * filename);
-        //     var uploadTask = storageRef.put(selectedFile);
+            //     // Register three observers:
+            //     // 1. 'state_changed' observer, called any time the state changes
+            //     // 2. Error observer, called on failure
+            //     // 3. Completion observer, called on successful completion
+            //     uploadTask.on('state_changed',
+            //         (snapshot) => {
+            //             // Observe state change events such as progress, pause, and resume
+            //             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            //             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            //             console.log('Upload is ' + progress + '% done');
+            //             switch (snapshot.state) {
+            //                 case firebase.storage.TaskState.PAUSED: // or 'paused'
+            //                     console.log('Upload is paused');
+            //                     break;
+            //                 case firebase.storage.TaskState.RUNNING: // or 'running'
+            //                     console.log('Upload is running');
+            //                     break;
+            //             }
+            //         },
+            //         (error) => {
+            //             // Handle unsuccessful uploads
+            //         },
+            //         () => {
+            //             // Handle successful uploads on complete
+            //             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            //             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            //                 var postKey = firebase.database().ref('Board_images/').push().key;
+            //                 var updates = {};
+            //                 var postData = {
+            //                     url: downloadURL
+            //                 }
+            //                 updates['/Board_images/' + postKey] = postData;
+            //                 console.log('File available at', downloadURL);
+            //                 firebase.database().ref().update(updates);
+            //             });
+            //         }
+            //     );
 
-        //     // Register three observers:
-        //     // 1. 'state_changed' observer, called any time the state changes
-        //     // 2. Error observer, called on failure
-        //     // 3. Completion observer, called on successful completion
-        //     uploadTask.on('state_changed',
-        //         (snapshot) => {
-        //             // Observe state change events such as progress, pause, and resume
-        //             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        //             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        //             console.log('Upload is ' + progress + '% done');
-        //             switch (snapshot.state) {
-        //                 case firebase.storage.TaskState.PAUSED: // or 'paused'
-        //                     console.log('Upload is paused');
-        //                     break;
-        //                 case firebase.storage.TaskState.RUNNING: // or 'running'
-        //                     console.log('Upload is running');
-        //                     break;
-        //             }
-        //         },
-        //         (error) => {
-        //             // Handle unsuccessful uploads
-        //         },
-        //         () => {
-        //             // Handle successful uploads on complete
-        //             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        //             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        //                 var postKey = firebase.database().ref('Board_images/').push().key;
-        //                 var updates = {};
-        //                 var postData = {
-        //                     url: downloadURL
-        //                 }
-        //                 updates['/Board_images/' + postKey] = postData;
-        //                 console.log('File available at', downloadURL);
-        //                 firebase.database().ref().update(updates);
-        //             });
-        //         }
-        //     );
+            //     selectedFile = null;
+            // }
 
-        //     selectedFile = null;
-        // }
+            if (selectedFile) {
+                const storage = getStorage();
+                var storageRef = ref(storage, '/board_images' * selectedFile.name);
 
-        if (selectedFile) {
-            const storage = getStorage();
-            var storageRef = ref(storage, '/board_images' * selectedFile.name);
-
-            // Upload the file and metadata
-            const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+                // Upload the file and metadata
+                const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+            }
         }
     }
 
-    async function setAndGetPeople(datab) {
-        await setDoc(doc(person, "Cassie"), {
-            first_name: "Cassie", last_name: "C", 
-            good_at_coding: true, 
+    // Add spaces to home page
+    getSpacesHomepage(db);
+
+    if (createResource) {
+
+        createResource.addEventListener("click", (e) => {
+            //addBoardImage();
         });
-
-        const peopleCol = collection(datab, 'person');
-        const citySnapshot = await getDocs(peopleCol);
-        const cityList = citySnapshot.docs.map(doc => doc.data());
-        console.log(cityList);
     }
-
-    createResource.addEventListener("click", (e) => {
-        //addBoardImage();
-
-        setAndGetPeople(db);
-    });
 
 })
