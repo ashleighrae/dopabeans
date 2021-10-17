@@ -25,7 +25,7 @@
     <script src="../script.js" type="module"></script>
   </head>
   <body>
-    <div id="create-resource-modal" class="modal">
+    <div id="create-collection-modal" class="modal">
       <div class="modal-content">
               <span class="close">&times;</span>
             <h1>Add a Resource</h1>
@@ -103,6 +103,16 @@
         <a id="rando" href="#">
           <!-- dynamically added in script.js -->
         </a>
+      </div>
+      <div id="user-container">
+        <div hidden id="user-pic"></div>
+        <div hidden id="user-name"></div>
+        <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+          Sign-out
+        </button>
+        <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+          <i class="material-icons"></i>Sign-in with Google
+        </button>
       </div>
       <div class="hamburgerhide">
         <a href="javascript:" class="hamburger" onclick="toggle()">
