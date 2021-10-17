@@ -104,6 +104,17 @@ button {
   border-radius: 10px;
 }
 
+a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #4c4475;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #569493;
+}
+
 /* Tables */
 li {
   list-style: none;
@@ -208,6 +219,24 @@ a:hover {
 
 .addResource #create-resource-modal-button {
   grid-column: 3/4;
+}
+
+
+.text-only {
+  background-color: #569493;
+  color: #f8f8f8;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.link-only {
+  background-color: #dfeaf0;
+  border-radius: 10px;
+  display: flex;
+}
+
+.linkIcon {
+  padding: 16px 10px 16px 0px;
+  font-size: 1.5em;
 }
 
 @media only screen and (min-width:767px) {
@@ -1008,7 +1037,11 @@ header {
 
 }
 
-.resourceTitle {
+.resourceHeading {
   color: #121212;
   padding: 0;
+}
+
+.resourceLink {
+  width: fit-content;
 }
