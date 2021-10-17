@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../style.css" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
       rel="stylesheet"
@@ -20,74 +20,176 @@
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <title>Dopabeans</title>
-    <script src="index.js"></script>
-    <script src="addResource.js"></script>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="index.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="script.js"></script>
+    <script src="../script.js" type="module"></script>
   </head>
   <body>
-    <script>
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from 'firebase/app';
-      import { getAnalytics } from 'firebase/analytics';
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+    <div id="create-resource-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div>
+          <h1>Create a new Space</h1>
+        </div>
+        <div>
+          <h2>Space title:</h2>
+          <label for="title" class="hiddenLabel">Space title</label>
+          <input type="text" id="title" name="title" />
+        </div>
+        <div class="flex">
+          <h2>Choose a cover image:</h2>
+          <section class="inline">
+            <h3>Enter a URL</h3>
+            <label for="link" class="hiddenLabel">Enter an image URL:</label>
+            <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
+          </section>
+          <section class="inline">
+            <h3>Or upload your own</h3>
+            <label for="boardFile" class="hiddenLabel">Or upload your own:</label>
+            <input type="file" id="boardFile" name="filename" />
+          </section>
+        </div>
+        <div>
+          <h2>Description:</h2>
+          <label for="desc" class="hiddenLabel">Description:</label>
+          <textarea
+            rows="4"
+            id="desc"
+            name="desc"
+            placeholder="What's this space about?"
+          ></textarea>
+        </div>
+        <div>
+          <button class="form-submit-add-resource">Create Space</button>
+        </div>
+      </div>
+    </div>
 
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: 'AIzaSyAK6BS-eYLMsXlJK2t8-cQfjQF8rh_idDQ',
-        authDomain: 'dopabeans-cb511.firebaseapp.com',
-        projectId: 'dopabeans-cb511',
-        storageBucket: 'dopabeans-cb511.appspot.com',
-        messagingSenderId: '402132301454',
-        appId: '1:402132301454:web:b5a2006a303f66f0bcfbdf',
-        measurementId: 'G-498CLKKQYT',
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-    </script>
     <!-- Navigation menu -->
-    <nav id="mainNavbarMenu" height="20px">
-        <ul class="nav logo m0">
+    <nav id="mainNavbarMenu">
+      <ul class="nav logo m0">
+        <li>
+          <a href="../index.html"><h1>Kozmos</h1></a>
+        </li>
+      </ul>
+      <div id="burglinks">
+        <ul class="nav">
           <li>
-            <a href="index.html"><h1>Kozmos</h1></a>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="../explore.html">Explore</a>
+          </li>
+          <li class="dropdown">
+            <a href="../spaces.html" class="active">Spaces</a>
+            <div class="dropdownContent">
+              <a href="../#">My Spaces</a>
+              <a href="../#">Following</a>
+              <a href="../#">Add New <i class="fas fa-plus"></i></a>
+            </div>
           </li>
         </ul>
-        <div id="burglinks">
-          <ul class="nav">
-            <li>
-              <a href="index.html" class="active">Home</a>
-            </li>
-            <li>
-              <a href="explore.html">Explore</a>
-            </li>
-            <li class="dropdown">
-              <a href="spaces.html" class="">Spaces</a>
-              <div class="dropdownContent">
-                <a href="#">My Spaces</a>
-                <a href="#">Following</a>
-                <a href="#">Add New <i class="fas fa-plus"></i></a>
+      </div>
+      <div class="nav userNav">
+        <a id="rando" href="#">
+          <!-- dynamically added in script.js -->
+        </a>
+      </div>
+      <div class="hamburgerhide">
+        <a href="javascript:" class="hamburger" onclick="toggle()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </nav>
+    <section class="page">
+      <div class="space">
+        <h1>
+          <!-- Need to add dynamically -->
+          Spaces
+        </h1>
+      </div>
+      <div>
+        <div class="categoryGrid">
+          <div class="category">
+            <img src="img/fishy.jpg" alt="" />
+            <a href="/spaces/ancient-oceans.html">
+              <div>
+                <h3 class="categoryTitle">Ancient Oceans</h3>
               </div>
-            </li>
-          </ul>
+            </a>
+          </div>
+          <div class="category">
+            <img src="img/timescale.jpg" alt="" />
+            <a href="/spaces/geological-timescale.html">
+              <div>
+                <h3>Geological Timescale</h3>
+              </div>
+              </a>
+          </div>
+          <div class="category">
+            <img src="img/asd-women.jpg" alt="" />
+            <a href="/spaces/women-with-asd.html">
+              <div>
+                <h3>Women with ASD</h3>
+              </div>
+              </a>
+          </div>
+          <div class="category">
+            <img src="img/banksia.jpg" alt="" />
+            <a href="/spaces/australian-plants.html">
+              <div>
+                <h3>Australian Plants</h3>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="img/brain.jpg" alt="" />
+            <a href="/spaces/the-brain.html">
+              <div>
+                <h3>The Brain</h3>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="img/paint.jpg" alt="" />
+            <a href="/spaces/painting-sketching.html">
+              <div>
+                <h3>Painting & Sketching</h3>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="img/fossil.jpg" alt="" />
+            <a href="/spaces/fossils.html">
+              <div>
+                <h3>Fossils</h3>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="img/autism.jpg" alt="" />
+            <a href="/spaces/adult-autism.html">
+              <div>
+                <h3>Adult Autism</h3>
+              </div>
+            </a>
+          </div>
+          <div class="category">
+            <img src="img/fungi.jpg" alt="" />
+            <a href="/spaces/ancient-oceans.html">
+              <div>
+                <h3>Fungi Friends</h3>
+              </div>
+            </a>
+          </div>
+          <div class="category addItem">
+            <!-- Create Resource Pop-Up Modal -->
+            <button id="create-resource-modal-button">
+              <h3><i class="fas fa-plus"></i><br />Create a space</h3>
+            </button>
+          </div>
         </div>
-        <div class="nav userNav">
-          <a id="rando" href="#">
-            <!-- dynamically added in script.js -->
-          </a>
-        </div>
-        <div class="hamburgerhide">
-          <a href="javascript:" class="hamburger" onclick="toggle()">
-            <i class="fa fa-bars"></i>
-          </a>
-        </div>
-      </nav>
-      <section class="page">
+      </div>
     </section>
     <!-- Footer -->
     <footer>
@@ -96,16 +198,16 @@
           <h3 class="">Quick Links</h3>
           <ul class="footermenuitems m0">
             <li>
-              <a href="#">Collections</a>
+              <a href="../#">Collections</a>
             </li>
             <li>
-              <a href="#">Profile</a>
+              <a href="../#">Profile</a>
             </li>
             <li>
-              <a href="#">Account settings</a>
+              <a href="../#">Account settings</a>
             </li>
             <li>
-              <a href="#">Get in touch</a>
+              <a href="../#">Get in touch</a>
             </li>
           </ul>
         </div>
@@ -119,16 +221,16 @@
         <div>
           <ul>
             <li>
-              <a href="#">Terms & Conditions</a>
+              <a href="../#">Terms & Conditions</a>
             </li>
             <li>
-              <a href="#" target="_blank">Privacy policy</a>
+              <a href="../#" target="_blank">Privacy policy</a>
             </li>
           </ul>
         </div>
       </div>
     </footer>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="masonry.js"></script>
+    <script src="../masonry.js"></script>
   </body>
 </html>
