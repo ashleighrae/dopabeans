@@ -13,7 +13,7 @@ const appConfig = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'development/scripts'),
+    path: path.resolve(__dirname, 'public/scripts'),
   },
 };
 
@@ -33,7 +33,7 @@ const serviceWorkerConfig = {
   },
   output: {
     filename: 'firebase-messaging-sw.js',
-    path: path.resolve(__dirname, 'development'),
+    path: path.resolve(__dirname, 'public'),
   },
 };
 
