@@ -63,6 +63,41 @@ async function getSpacesHomepage(datab) {
     const spaceSnapshot = await getDocs(spaceCol);
     const spaceList = spaceSnapshot.docs.map(doc => doc.data());
     console.log("Spaces: ", spaceList);
+
+    spaceList.forEach(element => {
+
+        //     <div class="category">
+        //     <img src="img/fishy.jpg" alt="" />
+        //     <a href="/spaces/ancient-oceans.html">
+        //       <div>
+        //         <h3 class="categoryTitle">Ancient Oceans</h3>
+        //       </div>
+        //     </a>
+        //   </div>
+
+        const categoryDiv = document.createElement("div");
+        categoryDiv.classList.add("category");
+
+        // Add image
+        var img = document.createElement('img');
+        img.src = element.image;
+        categoryDiv.appendChild(img);
+
+        // Add link
+        const spacePageLink = document.createElement("a");
+        categoryDiv.appendChild(spacePageLink);
+
+        // Add header
+        const header = document.createElement("h3");
+        const title = document.createTextNode(element.title);
+        header.appendChild(title);
+        const headerDiv = document.createElement("div");
+        headerDiv.appendChild(header);
+        spacePageLink.appendChild(headerDiv);
+
+        var spaceDiv = document.getElementsByClassName('categoryGrid')[0];
+        spaceDiv.appendChild(categoryDiv);
+    });
 }
 
 
