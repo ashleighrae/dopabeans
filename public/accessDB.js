@@ -29,7 +29,6 @@ async function getSpacesHomepage(datab) {
     const spaceCol = collection(datab, 'spaces');
     const spaceSnapshot = await getDocs(spaceCol);
     const spaceList = spaceSnapshot.docs.map(doc => doc.data());
-    console.log("Spaces: ", spaceList);
 
     spaceList.forEach(element => {
         // Add div to category section
@@ -62,22 +61,19 @@ async function getSpacesHomepage(datab) {
         if (spacePageLink) {
             spacePageLink.addEventListener("click", (e) => {
                 localStorage.setItem('currentSpace', JSON.stringify(element)); //set
-
-                /* Log current space */
-                console.log("Current space on click: ", localStorage.getItem('currentSpace'));
             });
         }
     });
 }
 
 // Populate collection page
-async function populateSpacePage(datab) {
-    const space = JSON.parse(localStorage.getItem('currentSpace'));
+async function populateSpaceOrCollectionPage(datab, space, docType, link, localLink) {
+    document.getElementById('pageHeader').innerHTML = space.title;
 
-    for (let i = 0; i < space.collections.length; i++) {
+    for (let i = 0; i < docType.length; i++) {
 
         // Get collection details
-        const docRef = doc(datab, "collections", space.collections[i]);
+        const docRef = doc(datab, "collections", docType[i]);
         const docSnap = await getDoc(docRef);
         const collection = docSnap.data();
 
@@ -92,7 +88,7 @@ async function populateSpacePage(datab) {
 
         // Add link
         const pageLink = document.createElement("a");
-        pageLink.href = "/collections/collection.html";
+        pageLink.href = link;
         categoryDiv.appendChild(pageLink);
 
         // Add header
@@ -109,10 +105,7 @@ async function populateSpacePage(datab) {
 
         // Set current collection
         if (pageLink) addEventListener("click", (e) => {
-            localStorage.setItem('currentCollection', JSON.stringify(collection)); //set
-
-            /* Log current collection */
-            console.log("Current collection: ", localStorage.getItem('currentCollection'));
+            localStorage.setItem(localLink, JSON.stringify(collection)); //set
         });
     }
 }
@@ -123,5 +116,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.location.href.includes("index") || window.location.href.includes("spaces.html")) getSpacesHomepage(db);
 
     // Populate space page
-    if (window.location.href.includes("space.html")) populateSpacePage(db);
+    if (window.location.href.includes("space.html"))
+        populateSpaceOrCollectionPage(
+            db,
+            JSON.parse(localStorage.getItem('currentSpace')),
+            JSON.parse(localStorage.getItem('currentSpace')).collections,
+            "/collection/collection.html", "currentCollection");
+
+    // Populate collection page
+    if (window.location.href.includes("collection.html"))
+        populateSpaceOrCollectionPage(
+            db,
+            JSON.parse(localStorage.getItem('currentCollection')),
+            JSON.parse(localStorage.getItem('currentCollection')).resources,
+            "resource.html", "currentResource");
 })

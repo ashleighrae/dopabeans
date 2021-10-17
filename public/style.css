@@ -806,9 +806,10 @@ main, #messages-card {
 #messages-card-container {
   height: calc(100% - 35px);
   padding-bottom: 0;
+  margin-top: 30px
 }
 #messages-card {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .mdl-layout__header-row span {
   margin-left: 15px;

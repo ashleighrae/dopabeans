@@ -282,134 +282,244 @@ function addSizeToGoogleProfilePic(url) {
         return url + '?sz=150';
     }
     return url;
-}
+  }
+  
+  // A loading image URL.
+  var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
+  
+  // Delete a Message from the UI.
+  function deleteMessage(id) {
+    var div = document.getElementById(id);
+    // If an element for that message exists we delete it.
+    if (div) {
+      div.parentNode.removeChild(div);
+    }
+  }
+  
+  function createAndInsertMessage(id, timestamp) {
+    const container = document.createElement('div');
+    container.innerHTML = MESSAGE_TEMPLATE;
+    const div = container.firstChild;
+    div.setAttribute('id', id);
+  
+    // If timestamp is null, assume we've gotten a brand new message.
+    // https://stackoverflow.com/a/47781432/4816918
+    timestamp = timestamp ? timestamp.toMillis() : Date.now();
+    div.setAttribute('timestamp', timestamp);
 
-// A loading image URL.
-var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
+    if (messageListElement != null) {
+      // figure out where to insert new message
+      const existingMessages = messageListElement.children;
+      if (existingMessages.length === 0) {
+        messageListElement.appendChild(div);
+      } else {
+        let messageListNode = existingMessages[0];
+    
+        while (messageListNode) {
+          const messageListNodeTime = messageListNode.getAttribute('timestamp');
+    
+          if (!messageListNodeTime) {
+            throw new Error(
+              `Child ${messageListNode.id} has no 'timestamp' attribute`
+            );
+          }
+    
+          if (messageListNodeTime > timestamp) {
+            break;
+          }
+    
+          messageListNode = messageListNode.nextSibling;
+        }
+    
+        messageListElement.insertBefore(div, messageListNode);
+      }
+    }
+    return div;
+  }
+  
+  // Displays a Message in the UI.
+  function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
+    var div = document.getElementById(id) || createAndInsertMessage(id, timestamp);
+  
+    // profile picture
+    if (picUrl) {
+      div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
+    }
+  
+    div.querySelector('.name').textContent = name;
+    var messageElement = div.querySelector('.message');
 
-//   // Delete a Message from the UI.
-//   function deleteMessage(id) {
-//     var div = document.getElementById(id);
-//     // If an element for that message exists we delete it.
-//     if (div) {
-//       div.parentNode.removeChild(div);
-//     }
-//   }
-
-//   function createAndInsertMessage(id, timestamp) {
-//     const container = document.createElement('div');
-//     container.innerHTML = MESSAGE_TEMPLATE;
-//     const div = container.firstChild;
-//     div.setAttribute('id', id);
-
-//     // If timestamp is null, assume we've gotten a brand new message.
-//     // https://stackoverflow.com/a/47781432/4816918
-//     timestamp = timestamp ? timestamp.toMillis() : Date.now();
-//     div.setAttribute('timestamp', timestamp);
-
-//     // figure out where to insert new message
-//     const existingMessages = messageListElement.children;
-//     if (existingMessages.length === 0) {
-//       messageListElement.appendChild(div);
-//     } else {
-//       let messageListNode = existingMessages[0];
-
-//       while (messageListNode) {
-//         const messageListNodeTime = messageListNode.getAttribute('timestamp');
-
-//         if (!messageListNodeTime) {
-//           throw new Error(
-//             `Child ${messageListNode.id} has no 'timestamp' attribute`
-//           );
-//         }
-
-//         if (messageListNodeTime > timestamp) {
-//           break;
-//         }
-
-//         messageListNode = messageListNode.nextSibling;
-//       }
-
-//       messageListElement.insertBefore(div, messageListNode);
-//     }
-
-//     return div;
-//   }
-
-//   // Displays a Message in the UI.
-//   function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
-//     var div = document.getElementById(id) || createAndInsertMessage(id, timestamp);
-
-//     // profile picture
-//     if (picUrl) {
-//       div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
-//     }
-
-//     div.querySelector('.name').textContent = name;
-//     var messageElement = div.querySelector('.message');
-
-//     if (text) { // If the message is text.
-//       messageElement.textContent = text;
-//       // Replace all line breaks by <br>.
-//       messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-//     } else if (imageUrl) { // If the message is an image.
-//       var image = document.createElement('img');
-//       image.addEventListener('load', function() {
-//         messageListElement.scrollTop = messageListElement.scrollHeight;
-//       });
-//       image.src = imageUrl + '&' + new Date().getTime();
-//       messageElement.innerHTML = '';
-//       messageElement.appendChild(image);
-//     }
-//     // Show the card fading-in and scroll to view the new message.
-//     setTimeout(function() {div.classList.add('visible')}, 1);
-//     messageListElement.scrollTop = messageListElement.scrollHeight;
-//     messageInputElement.focus();
-//   }
-
-// Enables or disables the submit button depending on the values of the input
-// fields.
-function toggleButton() {
+    if (messageListElement != null) {
+      if (text) { // If the message is text.
+        messageElement.textContent = text;
+        // Replace all line breaks by <br>.
+        messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+      } else if (imageUrl) { // If the message is an image.
+        var image = document.createElement('img');
+        image.addEventListener('load', function() {
+          messageListElement.scrollTop = messageListElement.scrollHeight;
+        });
+        image.src = imageUrl + '&' + new Date().getTime();
+        messageElement.innerHTML = '';
+        messageElement.appendChild(image);
+      }
+      // Show the card fading-in and scroll to view the new message.
+      setTimeout(function() {div.classList.add('visible')}, 1);
+      messageListElement.scrollTop = messageListElement.scrollHeight;
+      messageInputElement.focus();
+    }
+  }
+  
+  // Enables or disables the submit button depending on the values of the input
+  // fields.
+  function toggleButton() {
     if (messageInputElement.value) {
         submitButtonElement.removeAttribute('disabled');
     } else {
         submitButtonElement.setAttribute('disabled', 'true');
     }
+  }
+  
+  // Shortcuts to DOM Elements.
+  var messageListElement = document.getElementById('messages');
+  var messageFormElement = document.getElementById('message-form');
+  var messageInputElement = document.getElementById('message');
+  var submitButtonElement = document.getElementById('submit');
+  var imageButtonElement = document.getElementById('submitImage');
+  var imageFormElement = document.getElementById('image-form');
+  var mediaCaptureElement = document.getElementById('mediaCapture');
+  var userPicElement = document.getElementById('user-pic');
+  var userNameElement = document.getElementById('user-name');
+  var signInButtonElement = document.getElementById('sign-in');
+  var signOutButtonElement = document.getElementById('sign-out');
+  var signInSnackbarElement = document.getElementById('must-signin-snackbar');
+  
+  // Saves message on form submit.
+  if (messageFormElement != null) {
+    messageFormElement.addEventListener('submit', onMessageFormSubmit);
+  }
+  if (signOutButtonElement != null) {
+    signOutButtonElement.addEventListener('click', signOutUser);
+  }
+  if (signInButtonElement != null) {
+    signInButtonElement.addEventListener('click', signIn);
+  }
+  
+  // Toggle for the button.
+  if (messageInputElement != null) {
+    messageInputElement.addEventListener('keyup', toggleButton);
+    messageInputElement.addEventListener('change', toggleButton);
+  }
+
+  // Events for image upload.
+  if (mediaCaptureElement && imageButtonElement != null) {
+    imageButtonElement.addEventListener('click', function(e) {
+      e.preventDefault();
+      mediaCaptureElement.click();
+    });
+    mediaCaptureElement.addEventListener('change', onMediaFileSelected);  
+  }
+ 
+ getPerformance();
+ initFirebaseAuth();
+ loadMessages();
+
+// Add spaces to to home page
+async function getSpacesHomepage(datab) {
+    const spaceCol = collection(datab, 'spaces');
+    const spaceSnapshot = await getDocs(spaceCol);
+    const spaceList = spaceSnapshot.docs.map(doc => doc.data());
+    console.log("Spaces: ", spaceList);
+
+    spaceList.forEach(element => {
+        // Add div to category section
+        const categoryDiv = document.createElement("div");
+        categoryDiv.classList.add("category");
+
+        // Add image
+        var img = document.createElement('img');
+        img.src = element.image;
+        categoryDiv.appendChild(img);
+
+        // Add link
+        const spacePageLink = document.createElement("a");
+        spacePageLink.href = "/spaces/space.html";
+        categoryDiv.appendChild(spacePageLink);
+
+        // Add header
+        const header = document.createElement("h3");
+        const title = document.createTextNode(element.title);
+        header.appendChild(title);
+        const headerDiv = document.createElement("div");
+        headerDiv.appendChild(header);
+        spacePageLink.appendChild(headerDiv);
+
+        // Add space objects to grid space
+        var spaceDiv = document.getElementsByClassName('categoryGridSpace')[0];
+        
+        if (spaceDiv != null) {
+          spaceDiv.prepend(categoryDiv);
+        }
+
+        // Set current space
+        if (spacePageLink) {
+            spacePageLink.addEventListener("click", (e) => {
+                localStorage.setItem('currentSpace', JSON.stringify(element)); //set
+
+                /* Log current space */
+                console.log("Current space on click: ", localStorage.getItem('currentSpace'));
+            });
+        }
+    });
 }
 
-// Shortcuts to DOM Elements.
-var messageListElement = document.getElementById('messages');
-var messageFormElement = document.getElementById('message-form');
-var messageInputElement = document.getElementById('message');
-var submitButtonElement = document.getElementById('submit');
-var imageButtonElement = document.getElementById('submitImage');
-var imageFormElement = document.getElementById('image-form');
-var mediaCaptureElement = document.getElementById('mediaCapture');
-var userPicElement = document.getElementById('user-pic');
-var userNameElement = document.getElementById('user-name');
-var signInButtonElement = document.getElementById('sign-in');
-var signOutButtonElement = document.getElementById('sign-out');
-var signInSnackbarElement = document.getElementById('must-signin-snackbar');
+// Populate collection page
+// async function populateSpaceCollectionPage(datab) {
+//     const space = JSON.parse(localStorage.getItem('currentSpace'));
 
-// Saves message on form submit.
-//   messageFormElement.addEventListener('submit', onMessageFormSubmit);
-if (signOutButtonElement) signOutButtonElement.addEventListener('click', signOutUser);
-if (signInButtonElement) signInButtonElement.addEventListener('click', signIn);
+//     for (let i = 0; i < space.collections.length; i++) {
+ 
+//         // Get collection details
+//         const docRef = doc(datab, "collections", space.collections[i]);
+//         const docSnap = await getDoc(docRef);
+//         const collection = docSnap.data();
 
-// Toggle for the button.
-//   messageInputElement.addEventListener('keyup', toggleButton);
-//   messageInputElement.addEventListener('change', toggleButton);
+//         // Add div to category section
+//         const categoryDiv = document.createElement("div");
+//         categoryDiv.classList.add("category");
 
-// Events for image upload.
-//   imageButtonElement.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     mediaCaptureElement.click();
-//   });
-//   mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+//         // Add image
+//         var img = document.createElement('img');
+//         img.src = collection.image;
+//         categoryDiv.appendChild(img);
 
-getPerformance();
-initFirebaseAuth();
-//  loadMessages();
+//         // Add link
+//         const pageLink = document.createElement("a");
+//         pageLink.href = "/collections/collection.html";
+//         categoryDiv.appendChild(pageLink);
+
+//         // Add header
+//         const header = document.createElement("h3");
+//         const title = document.createTextNode(collection.title);
+//         header.appendChild(title);
+//         const headerDiv = document.createElement("div");
+//         headerDiv.appendChild(header);
+//         pageLink.appendChild(headerDiv);
+
+//         // Add collection objects to grid space
+//         var div = document.getElementsByClassName('categoryGrid')[0];
+//         div.prepend(categoryDiv);
+
+//         // Set current collection
+//         if (pageLink) addEventListener("click", (e) => {
+//             localStorage.setItem('currentCollection', JSON.stringify(collection)); //set
+
+//             /* Log current collection */
+//             console.log("Current collection: ", localStorage.getItem('currentCollection'));
+//         });
+//     }
+// }
+
 
 // Custom Scripts
 
