@@ -431,6 +431,7 @@ loadMessages();
 document.addEventListener("DOMContentLoaded", () => {
     var spaceModal = document.getElementById("create-space-modal");
     var collectionModal = document.getElementById("create-collection-modal");
+    var resourceModal = document.getElementById("create-resource-modal");
 
     var addSpaceBtn = document.getElementById("create-space-modal-button");
     var addCollectionBtn = document.getElementById("create-collection-modal-button");
@@ -465,7 +466,9 @@ document.addEventListener("DOMContentLoaded", () => {
             collectionModal.style.display = "block";
         });
     } else if (addResourceBtn) {
-
+        addResourceBtn.addEventListener("click", (e) => {
+            resourceModal.style.display = "block";
+        })
     }
 
 
@@ -504,8 +507,9 @@ document.addEventListener("DOMContentLoaded", () => {
             //Get Form Values
             let title = document.querySelector('#create-space-modal #title').value;
             var image;
-            if (document.getElementById('link'))
-                image = document.getElementById('link').value;
+            if (document.getElementById('image-link')) {
+                image = document.getElementById('image-link').value;
+            }
             let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
@@ -563,12 +567,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 resources: []
             })
 
-            // Get collection details
-            // const docRef = doc(db, "collections", toKebabCase(docType[i]));
-            // const docSnap = await getDoc(docRef);
-            // const collection = docSnap.data();
-
-
             // Update current space
             async function updateCurrentSpace(spaceId) {
                 const docRef = doc(db, "spaces", spaceId);
@@ -578,17 +576,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 location.reload();
             }
 
-            // Update current collection
-            async function updatCollection(collectionId) {
-                const docRef = doc(db, "collections", collectionId);
-                const docSnap = await getDoc(docRef);
-                const collectionData = docSnap.data();
-                localStorage.setItem("currentCollection", JSON.stringify(collectionData));
-                location.reload();
-            }
-
             // Add the collection to a space
-            async function yeet() {
+            async function saveCollectionData() {
                 await updateDoc(doc(db, "spaces", spaceId), {
                     collections: arrayUnion(title)
                 }).then(() => {
@@ -601,7 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            yeet();
+            saveCollectionData();
 
             //alert
             alert("Your new collection was added successfully!");
@@ -609,12 +598,77 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    if (submitAddResourceBtn) {
+        submitAddResourceBtn.addEventListener("click", (e) => {
+
+            //Get Form Values
+            let title = document.querySelector('#title').value;
+
+            let currentCollection = JSON.parse(localStorage.getItem("currentCollection"));
+            let collectionTitle = currentCollection.title;
+            let collectionId = toKebabCase(collectionTitle);
+
+            let resourceId = toKebabCase(title);
+
+            let image = document.getElementById('image-link').value;
+            // let id = toKebabCase(title);
+            let description = document.getElementById('desc').value;
+            let link = document.querySelector("#link").value;
+
+            if (!image) {
+                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+            }
+
+            console.log("OJIJNIJIJ")
+
+            // Add the new collection to the collections db 
+            setDoc(doc(db, "resources", resourceId), {
+                title: title,
+                image: image,
+                link: link,
+                description: description
+            })
+
+            // Update current collection
+            async function updateCollection(collectionId) {
+                const docRef = doc(db, "collections", collectionId);
+                const docSnap = await getDoc(docRef);
+                const collectionData = docSnap.data();
+                localStorage.setItem("currentCollection", JSON.stringify(collectionData));
+                location.reload();
+            }
+
+            // Add the collection to a space
+            async function saveCollectionData() {
+                await updateDoc(doc(db, "collections", collectionId), {
+                    resources: arrayUnion(title)
+                }).then(() => {
+                    console.log("Data saved");
+
+                    // Update current space
+                    updateCollection(collectionId);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+
+            saveCollectionData();
+
+            //alert
+            alert("Your new resource was added successfully!");
+            resourceModal.style.display = "none";
+        })
+    }
+
+
     if (closeButton) {
         closeButton.addEventListener("click", (e) => {
             if (spaceModal) {
                 spaceModal.style.display = "none";
             } else if (collectionModal) {
                 collectionModal.style.display = "none";
+            } else if (resourceModal) {
+                resourceModal.style.display = "none";
             }
         });
     }
