@@ -200,6 +200,16 @@ a:hover {
   line-height: 1.4em;
 }
 
+.addResource .categoryGrid {
+  display: grid;
+  margin: 0 10px;;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.addResource #create-resource-modal-button {
+  grid-column: 3/4;
+}
+
 @media only screen and (min-width:767px) {
   .grid-sizer,
   .grid-item {
