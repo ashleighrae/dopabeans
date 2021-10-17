@@ -140,14 +140,6 @@ async function populateCollectionPage(datab, space, docType, link, localLink) {
         if (resource) {
             console.log(resource);
 
-            //     <div class="grid-item">
-            //     <img src="../img/temp/0.jpg" alt="" />
-            //     <div class="container">
-            //       <h3><b>Cheesecake biscuit</b></h3>
-            //       <p>Jelly gingerbread pudding cotton candy toffee donut soufflé.</p>
-            //     </div>
-            //   </div>
-
             // Add div to category section
             const categoryDiv = document.createElement("div");
             categoryDiv.classList.add("grid-item");
@@ -197,9 +189,33 @@ async function populateCollectionPage(datab, space, docType, link, localLink) {
 
             // Set current collection
             if (pageLink) addEventListener("click", (e) => {
-                localStorage.setItem(localLink, JSON.stringify(collection));
+                localStorage.setItem(localLink, JSON.stringify(resource));
             });
         }
+    }
+}
+
+// Populate resource page
+async function populateResourcePage(datab) {
+    const resourceObj = JSON.parse(localStorage.getItem('currentResource'));
+
+    if (resourceObj) {
+        const docRef = doc(datab, "resources", toKebabCase(resourceObj.title));
+        const docSnap = await getDoc(docRef);
+        const resource = docSnap.data();
+
+        if (resource.title)
+            document.getElementsByClassName('resourceHeading')[0].innerHTML =
+                resource.title;
+        if (resource.link)
+            document.getElementsByClassName('resourceLink')[0].href =
+                resource.link;
+        if (resource.image)
+            document.getElementsByClassName('resourceImageElement')[0].src =
+                resource.image;
+        if (resource.description)
+            document.getElementsByClassName('resourceDescriptionPara')[0].innerHTML =
+                resource.description;
     }
 }
 
@@ -223,4 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
             JSON.parse(localStorage.getItem('currentCollection')),
             JSON.parse(localStorage.getItem('currentCollection')).resources,
             "../resource.html", "currentResource");
+
+    if (window.location.href.includes("resource.html")) populateResourcePage(db);
 })
