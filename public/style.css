@@ -104,6 +104,16 @@ button {
   border-radius: 10px;
 }
 
+a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #4c4475;
+}
+
+a:hover {
+  color: #569493;
+}
+
 /* Tables */
 li {
   list-style: none;
@@ -208,6 +218,27 @@ a:hover {
 
 .addResource #create-resource-modal-button {
   grid-column: 3/4;
+}
+
+
+.text-only {
+  background-color: #569493;
+  color: #f8f8f8;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.link-only {
+  background-color: #dfeaf0;
+  border-radius: 10px;
+}
+
+.flexyflex {
+  display: flex;
+}
+
+.linkIcon {
+  padding: 16px 5px 16px 0px;
+  font-size: 1.5em;
 }
 
 @media only screen and (min-width:767px) {
@@ -977,14 +1008,60 @@ header {
 }
 
 .singleResource {
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
-  padding-top: 10%;
-  padding-bottom: 5%;
+  padding: 5% 10% 4% 10%;
 }
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#must-signin-snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#must-signin-snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
 
 /* RESOURCE */
 /* Add some padding inside the card container */
@@ -1009,7 +1086,20 @@ header {
 
 }
 
-.resourceTitle {
+.resourceHeading {
   color: #121212;
   padding: 0;
+  margin: 0;
+}
+
+.resourceLink {
+  width: fit-content;
+  padding-top: 0;
+}
+
+
+.comments {
+  width: 100%;
+  height: 500px;
+  background-color: #dfeaf0;
 }
