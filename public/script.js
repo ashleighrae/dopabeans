@@ -468,6 +468,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
+            if (!image) {
+                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+            }
+
             //Save Form Data To Firebase
             setDoc(doc(db, "spaces", id), {
                 title: title,
