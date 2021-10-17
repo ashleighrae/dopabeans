@@ -252,13 +252,15 @@ function checkSignedInWithMessage() {
     if (isUserSignedIn()) {
         return true;
     }
+    
+    // var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
-    // Display a message to the user using a Toast.
-    var data = {
-        message: 'You must sign-in first',
-        timeout: 2000
-    };
-    signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
+    // Add the "show" class to DIV
+    signInSnackbarElement.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ signInSnackbarElement.className = signInSnackbarElement.className.replace("show", ""); }, 3000);
+
     return false;
 }
 
