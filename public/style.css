@@ -164,7 +164,7 @@ a:hover {
   display: grid;
   margin: 0 10px;;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 12%);
   gap: 10px;
 }
 
@@ -250,7 +250,6 @@ a:hover {
   /* Category Grids */
   .categoryGrid, .categoryGridSpace {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 10px;
   }
 }
@@ -264,7 +263,6 @@ a:hover {
   /* Category Grids */
   .categoryGrid {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 10px;
   }
 }
@@ -278,7 +276,6 @@ a:hover {
   /* Category Grids */
   .categoryGrid {
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 10px;
   }
 }
