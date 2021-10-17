@@ -583,7 +583,7 @@ footer .footermenuitems {
   box-shadow: none;
 }
 
-#create-resource-modal-button {
+#create-resource-modal-button, #create-collections-modal-button, #create-space-modal-button {
   border: 0;
   font-size: 1em;
   background-color: #f8f8f8;
@@ -595,23 +595,23 @@ footer .footermenuitems {
   min-height: 90px;
 }
 
-#create-resource-modal-button h3{
+#create-resource-modal-button h3, #create-collections-modal-button h3, #create-space-modal-button h3{
   color: #555555;
 }
 
-#create-resource-modal-button i {
+#create-resource-modal-button i, #create-space-modal-button i, #create-collections-modal-button i {
   font-size: 1.2em;
   margin-bottom: 5px;
 }
 
 
-#create-resource-modal-button:hover {
+#create-resource-modal-button:hover, #create-space-modal-button:hover, #create-collections-modal-button:hover {
   background-color: #569493;
   border: 3px solid #569493;
   transition: background-color 0.5s ease-out, color 0.5s ease-out, border 0.5s ease-out;
 }
 
-#create-resource-modal-button:hover h3{
+#create-resource-modal-button:hover h3, #create-collections-modal-button:hover h3, #create-space-modal-button:hover h3{
   color: #f8f8f8;
 }
 
