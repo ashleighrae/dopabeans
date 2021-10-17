@@ -445,6 +445,12 @@ document.addEventListener("DOMContentLoaded", () => {
         addSpaceBtn.addEventListener("click", (e) => {
             spaceModal.style.display = "block";
         });
+    } else if (addCollectionBtn) {
+        addCollectionBtn.addEventListener("click", (e) => {
+            collectionModal.style.display = "block";
+        });
+    } else if (addResourceBtn) {
+
     }
 
     const toKebabCase = str =>
@@ -486,6 +492,39 @@ document.addEventListener("DOMContentLoaded", () => {
             //alert
             alert("Your new space was added successfully!");
             spaceModal.style.display = "none";
+        })
+    }
+
+    if (submitAddCollectionBtn) {
+        submitAddCollectionBtn.addEventListener("click", (e) => {
+
+            //Get Form Values
+            let title = document.querySelector('#title').value;
+
+            console.log(title);
+
+            let image = document.getElementById('image-link').value;
+            let id = toKebabCase(title);
+            let description = document.getElementById('desc').value;
+
+            if (!image) {
+                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+            }
+
+            // //Save Form Data To Firebase
+            // setDoc(doc(db, "spaces", id), {
+            //     title: title,
+            //     image: image,
+            //     description: description
+            // }).then(() => {
+            //     console.log("Data saved")
+            // }).catch((error) => {
+            //     console.log(error)
+            // });
+
+            // //alert
+            // alert("Your new space was added successfully!");
+            // spaceModal.style.display = "none";
         })
     }
 

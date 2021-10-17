@@ -26,7 +26,7 @@
     <script src="../accessDB.js" type="module"></script>
   </head>
   <body>
-    <div id="create-resource-modal" class="modal">
+    <div id="create-collection-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <div>
@@ -44,11 +44,11 @@
             <label for="link" class="hiddenLabel">Enter an image URL:</label>
             <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
           </section>
-          <section class="inline">
+          <!-- <section class="inline">
             <h3>Or upload your own</h3>
             <label for="boardFile" class="hiddenLabel">Or upload your own:</label>
             <input type="file" id="boardFile" name="filename" />
-          </section>
+          </section> -->
         </div>
         <div>
           <h2>Description:</h2>
@@ -123,7 +123,7 @@
         <h2>Collections</h2>
         <div class="categoryGrid">          
             <!-- Create collection Pop-Up Modal -->
-            <button id="create-resource-modal-button">
+            <button id="create-collection-modal-button">
               <h3><i class="fas fa-plus"></i><br />New collection</h3>
             </button>
           </div>
