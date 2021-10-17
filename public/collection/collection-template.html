@@ -25,15 +25,15 @@
     <script src="../script.js" type="module"></script>
   </head>
   <body>
-    <div id="create-space-modal" class="modal">
+    <div id="create-resource-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <div>
-          <h1>Create a new Space</h1>
+          <h1>Start a new collection</h1>
         </div>
         <div>
-          <h2>Space title:</h2>
-          <label for="title" class="hiddenLabel">Space title</label>
+          <h2>Collection title:</h2>
+          <label for="title" class="hiddenLabel">Collection title</label>
           <input type="text" id="title" name="title" />
         </div>
         <div class="flex">
@@ -41,7 +41,12 @@
           <section class="inline">
             <h3>Enter a URL</h3>
             <label for="link" class="hiddenLabel">Enter an image URL:</label>
-            <input type="text" id="image-link" name="link" placeholder="Enter an image URL"/>
+            <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
+          </section>
+          <section class="inline">
+            <h3>Or upload your own</h3>
+            <label for="boardFile" class="hiddenLabel">Or upload your own:</label>
+            <input type="file" id="boardFile" name="filename" />
           </section>
         </div>
         <div>
@@ -51,11 +56,11 @@
             rows="4"
             id="desc"
             name="desc"
-            placeholder="What's this space about?"
+            placeholder="What's this collection about?"
           ></textarea>
         </div>
         <div>
-          <button id="form-submit-add-space">Create Space</button>
+          <button class="form-submit-add-resource">Create Collection</button>
         </div>
       </div>
     </div>
@@ -100,89 +105,15 @@
       <div class="space">
         <h1>
           <!-- Need to add dynamically -->
-          Spaces
+          Collection-Template
         </h1>
       </div>
-      <div>
-        <div class="categoryGridSpace">
-          <div class="category">
-            <img src="img/fishy.jpg" alt="" />
-            <a href="/spaces/ancient-oceans.html">
-              <div>
-                <h3 class="categoryTitle">Ancient Oceans</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/timescale.jpg" alt="" />
-            <a href="/spaces/geological-timescale.html">
-              <div>
-                <h3>Geological Timescale</h3>
-              </div>
-              </a>
-          </div>
-          <div class="category">
-            <img src="img/asd-women.jpg" alt="" />
-            <a href="/spaces/women-with-asd.html">
-              <div>
-                <h3>Women with ASD</h3>
-              </div>
-              </a>
-          </div>
-          <div class="category">
-            <img src="img/banksia.jpg" alt="" />
-            <a href="/spaces/australian-plants.html">
-              <div>
-                <h3>Australian Plants</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/brain.jpg" alt="" />
-            <a href="/spaces/the-brain.html">
-              <div>
-                <h3>The Brain</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/paint.jpg" alt="" />
-            <a href="/spaces/painting-sketching.html">
-              <div>
-                <h3>Painting & Sketching</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/fossil.jpg" alt="" />
-            <a href="/spaces/fossils.html">
-              <div>
-                <h3>Fossils</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/autism.jpg" alt="" />
-            <a href="/spaces/adult-autism.html">
-              <div>
-                <h3>Adult Autism</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category">
-            <img src="img/fungi.jpg" alt="" />
-            <a href="/spaces/ancient-oceans.html">
-              <div>
-                <h3>Fungi Friends</h3>
-              </div>
-            </a>
-          </div>
-          <div class="category addItem">
-            <!-- Create Resource Pop-Up Modal -->
-            <button id="create-space-modal-button">
-              <h3><i class="fas fa-plus"></i><br />Create a space</h3>
-            </button>
-          </div>
+      <div class="posts">
+        <h2>Resources</h2>
+        <!-- Masonary Grid -->
+        <!-- Need functionality to auto populate -->
+        <div class="grid">
+          <div class="grid-sizer"></div>
         </div>
       </div>
     </section>
