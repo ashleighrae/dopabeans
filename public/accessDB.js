@@ -79,49 +79,51 @@ async function getSpacesHomepage(datab) {
 async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
-    for (let i = 0; i < docType.length; i++) {
+    if (docType) {
+        for (let i = 0; i < docType.length; i++) {
 
-        // Get collection details
-        const docRef = doc(datab, "collections", toKebabCase(docType[i]));
-        const docSnap = await getDoc(docRef);
-        const collection = docSnap.data();
+            // Get collection details
+            const docRef = doc(datab, "collections", toKebabCase(docType[i]));
+            const docSnap = await getDoc(docRef);
+            const collection = docSnap.data();
 
-        if (collection) {
+            if (collection) {
 
-            // Add div to category section
-            const categoryDiv = document.createElement("div");
-            categoryDiv.classList.add("category");
+                // Add div to category section
+                const categoryDiv = document.createElement("div");
+                categoryDiv.classList.add("category");
 
-            // Add image
-            if (collection.image) {
-                var img = document.createElement('img');
-                img.src = collection.image;
-                categoryDiv.appendChild(img);
+                // Add image
+                if (collection.image) {
+                    var img = document.createElement('img');
+                    img.src = collection.image;
+                    categoryDiv.appendChild(img);
+                }
+
+                // Add link
+                const pageLink = document.createElement("a");
+                pageLink.href = link;
+                categoryDiv.appendChild(pageLink);
+
+                // Add header
+                if (collection.title) {
+                    const header = document.createElement("h3");
+                    const title = document.createTextNode(collection.title);
+                    header.appendChild(title);
+                    const headerDiv = document.createElement("div");
+                    headerDiv.appendChild(header);
+                    pageLink.appendChild(headerDiv);
+                }
+
+                // Add collection objects to grid space
+                var div = document.getElementsByClassName('categoryGrid')[0];
+                div.prepend(categoryDiv);
+
+                // Set current collection
+                if (pageLink) addEventListener("click", (e) => {
+                    localStorage.setItem(localLink, JSON.stringify(collection));
+                });
             }
-
-            // Add link
-            const pageLink = document.createElement("a");
-            pageLink.href = link;
-            categoryDiv.appendChild(pageLink);
-
-            // Add header
-            if (collection.title) {
-                const header = document.createElement("h3");
-                const title = document.createTextNode(collection.title);
-                header.appendChild(title);
-                const headerDiv = document.createElement("div");
-                headerDiv.appendChild(header);
-                pageLink.appendChild(headerDiv);
-            }
-
-            // Add collection objects to grid space
-            var div = document.getElementsByClassName('categoryGrid')[0];
-            div.prepend(categoryDiv);
-
-            // Set current collection
-            if (pageLink) addEventListener("click", (e) => {
-                localStorage.setItem(localLink, JSON.stringify(collection));
-            });
         }
     }
 }
