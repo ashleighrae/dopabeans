@@ -252,14 +252,14 @@ function checkSignedInWithMessage() {
     if (isUserSignedIn()) {
         return true;
     }
-    
+
     // var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
     // Add the "show" class to DIV
     signInSnackbarElement.className = "show";
 
-  // After 3 seconds, remove the show class from DIV
-  setTimeout(function(){ signInSnackbarElement.className = signInSnackbarElement.className.replace("show", ""); }, 3000);
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function () { signInSnackbarElement.className = signInSnackbarElement.className.replace("show", ""); }, 3000);
 
     return false;
 }
@@ -503,8 +503,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //Get Form Values
             let title = document.querySelector('#create-space-modal #title').value;
-
-            let image = document.getElementById('link').value;
+            var image;
+            if (document.getElementById('link'))
+                image = document.getElementById('link').value;
             let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
@@ -519,9 +520,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 description: description,
                 collections: []
             }).then(() => {
-                console.log("Data saved")
+                console.log("Data saved");
+
+                // Refresh page to show all spaces
+                location.reload();
             }).catch((error) => {
-                console.log(error)
+                console.log(error);
             });
 
             //alert
@@ -540,7 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let spaceTitle = currentSpace.title;
             let spaceId = toKebabCase(spaceTitle);
 
-            let collectionId = toKebabCase(title); 
+            let collectionId = toKebabCase(title);
 
             let image = document.getElementById('link').value;
             // let id = toKebabCase(title);
@@ -565,14 +569,35 @@ document.addEventListener("DOMContentLoaded", () => {
             // const collection = docSnap.data();
 
 
+            // Update current space
+            async function updateCurrentSpace(spaceId) {
+                const docRef = doc(db, "spaces", spaceId);
+                const docSnap = await getDoc(docRef);
+                const spaceData = docSnap.data();
+                localStorage.setItem("currentSpace", JSON.stringify(spaceData));
+                location.reload();
+            }
+
+            // Update current collection
+            async function updatCollection(collectionId) {
+                const docRef = doc(db, "collections", collectionId);
+                const docSnap = await getDoc(docRef);
+                const collectionData = docSnap.data();
+                localStorage.setItem("currentCollection", JSON.stringify(collectionData));
+                location.reload();
+            }
+
             // Add the collection to a space
             async function yeet() {
                 await updateDoc(doc(db, "spaces", spaceId), {
                     collections: arrayUnion(title)
                 }).then(() => {
-                    console.log("Data saved")
+                    console.log("Data saved");
+
+                    // Update current space
+                    updateCurrentSpace(spaceId);
                 }).catch((error) => {
-                    console.log(error)
+                    console.log(error);
                 });
             }
 
