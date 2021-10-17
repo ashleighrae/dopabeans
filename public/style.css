@@ -498,6 +498,10 @@ a:hover {
   max-width: 1000px;
 }
 
+.searchBar .icon-search {
+  cursor: pointer;
+}
+
 .searchBar .icon-search svg {
   height: 35px;
 }
