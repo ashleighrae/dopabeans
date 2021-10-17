@@ -2,7 +2,7 @@ import { ref, getStorage, uploadBytesResumable, getDownloadURL } from 'https://w
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js';
 import { getDatabase, onValue } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js';
-import { collection, addDoc, getFirestore, setDoc, getDocs, doc, query, orderBy, limit, onSnapshot, updateDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
+import { collection, addDoc, getFirestore, setDoc, getDocs, doc, query, orderBy, limit, arrayUnion, onSnapshot, updateDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js";
 
 import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-messaging.js';
@@ -435,8 +435,8 @@ document.addEventListener("DOMContentLoaded", () => {
     var addResourceBtn = document.getElementById("create-resource-modal-button");
 
     var submitAddSpaceBtn = document.getElementById("form-submit-add-space");
-    var submitAddCollectionBtn = document.getElementById("form-submit-add-space");
-    var submitAddResourceBtn = document.getElementById("form-submit-add-space");
+    var submitAddCollectionBtn = document.getElementById("form-submit-add-collection");
+    var submitAddResourceBtn = document.getElementById("form-submit-add-resource");
 
 
     var closeButton = document.getElementsByClassName("close")[0];
@@ -466,6 +466,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+
+    async function populateSpacesSelect() {
+        const spaceCol = collection(db, 'spaces');
+        const spaceSnapshot = await getDocs(spaceCol);
+        const spaceList = spaceSnapshot.docs.map(doc => doc.data());
+
+        let max = spaceList.length;
+        let select = document.getElementById("space-select");
+
+        for (var i = 0; i <= max; i++) {
+            var opt = document.createElement('option');
+            opt.value = spaceList[i].title;
+            opt.innerHTML = spaceList[i].title;
+            select.appendChild(opt);
+        }
+    }
+
+
+
     const toKebabCase = str =>
         str &&
         str
@@ -483,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //Get Form Values
             let title = document.querySelector('#create-space-modal #title').value;
 
-            let image = document.getElementById('image-link').value;
+            let image = document.getElementById('link').value;
             let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
@@ -495,7 +514,8 @@ document.addEventListener("DOMContentLoaded", () => {
             setDoc(doc(db, "spaces", id), {
                 title: title,
                 image: image,
-                description: description
+                description: description,
+                collections: []
             }).then(() => {
                 console.log("Data saved")
             }).catch((error) => {
@@ -514,30 +534,51 @@ document.addEventListener("DOMContentLoaded", () => {
             //Get Form Values
             let title = document.querySelector('#title').value;
 
-            console.log(title);
+            let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
+            let spaceTitle = currentSpace.title;
+            let spaceId = toKebabCase(spaceTitle);
 
-            let image = document.getElementById('image-link').value;
-            let id = toKebabCase(title);
+            let collectionId = toKebabCase(title); 
+
+            let image = document.getElementById('link').value;
+            // let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
             if (!image) {
                 image = 'https://i.some-random-api.ml/onUSIniyyq.png';
             }
 
-            // //Save Form Data To Firebase
-            // setDoc(doc(db, "spaces", id), {
-            //     title: title,
-            //     image: image,
-            //     description: description
-            // }).then(() => {
-            //     console.log("Data saved")
-            // }).catch((error) => {
-            //     console.log(error)
-            // });
 
-            // //alert
-            // alert("Your new space was added successfully!");
-            // spaceModal.style.display = "none";
+            // Add the new collection to the collections db 
+            setDoc(doc(db, "collections", collectionId), {
+                title: title,
+                image: image,
+                description: description,
+                resources: []
+            })
+
+            // Get collection details
+            // const docRef = doc(db, "collections", toKebabCase(docType[i]));
+            // const docSnap = await getDoc(docRef);
+            // const collection = docSnap.data();
+
+
+            // Add the collection to a space
+            async function yeet() {
+                await updateDoc(doc(db, "spaces", spaceId), {
+                    collections: arrayUnion(title)
+                }).then(() => {
+                    console.log("Data saved")
+                }).catch((error) => {
+                    console.log(error)
+                });
+            }
+
+            yeet();
+
+            //alert
+            alert("Your new collection was added successfully!");
+            collectionModal.style.display = "none";
         })
     }
 
