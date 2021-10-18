@@ -36,16 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  /* Open seperate window for login */
-  var loginButton = document.getElementById("open-login")
-  loginButton.addEventListener("click", (e) => {
-    window.open("http://localhost:5000/", '_blank').focus();
-  })
-
   /* Open a seperate window for creating board (open website)  */
   var createBoardButton = document.getElementById("open-website")
   createBoardButton.addEventListener("click", (e) => {
-    window.open("http://localhost:5000/", '_blank').focus();
+    window.open("http://localhost:5000/index.html", '_blank').focus();
   })
 
 

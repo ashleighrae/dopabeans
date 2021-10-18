@@ -1,12 +1,6 @@
-import { ref, getStorage, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-storage.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
-import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js';
-import { getDatabase, onValue } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js';
-import { collection, addDoc, getFirestore, setDoc, getDocs, doc, query, orderBy, limit, onSnapshot, updateDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
+import { collection, getFirestore, getDocs, doc, getDoc, orderBy, limit, query } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js";
-
-import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-messaging.js';
-import { getPerformance } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-performance.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAK6BS-eYLMsXlJK2t8-cQfjQF8rh_idDQ",
@@ -31,64 +25,120 @@ const toKebabCase = str =>
         .map(x => x.toLowerCase())
         .join('-');
 
+async function populateResources(resource, link, localLink) {
+    if (resource) {
+        // Add div to category section
+        const categoryDiv = document.createElement("div");
+        categoryDiv.classList.add("grid-item");
+
+        // Add image
+        if (resource.image) {
+            var img = document.createElement('img');
+            img.src = resource.image;
+            categoryDiv.appendChild(img);
+        }
+
+        // Add link
+        if (resource.link) {
+            const linkObject = document.createElement("a");
+            linkObject.href = resource.link;
+            categoryDiv.appendChild(linkObject);
+        }
+
+        // Add container div
+        const containerDiv = document.createElement("div");
+        containerDiv.classList.add("container");
+
+        // Add header and link
+        const pageLink = document.createElement("a");
+        pageLink.href = link;
+        if (resource.title) {
+            const header = document.createElement("h3");
+            const title = document.createTextNode(resource.title);
+            header.appendChild(title);
+            pageLink.appendChild(header);
+            containerDiv.appendChild(pageLink);
+        }
+
+        // Add description
+        if (resource.description) {
+            const para = document.createElement("p");
+            const desc = document.createTextNode(resource.description);
+            para.appendChild(desc);
+            containerDiv.appendChild(para);
+        }
+
+        categoryDiv.appendChild(containerDiv);
+
+        // Add collection objects to grid space
+        var div = document.getElementsByClassName('grid')[0];
+        div.prepend(categoryDiv);
+
+        // Set current collection
+        if (pageLink)
+            pageLink.addEventListener("click", (e) => {
+                localStorage.setItem(localLink, JSON.stringify(resource));
+            });
+    }
+}
+
 // Add spaces to to home page
 async function getSpacesHomepage(datab) {
     const spaceCol = collection(datab, 'spaces');
     const spaceSnapshot = await getDocs(spaceCol);
     const spaceList = spaceSnapshot.docs.map(doc => doc.data());
 
-    spaceList.forEach(element => {
-        // Add div to category section
-        const categoryDiv = document.createElement("div");
-        categoryDiv.classList.add("category");
+    if (spaceList)
+        spaceList.forEach(element => {
+            // Add div to category section
+            const categoryDiv = document.createElement("div");
+            categoryDiv.classList.add("category");
 
-        // Add image
-        if (element.image) {
-            var img = document.createElement('img');
-            img.src = element.image;
-            categoryDiv.appendChild(img);
-        }
+            // Add image
+            if (element.image) {
+                var img = document.createElement('img');
+                img.src = element.image;
+                categoryDiv.appendChild(img);
+            }
 
-        // Add link
-        const spacePageLink = document.createElement("a");
-        spacePageLink.href = "/spaces/space.html";
-        categoryDiv.appendChild(spacePageLink);
+            // Add link
+            const spacePageLink = document.createElement("a");
+            spacePageLink.href = "/spaces/space.html";
+            categoryDiv.appendChild(spacePageLink);
 
-        // Add header
-        const header = document.createElement("h3");
-        const title = document.createTextNode(element.title);
-        header.appendChild(title);
-        const headerDiv = document.createElement("div");
-        headerDiv.appendChild(header);
-        spacePageLink.appendChild(headerDiv);
+            // Add header
+            const header = document.createElement("h3");
+            const title = document.createTextNode(element.title);
+            header.appendChild(title);
+            const headerDiv = document.createElement("div");
+            headerDiv.appendChild(header);
+            spacePageLink.appendChild(headerDiv);
 
-        // Add space objects to grid space
-        var spaceDiv = document.getElementsByClassName('categoryGridSpace')[0];
-        spaceDiv.prepend(categoryDiv);
+            // Add space objects to grid space
+            var spaceDiv = document.getElementsByClassName('categoryGridSpace')[0];
+            spaceDiv.prepend(categoryDiv);
 
-        // Set current space
-        if (spacePageLink) {
-            spacePageLink.addEventListener("click", (e) => {
-                localStorage.setItem('currentSpace', JSON.stringify(element)); //set
-            });
-        }
-    });
+            // Set current space
+            if (spacePageLink) {
+                spacePageLink.addEventListener("click", (e) => {
+                    localStorage.setItem('currentSpace', JSON.stringify(element));
+                });
+            }
+        });
 }
 
 // Populate space page
 async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
-    if (docType) {
-        for (let i = 0; i < docType.length; i++) {
-
+    if (docType)
+        docType.forEach(async element => {
             // Get collection details
-            const docRef = doc(datab, "collections", toKebabCase(docType[i]));
+            const docRef = doc(datab, "collections", toKebabCase(element));
             const docSnap = await getDoc(docRef);
             const collection = docSnap.data();
 
             if (collection) {
-
                 // Add div to category section
                 const categoryDiv = document.createElement("div");
                 categoryDiv.classList.add("category");
@@ -119,81 +169,49 @@ async function populateSpacePage(datab, space, docType, link, localLink) {
                 var div = document.getElementsByClassName('categoryGrid')[0];
                 div.prepend(categoryDiv);
 
+                populateCollectionPage(
+                    datab,
+                    collection,
+                    collection.resources,
+                    "../resource.html",
+                    "currentResource",
+                    false);
+
                 // Set current collection
-                if (pageLink) addEventListener("click", (e) => {
+                if (pageLink) pageLink.addEventListener("click", (e) => {
                     localStorage.setItem(localLink, JSON.stringify(collection));
                 });
             }
-        }
-    }
+        });
 }
 
 // Populate collection page
-async function populateCollectionPage(datab, space, docType, link, localLink) {
-    document.getElementById('pageHeader').innerHTML = space.title;
+async function populateCollectionPage(datab, space, docType, link, localLink, headerNeeded) {
+    if (headerNeeded) document.getElementById('pageHeader').innerHTML = space.title;
 
-    for (let i = 0; i < docType.length; i++) {
+    if (docType)
+        docType.forEach(async element => {
+            // Get resource details
+            const docRef = doc(datab, "resources", toKebabCase(element));
+            const docSnap = await getDoc(docRef);
+            const resource = docSnap.data();
 
-        // Get resource details
-        const docRef = doc(datab, "resources", toKebabCase(docType[i]));
-        const docSnap = await getDoc(docRef);
-        const resource = docSnap.data();
+            populateResources(resource, link, localLink);
+        });
+}
 
-        if (resource) {
-            console.log(resource);
+// Populate resources on index page
+async function populateResourceIndexPage(datab, link) {
+    const resourcesCol = collection(datab, 'resources');
+    const queriedCol = query(resourcesCol, limit(15));
+    const resourcesSnapshot = await getDocs(queriedCol);
+    const resourcesList = resourcesSnapshot.docs.map(doc => doc.data());
 
-            // Add div to category section
-            const categoryDiv = document.createElement("div");
-            categoryDiv.classList.add("grid-item");
+    if (resourcesList) {
+        resourcesList.forEach(resource => {
 
-            // Add image
-            if (resource.image) {
-                var img = document.createElement('img');
-                img.src = resource.image;
-                categoryDiv.appendChild(img);
-            }
-
-            // Add link
-            if (resource.link) {
-                const linkObject = document.createElement("a");
-                linkObject.href = resource.link;
-                categoryDiv.appendChild(linkObject);
-            }
-
-            // Add container div
-            const containerDiv = document.createElement("div");
-            containerDiv.classList.add("container");
-
-            // Add header and link
-            const pageLink = document.createElement("a");
-            pageLink.href = link;
-            if (resource.title) {
-                const header = document.createElement("h3");
-                const title = document.createTextNode(resource.title);
-                header.appendChild(title);
-                pageLink.appendChild(header);
-                containerDiv.appendChild(pageLink);
-            }
-
-            // Add description
-            if (resource.description) {
-                const para = document.createElement("p");
-                const desc = document.createTextNode(resource.description);
-                para.appendChild(desc);
-                containerDiv.appendChild(para);
-            }
-
-            categoryDiv.appendChild(containerDiv);
-
-            // Add collection objects to grid space
-            var div = document.getElementsByClassName('grid')[0];
-            div.prepend(categoryDiv);
-
-            // Set current collection
-            if (pageLink) addEventListener("click", (e) => {
-                localStorage.setItem(localLink, JSON.stringify(resource));
-            });
-        }
+            populateResources(resource, link, "currentResource");
+        });
     }
 }
 
@@ -232,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
             db,
             JSON.parse(localStorage.getItem('currentSpace')),
             JSON.parse(localStorage.getItem('currentSpace')).collections,
-            "/collection/collection.html", "currentCollection");
+            "/collection/collection.html", "currentCollection", true);
 
     // Populate collection page
     if (window.location.href.includes("collection.html"))
@@ -242,5 +260,11 @@ document.addEventListener("DOMContentLoaded", () => {
             JSON.parse(localStorage.getItem('currentCollection')).resources,
             "../resource.html", "currentResource");
 
-    if (window.location.href.includes("resource.html")) populateResourcePage(db);
+    // Populate resource page
+    if (window.location.href.includes("resource.html"))
+        populateResourcePage(db);
+
+    // Add current resources to index page.
+    if (window.location.href.includes("index.html"))
+        populateResourceIndexPage(db, "../resource.html");
 })
