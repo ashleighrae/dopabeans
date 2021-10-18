@@ -36,6 +36,13 @@ function toggle() {
 
 }
 
+const toKebabCase = str =>
+        str &&
+        str
+            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+            .map(x => x.toLowerCase())
+            .join('-');
+
 // Signs-in Chat.
 async function signIn() {
     // Sign in Firebase using popup auth and Google as the identity provider.
@@ -70,11 +77,19 @@ function isUserSignedIn() {
     return !!getAuth().currentUser;
 }
 
+// Returns the current spaceId to display the correct message content
+async function getSpaceId() {
+  let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
+  let spaceTitle = currentSpace.title;
+  let spaceId = toKebabCase(spaceTitle);
+  return spaceId
+}
+
 // Saves a new message to Cloud Firestore.
 async function saveMessage(messageText) {
     // Add a new message entry to the Firebase database.
     try {
-        await addDoc(collection(getFirestore(), 'messages'), {
+        await addDoc(collection(db, 'spaces', String(getSpaceId()), 'messages'), {
             name: getUserName(),
             text: messageText,
             profilePicUrl: getProfilePicUrl(),
@@ -88,8 +103,9 @@ async function saveMessage(messageText) {
 
 // Loads chat messages history and listens for upcoming ones.
 function loadMessages() {
+
     // Create the query to load the last 12 messages and listen for new ones.
-    const recentMessagesQuery = query(collection(getFirestore(), 'messages'), orderBy('timestamp', 'desc'), limit(12));
+    const recentMessagesQuery = query(collection(db, 'spaces', String(getSpaceId()), 'messages'), orderBy('timestamp', 'desc'), limit(12));
 
     // Start listening to the query.
     onSnapshot(recentMessagesQuery, function (snapshot) {
@@ -108,9 +124,10 @@ function loadMessages() {
 // Saves a new message containing an image in Firebase.
 // This first saves the image in Firebase storage.
 async function saveImageMessage(file) {
+
     try {
         // 1 - We add a message with a loading icon that will get updated with the shared image.
-        const messageRef = await addDoc(collection(getFirestore(), 'messages'), {
+        const messageRef = await addDoc(collection(db, 'spaces', String(getSpaceId()), 'messages'), {
             name: getUserName(),
             imageUrl: LOADING_IMAGE_URL,
             profilePicUrl: getProfilePicUrl(),
@@ -142,7 +159,7 @@ async function saveMessagingDeviceToken() {
         if (currentToken) {
             console.log('Got FCM device token:', currentToken);
             // Saving the Device Token to Cloud Firestore.
-            const tokenRef = doc(getFirestore(), 'fcmTokens', currentToken);
+            const tokenRef = doc(db, 'fcmTokens', currentToken);
             await setDoc(tokenRef, { uid: getAuth().currentUser.uid });
 
             // This will fire when a message is received while the app is in the foreground.
@@ -485,13 +502,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //         select.appendChild(opt);
     //     }
     // }
-
-    const toKebabCase = str =>
-        str &&
-        str
-            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-            .map(x => x.toLowerCase())
-            .join('-');
 
     if (submitAddSpaceBtn) {
         submitAddSpaceBtn.addEventListener("click", (e) => {
