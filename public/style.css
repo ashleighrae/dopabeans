@@ -843,7 +843,7 @@ main, #messages-card {
   margin: auto;
 }
 .material-icons {
-  font-size: 36px;
+  /* font-size: 36px; */
   top: 8px;
   position: relative;
 }
@@ -1007,10 +1007,6 @@ header {
   width: 33px;
   height: 33px;
   background-size: 33px;
-}
-
-#sign-in {
-  margin-right: 0.35rem;
 }
 
 .singleResource {
