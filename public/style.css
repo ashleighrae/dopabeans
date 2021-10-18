@@ -431,7 +431,7 @@ a:hover {
     height: 49.09px;;
   }
   
-  #mainNavbarMenu {
+  #mainNavbarMenu li {
     width: 30%;
   }
 
@@ -950,7 +950,6 @@ main, #messages-card {
 }
 #user-container {
   width: 100%;
-  max-width: 300px;
   display: flex;
   align-items: center;
 }
@@ -977,7 +976,7 @@ main, #messages-card {
   color: white;
 }
 
-#sign-in {
+#sign-in, #sign-out {
   background-color: #ffffff00;
   border: 2px solid #f8f8f8;
   color: #f8f8f8;
@@ -1073,7 +1072,12 @@ header {
   to {bottom: 0; opacity: 0;}
 }
 
-
+@media only screen and (min-width: 767px) {
+  #sign-in, #sign-out {
+  padding: 1%;
+  }
+  
+}
 
 /* RESOURCE */
 /* Add some padding inside the card container */
@@ -1109,4 +1113,29 @@ header {
 
 .showMobileMenu {
   display: block;
+}
+
+
+.category-description {
+  width: calc(94% - 20px);
+  padding: 4%;
+  text-align: center;
+  margin: 10px;
+}
+
+@media only screen and (min-width:767px) {
+  .category-description {
+    width: 50%;
+    padding: 5%;
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width:1023px) {
+  .category-description {
+    width: 50%;
+    padding: 0 10%;
+    padding-top: 5%;
+    text-align: left;
+  }
 }
