@@ -634,7 +634,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: title,
                 image: image,
                 link: link,
-                description: description
+                description: description,
+                timestamp: serverTimestamp()
             })
 
             // Update current collection

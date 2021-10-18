@@ -203,9 +203,10 @@ async function populateCollectionPage(datab, space, docType, link, localLink, he
 // Populate resources on index page
 async function populateResourceIndexPage(datab, link) {
     const resourcesCol = collection(datab, 'resources');
-    const queriedCol = query(resourcesCol, limit(15));
+    const queriedCol = query(resourcesCol, orderBy("timestamp"), limit(15));
     const resourcesSnapshot = await getDocs(queriedCol);
-    const resourcesList = resourcesSnapshot.docs.map(doc => doc.data());
+    const rList = resourcesSnapshot.docs.map(doc => doc.data());
+    const resourcesList = rList.reverse();
 
     if (resourcesList) {
         resourcesList.forEach(resource => {
