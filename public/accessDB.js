@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
             db,
             JSON.parse(localStorage.getItem('currentSpace')),
             JSON.parse(localStorage.getItem('currentSpace')).collections,
-            "/collection/collection.html", "currentCollection", true);
+            "/collection/collection.html", "currentCollection");
 
     // Populate collection page
     if (window.location.href.includes("collection.html"))
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
             db,
             JSON.parse(localStorage.getItem('currentCollection')),
             JSON.parse(localStorage.getItem('currentCollection')).resources,
-            "../resource.html", "currentResource");
+            "../resource.html", "currentResource", true);
 
     // Populate resource page
     if (window.location.href.includes("resource.html"))
