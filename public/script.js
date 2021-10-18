@@ -26,6 +26,25 @@ const db = getFirestore();
 const person = collection(db, "person");
 
 // Hamburger
+
+$(window).resize(function() {
+    console.log(window.innerWidth);
+    if (window.innerWidth >= 830) {
+        var x = document.getElementById("burglinks");
+        x.style.display = "flex";
+    }
+
+});
+
+$(window).resize(function() {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 830) {
+        var x = document.getElementById("burglinks");
+        x.style.display = "none";
+    }
+
+});
+
 function toggle() {
     var x = document.getElementById("burglinks");
     if (x.style.display === "block") {

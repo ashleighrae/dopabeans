@@ -117,9 +117,15 @@ li {
   text-align: center;
 }
 
+.nav {
+  width: 100%;
+
+}
+
 .nav a {
   text-decoration: none;
   color: #ffffff;
+  width: 100%;
 }
 
 a:hover {
@@ -281,17 +287,16 @@ a:hover {
   /* overflow: hidden; */
   position: fixed;
   height: 69.33px;
-  width: 92%;
+  width: 100%;
   display: flex;
   z-index: 10;
   top: 0px;
-  padding: 0px 4%;
   background-color: #4c4475;
   align-items: center;
 }
 
 #mainNavbarMenu li {
-  width: 30%;
+  width: 100%;
 }
 
 #mainNavbarMenu a {
@@ -305,7 +310,8 @@ a:hover {
 
 #burglinks {
   display: none;
-  width: 10%;
+  position: absolute;
+  width: 100%;
   padding-top: 50px;
   padding-bottom: 0px;
   background-color: #4c4475;
@@ -424,6 +430,11 @@ a:hover {
     width: 90%;
     height: 49.09px;;
   }
+  
+  #mainNavbarMenu {
+    width: 30%;
+  }
+
   
   #mainNavbarMenu a {
     padding: 15px 0px;
@@ -843,7 +854,6 @@ main, #messages-card {
   margin: auto;
 }
 .material-icons {
-  /* font-size: 36px; */
   top: 8px;
   position: relative;
 }
