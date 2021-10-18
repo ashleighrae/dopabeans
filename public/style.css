@@ -35,7 +35,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.7em;
+  font-size: 1.4em;
   font-weight: 600;
 }
 
@@ -63,9 +63,6 @@ h4 {
   
   h2 {
     font-size: 2em;
-  }
-  h3 {
-    font-size: 1.4em;
   }
 }
 
@@ -162,9 +159,8 @@ a:hover {
 /* Category Grids */
 .categoryGrid, .categoryGridSpace {
   display: grid;
-  margin: 0 10px;;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(6, 12%);
+  margin: 0 10px;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
@@ -189,7 +185,6 @@ a:hover {
 
 .category div {
   position: absolute;
-  min-height: 90px;
   height: 100%;
   width: 100%;
   top: 50%;
@@ -210,16 +205,15 @@ a:hover {
   line-height: 1.4em;
 }
 
-.addResource .categoryGrid {
+.addResource .categoryGrid, .addResource .categoryGridSpace {
   display: grid;
-  margin: 0 10px;;
+  margin: 0 10px;
   grid-template-columns: repeat(5, 1fr);
 }
 
 .addResource #create-resource-modal-button {
   grid-column: 3/4;
 }
-
 
 .text-only {
   background-color: #569493;
@@ -261,7 +255,7 @@ a:hover {
   }
 
   /* Category Grids */
-  .categoryGrid {
+  .categoryGrid, .categoryGridSpace {
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
   }
@@ -274,7 +268,7 @@ a:hover {
   }
 
   /* Category Grids */
-  .categoryGrid {
+  .categoryGrid, .categoryGridSpace {
     grid-template-columns: repeat(8, 1fr);
     gap: 10px;
   }
@@ -1071,18 +1065,6 @@ header {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-@media only screen and (min-width:767px) {
-
-}
-
-@media only screen and (min-width:1023px) {
-
-}
-
-@media only screen and (min-width:1700px) {
-
-}
-
 .resourceHeading {
   color: #121212;
   padding: 0;
@@ -1093,7 +1075,6 @@ header {
   width: fit-content;
   padding-top: 0;
 }
-
 
 .comments {
   width: 100%;
