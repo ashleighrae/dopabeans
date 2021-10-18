@@ -37,11 +37,11 @@ function toggle() {
 }
 
 const toKebabCase = str =>
-        str &&
-        str
-            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-            .map(x => x.toLowerCase())
-            .join('-');
+    str &&
+    str
+        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+        .map(x => x.toLowerCase())
+        .join('-');
 
 // Signs-in Chat.
 async function signIn() {
@@ -79,10 +79,10 @@ function isUserSignedIn() {
 
 // Returns the current spaceId to display the correct message content
 async function getSpaceId() {
-  let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
-  let spaceTitle = currentSpace.title;
-  let spaceId = toKebabCase(spaceTitle);
-  return spaceId
+    let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
+    let spaceTitle = currentSpace.title;
+    let spaceId = toKebabCase(spaceTitle);
+    return spaceId
 }
 
 // Saves a new message to Cloud Firestore.
@@ -161,6 +161,15 @@ async function saveMessagingDeviceToken() {
             // Saving the Device Token to Cloud Firestore.
             const tokenRef = doc(db, 'fcmTokens', currentToken);
             await setDoc(tokenRef, { uid: getAuth().currentUser.uid });
+
+            // Display add buttons if user logged in
+            var addSpaceBtn = document.getElementById("create-space-modal-button");
+            var addCollectionBtn = document.getElementById("create-collection-modal-button");
+            var addResourceBtn = document.getElementById("create-resource-modal-button");
+
+            if (addSpaceBtn) addSpaceBtn.style.display = "block";
+            if (addCollectionBtn) addCollectionBtn.style.display = "block";
+            if (addResourceBtn) addResourceBtn.style.display = "block";
 
             // This will fire when a message is received while the app is in the foreground.
             // When the app is in the background, firebase-messaging-sw.js will receive the message instead.
@@ -458,19 +467,21 @@ document.addEventListener("DOMContentLoaded", () => {
     var submitAddCollectionBtn = document.getElementById("form-submit-add-collection");
     var submitAddResourceBtn = document.getElementById("form-submit-add-resource");
 
-
     var closeButton = document.getElementsByClassName("close")[0];
     var boardButton = document.getElementById("create-board-button");
     var existingBoardButton = document.getElementById("existing-board-button");
     var createBoardDiv = document.getElementsByClassName("create-board")[0];
     var currentBoard = document.getElementById("board-options");
-    var boardFile = document.getElementById("boardFile");
-    var selectedFile;
 
     /* Log current space */
     console.log("Current space: ", localStorage.getItem('currentSpace'));
     console.log("Current collection: ", localStorage.getItem('currentCollection'));
     console.log("Current resource: ", localStorage.getItem('currentResource'));
+
+    // Hide add buttons if user not logged in
+    if (addSpaceBtn) addSpaceBtn.style.display = "none";
+    if (addCollectionBtn) addCollectionBtn.style.display = "none";
+    if (addResourceBtn) addResourceBtn.style.display = "none";
 
     /* Create resource pop-up */
     if (addSpaceBtn) {
@@ -487,28 +498,8 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // async function populateSpacesSelect() {
-    //     const spaceCol = collection(db, 'spaces');
-    //     const spaceSnapshot = await getDocs(spaceCol);
-    //     const spaceList = spaceSnapshot.docs.map(doc => doc.data());
-
-    //     let max = spaceList.length;
-    //     let select = document.getElementById("space-select");
-
-    //     for (var i = 0; i <= max; i++) {
-    //         var opt = document.createElement('option');
-    //         opt.value = spaceList[i].title;
-    //         opt.innerHTML = spaceList[i].title;
-    //         select.appendChild(opt);
-    //     }
-    // }
-
     if (submitAddSpaceBtn) {
         submitAddSpaceBtn.addEventListener("click", (e) => {
-
-            // console.log(e.data);
-
-            // e.preventDefault();
 
             //Get Form Values
             let title = document.querySelector('#create-space-modal #title').value;
@@ -606,9 +597,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (submitAddResourceBtn) {
         submitAddResourceBtn.addEventListener("click", (e) => {
-
-            console.log("OJIJNIJIJ")
-
 
             //Get Form Values
             let title = document.querySelector('#title').value;
