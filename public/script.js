@@ -696,4 +696,15 @@ document.addEventListener("DOMContentLoaded", () => {
             createBoardDiv.style.display = "none";
         });
     }
+
+    //Mobile menu
+
+    const hamIcon = document.getElementsByClassName("hamburgerhide")[0];
+    const mobileMenu = document.getElementsByClassName("mobileMenu")[0];
+
+    if (hamIcon) {
+        hamIcon.addEventListener("click", (e) => {
+            mobileMenu.classList.toggle("showMobileMenu");
+        });
+    }
 });
