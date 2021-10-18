@@ -939,22 +939,13 @@ main, #messages-card {
   justify-content: space-between;
 }
 #user-container {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  /* top: 22px; */
   width: 100%;
-  right: 0;
-  padding-left: 10px;
-  justify-content: flex-end;
-  padding-right: 10px;
-  /* top: 72px; */
-  height: 38px;
-  padding-top: 3px;
-  padding-right: 2px;
   max-width: 300px;
+  display: flex;
   align-items: center;
 }
+
+
 
 #user-container #user-pic {
   /* top: -3px; */
@@ -962,10 +953,11 @@ main, #messages-card {
   display: inline-block;
   background-image: url('/images/profile_placeholder.png');
   background-repeat: no-repeat;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-size: 40px;
   border-radius: 20px;
+  padding-right: 10px;
 }
 #user-container #user-name {
   font-size: 16px;
@@ -974,6 +966,21 @@ main, #messages-card {
   padding-left: 20px;
   color: white;
 }
+
+#sign-in {
+  background-color: #ffffff00;
+  border: 2px solid #f8f8f8;
+  color: #f8f8f8;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+#sign-in:hover {
+  background-color: #569493;
+  border: 2px solid #569493;
+  color: #121212;
+}
+
 #image-form #submitImage {
   width: auto;
   padding: 0 6px 0 1px;
