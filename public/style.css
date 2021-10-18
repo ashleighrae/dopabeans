@@ -287,6 +287,7 @@ a:hover {
   top: 0px;
   padding: 0px 4%;
   background-color: #4c4475;
+  align-items: center;
 }
 
 #mainNavbarMenu li {
@@ -941,15 +942,22 @@ main, #messages-card {
   position: absolute;
   display: flex;
   flex-direction: row;
-  top: 22px;
+  /* top: 22px; */
   width: 100%;
   right: 0;
   padding-left: 10px;
   justify-content: flex-end;
   padding-right: 10px;
+  /* top: 72px; */
+  height: 38px;
+  padding-top: 3px;
+  padding-right: 2px;
+  max-width: 300px;
+  align-items: center;
 }
+
 #user-container #user-pic {
-  top: -3px;
+  /* top: -3px; */
   position: relative;
   display: inline-block;
   background-image: url('/images/profile_placeholder.png');
@@ -964,6 +972,7 @@ main, #messages-card {
   line-height: 36px;
   padding-right: 10px;
   padding-left: 20px;
+  color: white;
 }
 #image-form #submitImage {
   width: auto;
@@ -985,17 +994,16 @@ header {
   height: 113px;
   padding-bottom: 80px !important;
 }
-#user-container {
-  top: 72px;
-  height: 38px;
-  padding-top: 3px;
-  padding-right: 2px;
-}
+
 #user-container #user-pic {
-  top: 2px;
+  /* top: 2px; */
   width: 33px;
   height: 33px;
   background-size: 33px;
+}
+
+#sign-in {
+  margin-right: 0.35rem;
 }
 
 .singleResource {

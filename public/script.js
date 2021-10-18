@@ -252,14 +252,14 @@ function checkSignedInWithMessage() {
     if (isUserSignedIn()) {
         return true;
     }
-    
+
     // var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
     // Add the "show" class to DIV
     signInSnackbarElement.className = "show";
 
-  // After 3 seconds, remove the show class from DIV
-  setTimeout(function(){ signInSnackbarElement.className = signInSnackbarElement.className.replace("show", ""); }, 3000);
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function () { signInSnackbarElement.className = signInSnackbarElement.className.replace("show", ""); }, 3000);
 
     return false;
 }
@@ -431,6 +431,7 @@ loadMessages();
 document.addEventListener("DOMContentLoaded", () => {
     var spaceModal = document.getElementById("create-space-modal");
     var collectionModal = document.getElementById("create-collection-modal");
+    var resourceModal = document.getElementById("create-resource-modal");
 
     var addSpaceBtn = document.getElementById("create-space-modal-button");
     var addCollectionBtn = document.getElementById("create-collection-modal-button");
@@ -447,7 +448,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var createBoardDiv = document.getElementsByClassName("create-board")[0];
     var currentBoard = document.getElementById("board-options");
     var boardFile = document.getElementById("boardFile");
-    var createResource = document.getElementsByClassName("form-submit-add-resource")[0];
     var selectedFile;
 
     /* Log current space */
@@ -465,27 +465,26 @@ document.addEventListener("DOMContentLoaded", () => {
             collectionModal.style.display = "block";
         });
     } else if (addResourceBtn) {
-
+        addResourceBtn.addEventListener("click", (e) => {
+            resourceModal.style.display = "block";
+        })
     }
 
+    // async function populateSpacesSelect() {
+    //     const spaceCol = collection(db, 'spaces');
+    //     const spaceSnapshot = await getDocs(spaceCol);
+    //     const spaceList = spaceSnapshot.docs.map(doc => doc.data());
 
-    async function populateSpacesSelect() {
-        const spaceCol = collection(db, 'spaces');
-        const spaceSnapshot = await getDocs(spaceCol);
-        const spaceList = spaceSnapshot.docs.map(doc => doc.data());
+    //     let max = spaceList.length;
+    //     let select = document.getElementById("space-select");
 
-        let max = spaceList.length;
-        let select = document.getElementById("space-select");
-
-        for (var i = 0; i <= max; i++) {
-            var opt = document.createElement('option');
-            opt.value = spaceList[i].title;
-            opt.innerHTML = spaceList[i].title;
-            select.appendChild(opt);
-        }
-    }
-
-
+    //     for (var i = 0; i <= max; i++) {
+    //         var opt = document.createElement('option');
+    //         opt.value = spaceList[i].title;
+    //         opt.innerHTML = spaceList[i].title;
+    //         select.appendChild(opt);
+    //     }
+    // }
 
     const toKebabCase = str =>
         str &&
@@ -503,8 +502,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //Get Form Values
             let title = document.querySelector('#create-space-modal #title').value;
-
-            let image = document.getElementById('link').value;
+            var image;
+            if (document.getElementById('image-link')) {
+                image = document.getElementById('image-link').value;
+            }
             let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
 
@@ -519,9 +520,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 description: description,
                 collections: []
             }).then(() => {
-                console.log("Data saved")
+                console.log("Data saved");
+
+                // Refresh page to show all spaces
+                location.reload();
             }).catch((error) => {
-                console.log(error)
+                console.log(error);
             });
 
             //alert
@@ -540,7 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let spaceTitle = currentSpace.title;
             let spaceId = toKebabCase(spaceTitle);
 
-            let collectionId = toKebabCase(title); 
+            let collectionId = toKebabCase(title);
 
             let image = document.getElementById('link').value;
             // let id = toKebabCase(title);
@@ -559,24 +563,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 resources: []
             })
 
-            // Get collection details
-            // const docRef = doc(db, "collections", toKebabCase(docType[i]));
-            // const docSnap = await getDoc(docRef);
-            // const collection = docSnap.data();
-
+            // Update current space
+            async function updateCurrentSpace(spaceId) {
+                const docRef = doc(db, "spaces", spaceId);
+                const docSnap = await getDoc(docRef);
+                const spaceData = docSnap.data();
+                localStorage.setItem("currentSpace", JSON.stringify(spaceData));
+                location.reload();
+            }
 
             // Add the collection to a space
-            async function yeet() {
+            async function saveCollectionData() {
                 await updateDoc(doc(db, "spaces", spaceId), {
                     collections: arrayUnion(title)
                 }).then(() => {
-                    console.log("Data saved")
+                    console.log("Data saved");
+
+                    // Update current space
+                    updateCurrentSpace(spaceId);
                 }).catch((error) => {
-                    console.log(error)
+                    console.log(error);
                 });
             }
 
-            yeet();
+            saveCollectionData();
 
             //alert
             alert("Your new collection was added successfully!");
@@ -584,12 +594,81 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    if (submitAddResourceBtn) {
+        submitAddResourceBtn.addEventListener("click", (e) => {
+
+            console.log("OJIJNIJIJ")
+
+
+            //Get Form Values
+            let title = document.querySelector('#title').value;
+
+            let currentCollection = JSON.parse(localStorage.getItem("currentCollection"));
+            let collectionTitle = currentCollection.title;
+            let collectionId = toKebabCase(collectionTitle);
+
+            let resourceId = toKebabCase(title);
+
+            let image = document.getElementById('image-link').value;
+            // let id = toKebabCase(title);
+            let description = document.getElementById('desc').value;
+            let link = document.querySelector("#link").value;
+
+            if (!image) {
+                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+            }
+
+
+            // Add the new collection to the collections db 
+            setDoc(doc(db, "resources", resourceId), {
+                title: title,
+                image: image,
+                link: link,
+                description: description
+            })
+
+            // Update current collection
+            async function updateCollection(collectionId) {
+                const docRef = doc(db, "collections", collectionId);
+                const docSnap = await getDoc(docRef);
+                const collectionData = docSnap.data();
+                localStorage.setItem("currentCollection", JSON.stringify(collectionData));
+                location.reload();
+            }
+
+            // Add the collection to a space
+            async function saveCollectionData() {
+                await updateDoc(doc(db, "collections", collectionId), {
+                    resources: arrayUnion(title)
+                }).then(() => {
+                    console.log("Data saved");
+
+                    // Update current space
+                    updateCollection(collectionId);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+
+            updateCollection();
+
+            saveCollectionData();
+
+            //alert
+            alert("Your new resource was added successfully!");
+            resourceModal.style.display = "none";
+        })
+    }
+
+
     if (closeButton) {
         closeButton.addEventListener("click", (e) => {
             if (spaceModal) {
                 spaceModal.style.display = "none";
             } else if (collectionModal) {
                 collectionModal.style.display = "none";
+            } else if (resourceModal) {
+                resourceModal.style.display = "none";
             }
         });
     }

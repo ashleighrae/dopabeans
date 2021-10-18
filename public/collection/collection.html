@@ -30,19 +30,27 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <div>
-          <h1>Start a new collection</h1>
+          <h1>Add a new resource</h1>
         </div>
         <div>
-          <h2>Collection title:</h2>
-          <label for="title" class="hiddenLabel">Collection title</label>
+          <h2>Resource title:</h2>
+          <label for="title" class="hiddenLabel">Resource title</label>
           <input type="text" id="title" name="title" />
         </div>
         <div class="flex">
-          <h2>Choose a cover image:</h2>
+          <h2>Add a link:</h2>
+          <section class="inline">
+            <h3>Enter a URL</h3>
+            <label for="link" class="hiddenLabel">Enter a URL:</label>
+            <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
+          </section>
+        </div>
+        <div class="flex">
+          <h2>Add an image:</h2>
           <section class="inline">
             <h3>Enter a URL</h3>
             <label for="link" class="hiddenLabel">Enter an image URL:</label>
-            <input type="text" id="link" name="link" placeholder="Enter an image URL"/>
+            <input type="text" id="image-link" name="image-link" placeholder="Enter an image URL"/>
           </section>
         </div>
         <div>
@@ -52,11 +60,11 @@
             rows="4"
             id="desc"
             name="desc"
-            placeholder="What's this collection about?"
+            placeholder="What's this resource about?"
           ></textarea>
         </div>
         <div>
-          <button class="form-submit-add-resource">Add Resource</button>
+          <button id="form-submit-add-resource">Add Resource</button>
         </div>
       </div>
     </div>
@@ -65,7 +73,7 @@
     <nav id="mainNavbarMenu">
       <ul class="nav logo m0">
         <li>
-          <a href="../index.html"><h1>Kozmos</h1></a>
+          <a href="../index.html"><h1>Cozmos</h1></a>
         </li>
       </ul>
       <div id="burglinks">
