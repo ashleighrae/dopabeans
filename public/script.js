@@ -54,6 +54,9 @@ async function signIn() {
 function signOutUser() {
     // Sign out of Firebase.
     signOut(getAuth());
+
+    // Refresh page to disable buttons
+    location.reload();
 }
 
 // Initialize firebase auth
