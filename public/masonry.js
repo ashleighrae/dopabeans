@@ -6,7 +6,7 @@ var $grid = $('.grid').masonry({
 });
 // bind event
 $grid.masonry( 'on', 'layoutComplete', function() {
-  console.log('layout is complete');
+  console.log('Layout is complete.');
 });
 // trigger initial layout
 $grid.masonry();

@@ -219,6 +219,10 @@ a:hover {
   grid-column: 3/4;
 }
 
+.addResource {
+  margin-bottom: 10px;
+}
+
 .text-only {
   background-color: #569493;
   color: #f8f8f8;
