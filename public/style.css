@@ -900,21 +900,21 @@ main, #messages-card {
 #message-form {
   display: flex;
   width: 90%;
-  padding: 3% 0% 5% 5%;
+  padding: 5% 0% 5% 5%;
 
 }
 
 .forms {
   display: flex;
   background-color: #f8f8f8;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 10px;
 }
 
 #image-form {
   display: flex;
   justify-content: start;
   width: 10%;
-  padding: 3% 1% 5% 2%;
+  padding: 5% 1% 5% 2%;
 }
 #message-form .mdl-textfield {
   width: 100%;
