@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="style.css" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,400;0,700;1,100;1,500;1,600&family=ZCOOL+QingKe+HuangYou&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <title>Cozmos</title>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="script.js" type="module"></script>
+  <script src="accessDB.js" type="module"></script>
+</head>
+
+<body>
+
+  <!-- Navigation menu -->
+  <nav id="mainNavbarMenu">
+    <ul class="logo">
+      <li>
+        <a href="index.html">
+          <img src="images/logo-white.png" height="30px">
+          <h1>Cozmos</h1>
+        </a>
+      </li>
+    </ul>
+    <div id="burglinks">
+      <ul class="nav">
+        <li>
+          <a href="about.html" class="">About</a>
+        </li>
+        <li>
+          <a href="spaces.html" class="">Spaces</a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav userNav" id="user-container">
+      <div hidden id="user-pic"></div>
+      <div hidden id="user-name"></div>
+      <button hidden id="sign-out">
+        Sign-out
+      </button>
+      <button hidden id="sign-in">
+        <i class="material-icons"></i>Sign-in with Google
+      </button>
+    </div>
+  </nav>
+
+  
+  <section class="page">
+    <div class="logoIMG">
+      <img src="images/cozmos-logo.png">
+    </div>
+    <article>
+        <h1>What is Cozoms?</h1>
+    </article>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="rowfooter">
+      <div>
+        <h3 class="">Quick Links</h3>
+        <ul class="footermenuitems m0">
+          <li>
+            <a href="#">My Spaces</a>
+          </li>
+          <li>
+            <a href="#">Profile</a>
+          </li>
+          <li>
+            <a href="#">Account settings</a>
+          </li>
+          <li>
+            <a href="#">Get in touch</a>
+          </li>
+        </ul>
+      </div>
+      <div class="socialmedialinks">
+        <h3 class="">Follow Us</h3>
+        <div>
+          <a href="https://www.facebook.com/cozmoscommunity" title="Facebook">
+            <i class="fab fa-facebook"></i>
+          </a>
+          </a>
+          <a href="https://www.instagram.com/cozmoscommunityy/?hl=en" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="">Extra Info</h3>
+        <ul>
+          <li>
+            <a href="#">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="#" target="_blank">Privacy policy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script src="masonry.js"></script>
+  <script>
+    function filterSpaces() {
+      // Declare variables
+      var input, filter, ul, li, h3, i, txtValue;
+      input = document.getElementById('searchbar');
+      filter = input.value.toUpperCase();
+      cat = document.getElementsByClassName("category");
+      console.log(cat);
+
+  // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < cat.length; i++) {
+        div = cat[i]
+        txtValue = div.textContent || div.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          cat[i].style.display = "";
+        } else {
+          cat[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
