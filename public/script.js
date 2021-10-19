@@ -100,11 +100,11 @@ function isUserSignedIn() {
 }
 
 // Returns the current spaceId to display the correct message content
-async function getSpaceId() {
-    let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
-    let spaceTitle = currentSpace.title;
-    let spaceId = toKebabCase(spaceTitle);
-    return spaceId
+function getSpaceId() {
+  let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
+  let spaceTitle = currentSpace.title;
+  let spaceId = toKebabCase(spaceTitle);
+  return spaceId
 }
 
 // Saves a new message to Cloud Firestore.
