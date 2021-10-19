@@ -100,7 +100,7 @@ async function populateResources(resource, link, localLink) {
                 });
         }
 
-        // Add collection objects to grid space
+        // Add resource objects to grid space
         var $grid = $('.grid').masonry({
             // options...
             initLayout: false,
