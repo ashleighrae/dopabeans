@@ -61,11 +61,12 @@
     </div>
   </div>
 
-  <!-- Navigation menu -->
-  <nav id="mainNavbarMenu">
-    <ul class="nav logo m0">
+   <!-- Navigation menu -->
+   <nav id="mainNavbarMenu">
+    <ul class="logo">
       <li>
-        <a href="../index.html">
+        <a href="index.html">
+          <img src="images/logo-white.png" height="30px">
           <h1>Cozmos</h1>
         </a>
       </li>
@@ -73,46 +74,24 @@
     <div id="burglinks">
       <ul class="nav">
         <li>
-          <a href="../index.html">Home</a>
-        </li>
-
-        <li class="dropdown">
-          <a href="../spaces.html" class="active">Spaces</a>
-          <div class="dropdownContent">
-            <a href="../#">My Spaces</a>
-            <a href="../#">Following</a>
-            <a href="../#">Add New <i class="fas fa-plus"></i></a>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div id="user-container">
-      <div hidden id="user-pic"></div>
-      <div hidden id="user-name"></div>
-      <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-        Sign-out
-      </button>
-      <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-        <i class="material-icons"></i>Sign-in with Google
-      </button>
-    </div>
-    <div class="hamburgerhide">
-      <a href="javascript:" class="hamburger" onclick="toggle()">
-        <i class="fa fa-bars"></i>
-      </a>
-    </div>
-    <div class="mobileMenu">
-      <ul class="nav">
-        <li>
-          <a href="index.html" class="active">Home</a>
+          <a href="about.html" class="">About</a>
         </li>
         <li>
           <a href="spaces.html" class="">Spaces</a>
         </li>
       </ul>
     </div>
+    <div class="nav userNav" id="user-container">
+      <div hidden id="user-pic"></div>
+      <div hidden id="user-name"></div>
+      <button hidden id="sign-out">
+        Sign-out
+      </button>
+      <button hidden id="sign-in">
+        <i class="material-icons"></i>Sign-in with Google
+      </button>
+    </div>
   </nav>
-
 
   <main class="mdl-layout__content mdl-color--grey-100">
     <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
@@ -230,6 +209,7 @@
   </footer>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="../masonry.js"></script>
+
 </body>
 
 </html>

@@ -97,7 +97,7 @@ button {
   font-weight: 700;
   cursor: pointer;
   border: none;
-  padding: 2% 3%;
+  padding: 5% 7%;
   border-radius: 10px;
 }
 
@@ -139,7 +139,7 @@ a:hover {
 
 .grid-sizer, .grid-item {
   /* width: calc(50% - 10px); */
-  width: calc(20%);
+  width: calc(20% - 10px);
 
   /* vertical gutter */
   margin-bottom: 10px;
@@ -160,10 +160,6 @@ a:hover {
   padding: 2px 16px;
 }
 
-.grid-item h3 {
-  margin: 10px 0;
-}
-
 /* Category Grids */
 .categoryGrid, .categoryGridSpace {
   display: grid;
@@ -182,18 +178,19 @@ a:hover {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
   position: relative;
+  height: 160px;
 }
 
 .category img {
   width: 100%;
-  height: 100%;
+  height: 160px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .category div {
   position: absolute;
-  height: 100%;
+  height: 160px;
   width: 100%;
   top: 50%;
   left: 50%;
@@ -308,23 +305,16 @@ a:hover {
   transition: background-color 0.5s linear;
   text-transform: uppercase;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #burglinks {
-  display: none;
-  position: absolute;
   width: 100%;
   padding-top: 50px;
   padding-bottom: 0px;
   background-color: #4c4475;
-}
-
-#mainNavbarMenu a.hamburger {
-  position: fixed;
-  text-align: center;
-  right: 0;
-  width: 15%;
-  font-size: 1.5em;
 }
 
 #mainNavbarMenu .logo {
@@ -333,10 +323,6 @@ a:hover {
 
 #mainNavbarMenu .logo h1 {
   font-size: 1.5em;
-}
-
-#mainNavbarMenu .logo a {
-  display: flex;
 }
 
 #mainNavbarMenu .logo a:hover {
@@ -358,73 +344,23 @@ a:hover {
   justify-content: start;
 }
 
-
-
 .active {
   color: white;
   background-color: #6e65a4;
 }
 
 #mainNavbarMenu a:hover {
-  color: black;
+  color: #121212;
   background-color: white;
   text-decoration: none;
-}
-
-/* DROPDOWN */
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdownContent {
-  display: none;
-  position: absolute;
-  background-color: #bad9eb;
-  transition: background-color 0.5s linear;
-  z-index: 1;
-  width: 100%;
-}
-
-#mainNavbarMenu .dropdownContent a {
-  color: #121212;
-}
-
-#mainNavbarMenu .dropdownContent a:hover {
-  background-color: #f8f8f8;
-}
-
-.dropdown:hover .dropdownContent {
-  display: block;
 }
 
 .userNav {
   display: flex;
   justify-content: right;
-  width: 45%;
+  width: 35%;
   padding-right: 10px;
 }
-
-
-
-/* .sidenav a {
-  display: flex;
-  margin-top: 10px;
-  margin-left: 15px;
-}
-
-.sidenav a:first-of-type {
-  color: #4c4475;
-  font-size: 1.2em;
-  margin-left: 3px;
-}
-
-.sidenav {
-  width: 150px;
-  background-color: #fff8f5;
-  padding: 20px;
-} */
 
 @media only screen and (min-width: 767px) {
   #mainNavbarMenu {
@@ -498,20 +434,18 @@ a:hover {
 
 
 /* Search bar */
+
 .searchBar {
-  display: flex;
-  justify-content: center;
+  padding-bottom: 2%;
 }
 
 .searchBar form {
   width: 100%;
   justify-content: center;
   display: flex;
-  background-color: #dfeaf0;
   position: relative;
   border-radius: 25px;
   align-items: center;
-  max-width: 1000px;
 }
 
 .searchBar .icon-search {
@@ -522,34 +456,35 @@ a:hover {
   height: 35px;
 }
 
-.searchBar input {
-  color: #121212;
-  font-weight: 600;
-  text-indent: 5%;
-  cursor: default;
-  padding: 6px 0;
-  border: none;
-  width: 90%;
-  height: 25px;
-  justify-content: center;
-  font-size: 1.25rem;
-  height: 3rem;
-  background-color: inherit;
-}
-
-.searchBar textarea {
+textarea {
   background-color: #dfeaf0;
   color: #121212;
   font-weight: 600;
-  text-indent: 5%;
+  text-indent: 3%;
   border-radius: 25px;
   cursor: default;
-  padding: 15px 0px;
+  padding: 8px 0px;
   border: none;
   width: 80%;
   justify-content: center;
+  resize: none;
 }
 
+input {
+  width: 100%;
+  color: #121212;
+  font-weight: 600;
+  text-indent: 5%;
+  padding: 12px 0px;
+  cursor: default;
+  border: none;
+  justify-content: center;
+  display: flex;
+  background-color: #dfeaf0;
+  position: relative;
+  border-radius: 25px;
+  align-items: center;
+}
 
 input:focus {
   outline: #f6ae2d;
@@ -560,13 +495,15 @@ textarea:focus {
 }
 
 textarea::placeholder {
-  font: 700 1em 'Nunito', sans-serif;
+  font: 700 1.2em 'Nunito', sans-serif;
   color: #121212;
+  line-height: 1.5em;
 }
 
 input::placeholder {
-  font: 700 1em 'Nunito', sans-serif;
+  font: 700 1.2em 'Nunito', sans-serif;
   color: #121212;
+  line-height: 1.5em;
 }
 
 /* FOOTER */
@@ -575,15 +512,19 @@ footer {
   padding: 30px;
   color: #121212;
   display: block;
-  padding: 30px 10%;
+  padding: 1% 10%;
 }
 
 footer ul {
   padding-left: 12px;
 }
 
-footer li a {
+footer a {
   color: #121212;
+}
+
+footer a:hover {
+  color: #dfeaf0;
 }
 
 .footermenuitems {
@@ -627,6 +568,15 @@ footer .footermenuitems {
 /* Modal Button */
 .addItem {
   box-shadow: none;
+}
+
+.logoIMG {
+  width: 80%;
+  text-align: center;
+  padding-bottom: 0;
+}
+.logoIMG img {
+  height: 130px;
 }
 
 #create-resource-modal-button, #create-collection-modal-button, #create-space-modal-button {
@@ -951,12 +901,10 @@ main, #messages-card {
   justify-content: space-between;
 }
 #user-container {
-  width: 100%;
+  width: 50%;
   display: flex;
   align-items: center;
 }
-
-
 
 #user-container #user-pic {
   /* top: -3px; */
@@ -968,18 +916,22 @@ main, #messages-card {
   height: 35px;
   background-size: 40px;
   border-radius: 20px;
-  padding-right: 10px;
 }
+
 #user-container #user-name {
   font-size: 16px;
-  line-height: 36px;
   padding-right: 10px;
-  padding-left: 20px;
+  padding-left: 10px;
   color: white;
+}
+
+#sign-in {
+  margin-left: 10px;
 }
 
 #sign-in, #sign-out {
   background-color: #ffffff00;
+  padding: 2% 3%;
   border: 2px solid #f8f8f8;
   color: #f8f8f8;
   font-weight: 600;
@@ -1074,13 +1026,6 @@ header {
   to {bottom: 0; opacity: 0;}
 }
 
-@media only screen and (min-width: 767px) {
-  #sign-in, #sign-out {
-  padding: 1%;
-  }
-  
-}
-
 /* RESOURCE */
 /* Add some padding inside the card container */
 
@@ -1109,14 +1054,8 @@ header {
   background-color: #dfeaf0;
 }
 
-.mobileMenu {
-  display: none;
-}
 
-.showMobileMenu {
-  display: block;
-}
-
+/* Descriptions */
 
 .category-description {
   width: calc(94% - 20px);

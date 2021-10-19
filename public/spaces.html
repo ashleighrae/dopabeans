@@ -53,61 +53,55 @@
     </div>
   </div>
 
-  <!-- Navigation menu -->
-  <nav id="mainNavbarMenu">
-    <ul class="nav logo m0">
-      <li>
-        <a href="../index.html">
-          <h1>Cozmos</h1>
-        </a>
-      </li>
-    </ul>
-    <div id="burglinks">
-      <ul class="nav">
+    <!-- Navigation menu -->
+    <nav id="mainNavbarMenu">
+      <ul class="logo">
         <li>
-          <a href="../index.html">Home</a>
-        </li>
-        <li class="dropdown">
-          <a href="../spaces.html" class="active">Spaces</a>
-          <div class="dropdownContent">
-            <a href="../#">My Spaces</a>
-            <a href="../#">Following</a>
-            <a href="../#">Add New <i class="fas fa-plus"></i></a>
-          </div>
-        </li>
-    </div>
-    <div class="nav userNav" id="user-container">
-      <div hidden id="user-pic"></div>
-      <div hidden id="user-name"></div>
-      <button hidden id="sign-out">
-        Sign-out
-      </button>
-      <button hidden id="sign-in">
-        <i class="material-icons"></i>Sign-in with Google
-      </button>
-    </div>
-    <div class="hamburgerhide">
-      <a href="javascript:" class="hamburger" onclick="toggle()">
-        <i class="fa fa-bars"></i>
-      </a>
-    </div>
-    <div class="mobileMenu">
-      <ul class="nav">
-        <li>
-          <a href="index.html" class="active">Home</a>
-        </li>
-        <li>
-          <a href="spaces.html" class="">Spaces</a>
+          <a href="index.html">
+            <img src="images/logo-white.png" height="30px">
+            <h1>Cozmos</h1>
+          </a>
         </li>
       </ul>
-    </div>
-  </nav>
+      <div id="burglinks">
+        <ul class="nav">
+          <li>
+            <a href="about.html" class="">About</a>
+          </li>
+          <li>
+            <a href="spaces.html" class="">Spaces</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav userNav" id="user-container">
+        <div hidden id="user-pic"></div>
+        <div hidden id="user-name"></div>
+        <button hidden id="sign-out">
+          Sign-out
+        </button>
+        <button hidden id="sign-in">
+          <i class="material-icons"></i>Sign-in with Google
+        </button>
+      </div>
+    </nav>
+
+
+    
   <section class="page">
     <div class="space">
       <h1>
         <!-- Need to add dynamically -->
         Spaces
       </h1>
+    </div>
+    <div class="logoIMG">
+      <img src="images/cozmos-logo.png">
+    </div>
+    <div class="searchBar">
+      <form>
+        <label class="hiddenLabel">Search</label>
+        <input type="text" id="searchbar" onkeyup="filterSpaces()" placeholder="Explore... ">
+      </form>
     </div>
     <div>
       <div class="categoryGridSpace">
@@ -166,6 +160,27 @@
   </footer>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="../masonry.js"></script>
+  <script>
+    function filterSpaces() {
+      // Declare variables
+      var input, filter, ul, li, h3, i, txtValue;
+      input = document.getElementById('searchbar');
+      filter = input.value.toUpperCase();
+      cat = document.getElementsByClassName("category");
+      console.log(cat);
+
+  // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < cat.length; i++) {
+        div = cat[i]
+        txtValue = div.textContent || div.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          cat[i].style.display = "";
+        } else {
+          cat[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>
