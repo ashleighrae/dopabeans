@@ -101,8 +101,22 @@ async function populateResources(resource, link, localLink) {
         }
 
         // Add collection objects to grid space
-        var div = document.getElementsByClassName('grid')[0];
-        div.prepend(categoryDiv);
+        var $grid = $('.grid').masonry({
+            // options...
+            initLayout: false,
+            // percentPosition: true,
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-sizer',
+            gutter: 10
+        });
+
+        $grid.masonry()
+            .append(categoryDiv)
+            .masonry('appended', categoryDiv)
+            // layout
+            .masonry();
+
+        //div.prepend(categoryDiv);
     }
 }
 
