@@ -9,9 +9,9 @@
     "default_title": "Does a thing when you do a thing",
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/beans.png",
-      "32": "icons/beans.png",
-      "128": "icons/beans.png"
+      "16": "icons/cozmos-logo.png",
+      "32": "icons/cozmos-logo.png",
+      "128": "icons/cozmos-logo.png"
     }
   }
 }
