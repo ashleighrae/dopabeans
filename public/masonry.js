@@ -1,19 +1,47 @@
 // external js: masonry.pkgd.js
+// var $grid = $('.grid').masonry({
+//   // disable initial layout
+//   initLayout: false,
+//   //...
+// });
+
+// var $grid = $('.grid').imagesLoaded( function() {
+//   // init Masonry after all images have loaded
+//   $grid.masonry({
+//     // options...
+//     initLayout: false,
+//   });
+// });
+
+
 var $grid = $('.grid').masonry({
-  // disable initial layout
+  // options...
   initLayout: false,
-  //...
+  // percentPosition: true,
+  itemSelector: '.grid-item',
+  columnWidth:  '.grid-sizer',
+  gutter: 10
 });
-// bind event
-$grid.masonry( 'on', 'layoutComplete', function() {
-  console.log('layout is complete');
-});
-// trigger initial layout
-$grid.masonry();
+// layout Masonry after each image loads
 
-
-$('.grid').masonry({
-    itemSelector: '.grid-item',
-    columnWidth:  '.grid-sizer',
-    gutter: 10
+window.addEventListener("DOMContentLoaded", () => {
+  $grid.imagesLoaded().progress( function() {
+    $grid.masonry();
   });
+})
+
+
+// bind event
+// $grid.masonry( 'on', 'layoutComplete', function() {
+//   console.log('layout is complete');
+// });
+
+// // $('.grid').masonry({
+  
+// // });
+
+
+// // trigger initial layout
+// $grid.masonry();
+
+
