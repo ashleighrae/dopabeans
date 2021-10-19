@@ -119,12 +119,11 @@ li {
 
 .nav {
   width: 100%;
-
 }
 
 .nav a {
   text-decoration: none;
-  color: #ffffff;
+  color: #f8f8f8;
   width: 100%;
 }
 
@@ -304,7 +303,7 @@ a:hover {
   font-weight: bold;
   transition: background-color 0.5s linear;
   text-transform: uppercase;
-  color: #fff;
+  color: #f8f8f8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -487,11 +486,11 @@ input {
 }
 
 input:focus {
-  outline: #f6ae2d;
+  outline: #f8f8f8;
 }
 
 textarea:focus {
-  outline: #f6ae2d;
+  outline: #f8f8f8;
 }
 
 textarea::placeholder {
@@ -789,33 +788,39 @@ main, #messages-card {
   height: 100%;
   padding-bottom: 0;
 }
+
+#chatBuddies {
+  background-color: #bad9eb;
+  border-radius: 10px;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.mdl-textfield__input {
+  background-color: #bad9eb;
+}
+
+
 #messages-card-container {
   height: calc(100% - 35px);
   padding-bottom: 0;
-  margin-top: 30px
+  background-color: #f8f8f8;
+  border-radius: 10px;
 }
-#messages-card {
-  margin-top: 20px;
-}
+
+
 .mdl-layout__header-row span {
   margin-left: 15px;
   margin-top: 17px;
 }
 .mdl-grid {
-  max-width: 1024px;
+  max-width: 80%;
   margin: auto;
 }
-.material-icons {
-  top: 8px;
-  position: relative;
-}
+
 .mdl-layout__header-row {
   padding: 0;
   margin: 0 auto;
-}
-.mdl-button .material-icons {
-  top: -1px;
-  margin-right: 5px;
 }
 
 .mdl-card__supporting-text {
@@ -824,9 +829,23 @@ main, #messages-card {
   padding-top: 0;
   padding-bottom: 0;
 }
+
+#submit {
+  background-color: #569493;
+  border: 2px solid #569493;
+  padding: 2% 3%;
+  color: #f8f8f8;
+  font-weight: 600;
+  font-size: 1em;
+}
+  
+#submit:hover {
+  background-color: #4c4475;
+  border: 2px solid #4c4475;
+}
+
 #messages {
   overflow-y: auto;
-  margin-bottom: 10px;
   height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
@@ -836,12 +855,14 @@ main, #messages-card {
 }
 .message-container:first-of-type {
   border-top-width: 0;
+  padding-top: 5%;
+  margin-top: 0;
 }
 .message-container {
   display: block;
   margin-top: 10px;
-  border-top: 1px solid #f3f3f3;
-  padding-top: 10px;
+  border-top: 1px solid #f8f8f8;
+  padding: 2% 5% 0 5%;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -864,6 +885,7 @@ main, #messages-card {
   display: table-cell;
   width: calc(100% - 40px);
   padding: 5px 0 5px 10px;
+  font-weight: 500;
 }
 .message-container .name {
   display: inline-block;
@@ -874,30 +896,39 @@ main, #messages-card {
   font-size: 12px;
   box-sizing: border-box;
 }
+
 #message-form {
   display: flex;
-  flex-direction: row;
-  width: calc(100% - 48px);
-  float: left;
+  width: 90%;
+  padding: 3% 0% 5% 5%;
+
 }
+
+.forms {
+  display: flex;
+  background-color: #f8f8f8;
+  border-radius: 0px 0px 10px 10px;
+}
+
 #image-form {
   display: flex;
-  flex-direction: row;
-  width: 48px;
-  float: right;
+  justify-content: start;
+  width: 10%;
+  padding: 3% 1% 5% 2%;
 }
 #message-form .mdl-textfield {
-  width: calc(100% - 100px);
+  width: 100%;
 }
-#message-form button, #image-form button {
-  width: 100px;
-  margin: 15px 0 0 10px;
+#message-form button {
+  margin-left: 15px;
+  padding: 1% 2%;
 }
+
 .mdl-card {
   min-height: 0;
 }
 .mdl-card {
-  background: linear-gradient(white, #f9f9f9);
+  background: linear-gradient(white, #f8f8f8);
   justify-content: space-between;
 }
 #user-container {
@@ -930,7 +961,7 @@ main, #messages-card {
 }
 
 #sign-in, #sign-out {
-  background-color: #ffffff00;
+  background-color: #f8f8f800;
   padding: 2% 3%;
   border: 2px solid #f8f8f8;
   color: #f8f8f8;
@@ -944,14 +975,30 @@ main, #messages-card {
   color: #121212;
 }
 
-#image-form #submitImage {
+#submitImage {
   width: auto;
-  padding: 0 6px 0 1px;
   min-width: 0;
+  background-color: #f8f8f8;
+  border: 3px solid #569493;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#image-form #submitImage .material-icons {
-  top: -1px;
+
+#submitImage:hover {
+  background-color: #569493;
+  border: 3px solid #569493;
 }
+
+#submitImage .material-icons {
+  color: #569493;
+  padding: 2%;
+}
+
+#submitImage:hover .material-icons{
+  color: #f8f8f8;
+}
+
 .message img {
   max-width: 300px;
   max-height: 200px;
@@ -986,7 +1033,7 @@ header {
   min-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
   background-color: #333; /* Black background color */
-  color: #fff; /* White text color */
+  color: #f8f8f8; /* White text color */
   text-align: center; /* Centered text */
   border-radius: 2px; /* Rounded borders */
   padding: 16px; /* Padding */
