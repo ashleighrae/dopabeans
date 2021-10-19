@@ -52,14 +52,14 @@ const toKebabCase = str =>
         .map(x => x.toLowerCase())
         .join('-');
 
-// Signs-in Chat.
+// Signs-in a user.
 async function signIn() {
     // Sign in Firebase using popup auth and Google as the identity provider.
     var provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
 }
 
-// Signs-out of Chat.
+// Signs-out the current user
 function signOutUser() {
     // Sign out of Firebase.
     signOut(getAuth());
@@ -89,12 +89,20 @@ function isUserSignedIn() {
     return !!getAuth().currentUser;
 }
 
-// Returns the current spaceId to display the correct message content
+// Returns the current space ID to display the correct message content
 function getSpaceId() {
   let currentSpace = JSON.parse(localStorage.getItem("currentSpace"));
   let spaceTitle = currentSpace.title;
   let spaceId = toKebabCase(spaceTitle);
   return spaceId
+}
+
+// Returns the current resource ID to display the correct comments
+function getResourceId() {
+  let currentResource = JSON.parse(localStorage.getItem("currentResource"));
+  let resourceTitle = currentResource.title;
+  let resourceId = toKebabCase(resourceTitle);
+  return resourceId
 }
 
 // Saves a new message to Cloud Firestore.
@@ -208,7 +216,19 @@ async function requestNotificationsPermissions() {
     if (permission === 'granted') {
         console.log('Notification permission granted.');
         // Notification permission granted.
-        await saveMessagingDeviceToken();
+
+        console.log(localStorage.getItem("currentSpace"));
+
+        if (window.location.href.indexOf("space")  > -1 ) {
+          // on a space page so therefore messaging functonality
+          await saveMessagingDeviceToken();
+
+        } else {
+          // on a resource page so therefore commenting functionality
+          await saveCommentingDeviceToken();
+
+        }
+        
     } else {
         console.log('Unable to get permission to notify.');
     }
@@ -245,7 +265,7 @@ function onMessageFormSubmit(e) {
         saveMessage(messageInputElement.value).then(function () {
             // Clear message text field and re-enable the SEND button.
             resetMaterialTextfield(messageInputElement);
-            toggleButton();
+            toggleMessageButton();
         });
     }
 }
@@ -269,8 +289,17 @@ function authStateObserver(user) {
         // Hide sign-in button.
         signInButtonElement.setAttribute('hidden', 'true');
 
-        // We save the Firebase Messaging Device token and enable notifications.
-        saveMessagingDeviceToken();
+        if (window.location.href.indexOf("space")  > -1 ) {
+          // on a space page so therefore messaging functonality
+          // We save the Firebase Messaging Device token and enable notifications.
+          saveMessagingDeviceToken();
+          
+        } else {
+          // on a resource page so therefore commenting functionality
+          // We save the Firebase Commenting Device token and enable notifications.
+          saveCommentingDeviceToken();
+        }
+
     } else { // User is signed out!
         if (userNameElement) {
             // Hide user's profile and sign-out button.
@@ -291,8 +320,6 @@ function checkSignedInWithMessage() {
         return true;
     }
 
-    // var signInSnackbarElement = document.getElementById('must-signin-snackbar');
-
     // Add the "show" class to DIV
     signInSnackbarElement.className = "show";
 
@@ -304,8 +331,9 @@ function checkSignedInWithMessage() {
 
 // Resets the given MaterialTextField.
 function resetMaterialTextfield(element) {
+  //debugger;
     element.value = '';
-    element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
+    //element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
 }
 
 // Template for messages.
@@ -381,6 +409,8 @@ function createAndInsertMessage(id, timestamp) {
 function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
     var div = document.getElementById(id) || createAndInsertMessage(id, timestamp);
 
+    console.log(div);
+
     // profile picture
     if (picUrl) {
         div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
@@ -410,9 +440,22 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
     }
 }
 
-// Enables or disables the submit button depending on the values of the input
+// Triggered when the send new message form is submitted.
+function onCommentFormSubmit(e) {
+  e.preventDefault();
+  // Check that the user entered a message and is signed in.
+  if (commentInputElement.value && checkSignedInWithMessage()) {
+      saveComment(commentInputElement.value).then(function () {
+          // Clear comment text field and re-enable the SEND button.
+          resetMaterialTextfield(commentInputElement);
+          toggleCommentButton();
+      });
+  }
+}
+
+// Enables or disables the messaging submit button depending on the values of the input
 // fields.
-function toggleButton() {
+function toggleMessageButton() {
     if (messageInputElement.value) {
         submitButtonElement.removeAttribute('disabled');
     } else {
@@ -420,11 +463,168 @@ function toggleButton() {
     }
 }
 
+// Enables or disables the comment submit button depending on the values of the input
+// fields.
+function toggleCommentButton() {
+  if (commentInputElement.value) {
+    submitCommentButtonElement.removeAttribute('disabled');
+  } else {
+    submitCommentButtonElement.setAttribute('disabled', 'true');
+  }
+}
+
+// Template for comments.
+var COMMENT_TEMPLATE =
+    '<div class="comment-container">' +
+    '<div class="spacing"></div>' +
+    '<div class="name"></div>' +
+    '<div class="comment"></div>' +
+    '</div>';
+
+// Saves a new comment to Cloud Firestore.
+async function saveComment(commentText) {
+  // Add a new comment entry to the Firebase database.
+  try {
+    await addDoc(collection(getFirestore(), 'comments'), {
+      name: getUserName(),
+      text: commentText,
+      profilePicUrl: getProfilePicUrl(),
+      timestamp: serverTimestamp()
+    });
+  }
+  catch(error) {
+    console.error('Error writing new comment to Firebase Database', error);
+  }
+}
+
+// Loads comment history and listens for upcoming ones.
+function loadComments() {
+
+  // Create the query to load the last 12 comments and listen for new ones.
+  const recentCommentsQuery = query(collection(db, 'comments'), orderBy('timestamp', 'desc'), limit(12));
+
+  // Start listening to the query.
+  onSnapshot(recentCommentsQuery, function (snapshot) {
+      snapshot.docChanges().forEach(function (change) {
+          if (change.type === 'removed') {
+              deleteMessage(change.doc.id);
+          } else {
+              var comment = change.doc.data();
+              displayComment(change.doc.id, comment.timestamp, comment.name,
+                comment.text, comment.profilePicUrl, comment.imageUrl);
+          }
+      });
+  });
+}
+
+// Saves the commenting device token to Cloud Firestore.
+async function saveCommentingDeviceToken() {
+  try {
+      const currentToken = await getToken(getMessaging());
+      if (currentToken) {
+          console.log('Got FCM device token:', currentToken);
+          // Saving the Device Token to Cloud Firestore.
+          const tokenRef = doc(db, 'fcmTokens', currentToken);
+          await setDoc(tokenRef, { uid: getAuth().currentUser.uid });
+
+          // This will fire when a comment is received while the app is in the foreground.
+          // When the app is in the background, firebase-messaging-sw.js will receive the comment instead.
+          onMessage(getMessaging(), (comment) => {
+              console.log(
+                  'New foreground notification from Firebase Comments!',
+                  comment.notification
+              );
+          });
+      } else {
+          // Need to request permissions to show notifications.
+          requestNotificationsPermissions();
+      }
+  } catch (error) {
+      console.error('Unable to get messaging token.', error);
+  };
+}
+
+function createAndInsertComment(id, timestamp) {
+  const container = document.createElement('div');
+  container.innerHTML = COMMENT_TEMPLATE;
+  const div = container.firstChild;
+  div.setAttribute('id', id);
+
+  // If timestamp is null, assume we've gotten a brand new comment.
+  // https://stackoverflow.com/a/47781432/4816918
+  timestamp = timestamp ? timestamp.toMillis() : Date.now();
+  div.setAttribute('timestamp', timestamp);
+
+  if (commentListElement != null) {
+      // figure out where to insert new comment
+      const existingComments = commentListElement.children;
+      if (existingComments.length === 0) {
+          commentListElement.appendChild(div);
+      } else {
+          let commentListNode = existingComments[0];
+
+          while (commentListNode) {
+              const commentListNodeTime = commentListNode.getAttribute('timestamp');
+
+              if (!commentListNodeTime) {
+                  throw new Error(
+                      `Child ${commentListNode.id} has no 'timestamp' attribute`
+                  );
+              }
+
+              if (commentListNodeTime > timestamp) {
+                  break;
+              }
+
+              commentListNode = commentListNode.nextSibling;
+          }
+
+          commentListElement.insertBefore(div, commentListNode);
+      }
+  }
+  return div;
+}
+
+// Displays a Message in the UI.
+function displayComment(id, timestamp, name, text, picUrl) {
+  var div = document.getElementById(id) || createAndInsertComment(id, timestamp);
+
+  console.log(div);
+
+  // profile picture
+  // if (picUrl) {
+  //     div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
+  // }
+
+  div.querySelector('.name').textContent = name;
+  var commentElement = div.querySelector('.comment');
+
+  console.log(commentElement);
+
+  if (commentListElement != null) {
+      if (text) { // If the comment is text.
+          commentElement.textContent = text;
+          // Replace all line breaks by <br>.
+          commentElement.innerHTML = commentElement.innerHTML.replace(/\n/g, '<br>');
+      } 
+      // Show the card fading-in and scroll to view the new comment .
+      setTimeout(function () { div.classList.add('visible') }, 1);
+      commentListElement.scrollTop = commentListElement.scrollHeight;
+      commentInputElement.focus();
+  }
+}
+
+
+
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');
 var messageFormElement = document.getElementById('message-form');
 var messageInputElement = document.getElementById('message');
 var submitButtonElement = document.getElementById('submit');
+var commentListElement = document.getElementById('comments');
+var commentFormElement = document.getElementById('comment-form');
+var commentInputElement = document.getElementById('comment');
+var submitCommentButtonElement = document.getElementById('submit-comment');
 var imageButtonElement = document.getElementById('submitImage');
 var imageFormElement = document.getElementById('image-form');
 var mediaCaptureElement = document.getElementById('mediaCapture');
@@ -434,10 +634,20 @@ var signInButtonElement = document.getElementById('sign-in');
 var signOutButtonElement = document.getElementById('sign-out');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
+
+
+
 // Saves message on form submit.
 if (messageFormElement != null) {
     messageFormElement.addEventListener('submit', onMessageFormSubmit);
 }
+
+// Saves comment on form submit.
+if (commentFormElement != null) {
+  commentFormElement.addEventListener('submit', onCommentFormSubmit);
+}
+
+
 if (signOutButtonElement != null) {
     signOutButtonElement.addEventListener('click', signOutUser);
 }
@@ -445,10 +655,16 @@ if (signInButtonElement != null) {
     signInButtonElement.addEventListener('click', signIn);
 }
 
-// Toggle for the button.
+// Toggle for the message button.
 if (messageInputElement != null) {
-    messageInputElement.addEventListener('keyup', toggleButton);
-    messageInputElement.addEventListener('change', toggleButton);
+    messageInputElement.addEventListener('keyup', toggleMessageButton);
+    messageInputElement.addEventListener('change', toggleMessageButton);
+}
+
+// Toggle for the comment button.
+if (commentInputElement != null) {
+  commentInputElement.addEventListener('keyup', toggleCommentButton);
+  commentInputElement.addEventListener('change', toggleCommentButton);
 }
 
 // Events for image upload.
@@ -463,6 +679,7 @@ if (mediaCaptureElement && imageButtonElement != null) {
 getPerformance();
 initFirebaseAuth();
 loadMessages();
+loadComments();
 
 // Custom Scripts
 

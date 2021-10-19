@@ -101,7 +101,32 @@
     </div>
   </section>
   <section>
-    <div class="comments"></div>
+    <div class="comments">
+
+      <!-- Comments container -->
+      <div id="comments-card"
+        class="">
+        <div class="">
+          <div id="comments">
+          </div>
+          <form id="comment-form" action="#">
+            <div class="">
+              <input class="" type="text" id="comment" autocomplete="off">
+              <label class="" for="comment">Comment...</label>
+            </div>
+            <button id="submit-comment" disabled type="submit" class="">Send</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Snackbar to appear when a user isn't signed in-->
+      <div id="must-signin-snackbar">
+        <p>You must sign-in first!</p>
+      </div>
+
+
+
+    </div>
   </section>
   <!-- Footer -->
   <footer>
