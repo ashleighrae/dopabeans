@@ -178,18 +178,19 @@ a:hover {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
   position: relative;
+  height: 160px;
 }
 
 .category img {
   width: 100%;
-  height: 100%;
+  height: 160px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .category div {
   position: absolute;
-  height: 100%;
+  height: 160px;
   width: 100%;
   top: 50%;
   left: 50%;
@@ -434,6 +435,10 @@ a:hover {
 
 /* Search bar */
 
+.searchBar {
+  padding-bottom: 2%;
+}
+
 .searchBar form {
   width: 100%;
   justify-content: center;
@@ -507,15 +512,19 @@ footer {
   padding: 30px;
   color: #121212;
   display: block;
-  padding: 30px 10%;
+  padding: 1% 10%;
 }
 
 footer ul {
   padding-left: 12px;
 }
 
-footer li a {
+footer a {
   color: #121212;
+}
+
+footer a:hover {
+  color: #dfeaf0;
 }
 
 .footermenuitems {

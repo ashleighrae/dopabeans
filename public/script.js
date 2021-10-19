@@ -45,16 +45,6 @@ $(window).resize(function() {
 
 });
 
-function toggle() {
-    var x = document.getElementById("burglinks");
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
-    }
-
-}
-
 const toKebabCase = str =>
     str &&
     str
