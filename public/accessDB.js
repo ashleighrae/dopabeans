@@ -115,8 +115,6 @@ async function populateResources(resource, link, localLink) {
             .masonry('appended', categoryDiv)
             // layout
             .masonry();
-
-        //div.prepend(categoryDiv);
     }
 }
 
@@ -253,7 +251,7 @@ async function populateCollectionPage(datab, space, docType, link, localLink, he
 // Populate resources on index page
 async function populateResourceIndexPage(datab, link) {
     const resourcesCol = collection(datab, 'resources');
-    const queriedCol = query(resourcesCol, orderBy("timestamp"), limit(15));
+    const queriedCol = query(resourcesCol, orderBy("timestamp"), limit(20));
     const resourcesSnapshot = await getDocs(queriedCol);
     const resourcesList = resourcesSnapshot.docs.map(doc => doc.data());
 
