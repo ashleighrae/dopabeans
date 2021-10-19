@@ -131,6 +131,12 @@ async function getSpacesHomepage(datab) {
 async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
+    if (space.description !== "") {
+        document.getElementsByClassName('category-description-para')[0].innerHTML = space.description;
+    } else {
+        document.getElementsByClassName('category-description')[0].style.display = "none";
+    }
+
     if (docType)
         docType.forEach(async element => {
             // Get collection details
@@ -188,6 +194,12 @@ async function populateSpacePage(datab, space, docType, link, localLink) {
 // Populate collection page
 async function populateCollectionPage(datab, space, docType, link, localLink, headerNeeded) {
     if (headerNeeded) document.getElementById('pageHeader').innerHTML = space.title;
+
+    if (space.description !== "") {
+        document.getElementsByClassName('category-description-para')[0].innerHTML = space.description;
+    } else {
+        document.getElementsByClassName('category-description')[0].style.display = "none";
+    }
 
     if (docType)
         docType.forEach(async element => {
