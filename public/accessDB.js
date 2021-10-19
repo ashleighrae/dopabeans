@@ -39,46 +39,82 @@ async function populateResources(resource, link, localLink) {
         }
 
         // Add link
-        if (resource.link) {
+        if (resource.link && !resource.image && !resource.description) {
+            const linkDiv = document.createElement("div");
+            linkDiv.classList.add("link-only");
+            linkDiv.classList.add("container");
             const linkObject = document.createElement("a");
+            linkObject.classList.add("flexyflex");
+            linkObject.target = "_blank";
             linkObject.href = resource.link;
-            categoryDiv.appendChild(linkObject);
+            const icon = document.createElement("i");
+            icon.classList.add("fas");
+            icon.classList.add("fa-link");
+            icon.classList.add("linkIcon");
+            linkObject.appendChild(icon);
+            const headingLink = document.createElement("h3");
+            const headingText = document.createTextNode(resource.title);
+            headingLink.appendChild(headingText);
+            linkObject.append(headingLink);
+            linkDiv.appendChild(linkObject);
+            categoryDiv.appendChild(linkDiv);
+        } else {
+            // Add container div
+            const containerDiv = document.createElement("div");
+            containerDiv.classList.add("container");
+
+            // Add header and link
+            const pageLink = document.createElement("a");
+            pageLink.href = link;
+            if (resource.title && !resource.image && !resource.link) {
+                const headerDiv = document.createElement("div");
+                headerDiv.classList.add("text-only");
+                headerDiv.classList.add("container");
+                const header = document.createElement("h3");
+                const title = document.createTextNode(resource.title);
+                header.appendChild(title);
+                headerDiv.appendChild(header);
+                categoryDiv.appendChild(headerDiv);
+            } else if (resource.title) {
+                const header = document.createElement("h3");
+                const title = document.createTextNode(resource.title);
+                header.appendChild(title);
+                pageLink.appendChild(header);
+                containerDiv.appendChild(pageLink);
+            }
+
+            // Add description
+            if (resource.description) {
+                const para = document.createElement("p");
+                const desc = document.createTextNode(resource.description);
+                para.appendChild(desc);
+                containerDiv.appendChild(para);
+            }
+
+            categoryDiv.appendChild(containerDiv);
+
+            // Set current collection
+            if (pageLink)
+                pageLink.addEventListener("click", (e) => {
+                    localStorage.setItem(localLink, JSON.stringify(resource));
+                });
         }
 
-        // Add container div
-        const containerDiv = document.createElement("div");
-        containerDiv.classList.add("container");
+        // Add resource objects to grid space
+        var $grid = $('.grid').masonry({
+            // options...
+            initLayout: false,
+            // percentPosition: true,
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-sizer',
+            gutter: 10
+        });
 
-        // Add header and link
-        const pageLink = document.createElement("a");
-        pageLink.href = link;
-        if (resource.title) {
-            const header = document.createElement("h3");
-            const title = document.createTextNode(resource.title);
-            header.appendChild(title);
-            pageLink.appendChild(header);
-            containerDiv.appendChild(pageLink);
-        }
-
-        // Add description
-        if (resource.description) {
-            const para = document.createElement("p");
-            const desc = document.createTextNode(resource.description);
-            para.appendChild(desc);
-            containerDiv.appendChild(para);
-        }
-
-        categoryDiv.appendChild(containerDiv);
-
-        // Add collection objects to grid space
-        var div = document.getElementsByClassName('grid')[0];
-        div.prepend(categoryDiv);
-
-        // Set current collection
-        if (pageLink)
-            pageLink.addEventListener("click", (e) => {
-                localStorage.setItem(localLink, JSON.stringify(resource));
-            });
+        $grid.masonry()
+            .append(categoryDiv)
+            .masonry('appended', categoryDiv)
+            // layout
+            .masonry();
     }
 }
 
@@ -130,6 +166,12 @@ async function getSpacesHomepage(datab) {
 // Populate space page
 async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
+
+    if (space.description !== "" && space.description) {
+        document.getElementsByClassName('category-description-para')[0].innerHTML = space.description;
+    } else {
+        document.getElementsByClassName('category-description')[0].style.display = "none";
+    }
 
     if (docType)
         docType.forEach(async element => {
@@ -189,6 +231,12 @@ async function populateSpacePage(datab, space, docType, link, localLink) {
 async function populateCollectionPage(datab, space, docType, link, localLink, headerNeeded) {
     if (headerNeeded) document.getElementById('pageHeader').innerHTML = space.title;
 
+    if (space.description !== "" && space.description) {
+        document.getElementsByClassName('category-description-para')[0].innerHTML = space.description;
+    } else {
+        document.getElementsByClassName('category-description')[0].style.display = "none";
+    }
+
     if (docType)
         docType.forEach(async element => {
             // Get resource details
@@ -203,10 +251,9 @@ async function populateCollectionPage(datab, space, docType, link, localLink, he
 // Populate resources on index page
 async function populateResourceIndexPage(datab, link) {
     const resourcesCol = collection(datab, 'resources');
-    const queriedCol = query(resourcesCol, orderBy("timestamp"), limit(15));
+    const queriedCol = query(resourcesCol, orderBy("timestamp"), limit(20));
     const resourcesSnapshot = await getDocs(queriedCol);
-    const rList = resourcesSnapshot.docs.map(doc => doc.data());
-    const resourcesList = rList.reverse();
+    const resourcesList = resourcesSnapshot.docs.map(doc => doc.data());
 
     if (resourcesList) {
         resourcesList.forEach(resource => {
@@ -225,18 +272,30 @@ async function populateResourcePage(datab) {
         const docSnap = await getDoc(docRef);
         const resource = docSnap.data();
 
-        if (resource.title)
+        if (resource.title) {
             document.getElementsByClassName('resourceHeading')[0].innerHTML =
-                resource.title;
-        if (resource.link)
+                resource.title
+        } else {
+            document.getElementsByClassName('resourceHeading')[0].style.display = "none";
+        }
+        if (resource.link) {
             document.getElementsByClassName('resourceLink')[0].href =
                 resource.link;
-        if (resource.image)
+        } else {
+            document.getElementsByClassName('resourceLink')[0].style.display = "none";
+        }
+        if (resource.image) {
             document.getElementsByClassName('resourceImageElement')[0].src =
                 resource.image;
-        if (resource.description)
+        } else {
+            document.getElementsByClassName('resourceImageDiv')[0].style.display = "none";
+        }
+        if (resource.description) {
             document.getElementsByClassName('resourceDescriptionPara')[0].innerHTML =
                 resource.description;
+        } else {
+            document.getElementsByClassName('resourceDescription')[0].style.display = "none";
+        }
     }
 }
 
