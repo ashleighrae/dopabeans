@@ -139,7 +139,7 @@ a:hover {
 
 .grid-sizer, .grid-item {
   /* width: calc(50% - 10px); */
-  width: calc(30%);
+  width: calc(20% - 10px);
 
   /* vertical gutter */
   margin-bottom: 10px;
@@ -256,7 +256,7 @@ a:hover {
 @media only screen and (min-width:1023px) {
   .grid-sizer,
   .grid-item {
-    width: calc(30% - 10px);
+    width: calc(20% - 10px);
   }
 
   /* Category Grids */
