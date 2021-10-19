@@ -38,37 +38,63 @@ async function populateResources(resource, link, localLink) {
             categoryDiv.appendChild(img);
         }
 
+        console.log(resource.image);
+
         // Add link
-        if (resource.link) {
+        if (resource.link && !resource.image && !resource.description) {
+            const linkDiv = document.createElement("div");
+            linkDiv.classList.add("link-only");
+            linkDiv.classList.add("container");
             const linkObject = document.createElement("a");
+            linkObject.classList.add("flexyflex");
             linkObject.href = resource.link;
-            categoryDiv.appendChild(linkObject);
+            const icon = document.createElement("i");
+            icon.classList.add("fas");
+            icon.classList.add("fa-link");
+            icon.classList.add("linkIcon");
+            linkObject.appendChild(icon);
+            const headingLink = document.createElement("h3");
+            const headingText = document.createTextNode(resource.title);
+            headingLink.appendChild(headingText);
+            linkObject.append(headingLink);
+            linkDiv.appendChild(linkObject);
+            categoryDiv.appendChild(linkDiv);
+        } else {
+
+            // Add container div
+            const containerDiv = document.createElement("div");
+            containerDiv.classList.add("container");
+
+            // Add header and link
+            const pageLink = document.createElement("a");
+            pageLink.href = link;
+            if (resource.title && !resource.image && !resource.link) {
+                const headerDiv = document.createElement("div");
+                headerDiv.classList.add("text-only");
+                headerDiv.classList.add("container");
+                const header = document.createElement("h3");
+                const title = document.createTextNode(resource.title);
+                header.appendChild(title);
+                headerDiv.appendChild(header);
+                categoryDiv.appendChild(headerDiv);
+            } else if (resource.title) {
+                const header = document.createElement("h3");
+                const title = document.createTextNode(resource.title);
+                header.appendChild(title);
+                pageLink.appendChild(header);
+                containerDiv.appendChild(pageLink);
+            }
+
+            // Add description
+            if (resource.description) {
+                const para = document.createElement("p");
+                const desc = document.createTextNode(resource.description);
+                para.appendChild(desc);
+                containerDiv.appendChild(para);
+            }
+
+            categoryDiv.appendChild(containerDiv);
         }
-
-        // Add container div
-        const containerDiv = document.createElement("div");
-        containerDiv.classList.add("container");
-
-        // Add header and link
-        const pageLink = document.createElement("a");
-        pageLink.href = link;
-        if (resource.title) {
-            const header = document.createElement("h3");
-            const title = document.createTextNode(resource.title);
-            header.appendChild(title);
-            pageLink.appendChild(header);
-            containerDiv.appendChild(pageLink);
-        }
-
-        // Add description
-        if (resource.description) {
-            const para = document.createElement("p");
-            const desc = document.createTextNode(resource.description);
-            para.appendChild(desc);
-            containerDiv.appendChild(para);
-        }
-
-        categoryDiv.appendChild(containerDiv);
 
         // Add collection objects to grid space
         var div = document.getElementsByClassName('grid')[0];

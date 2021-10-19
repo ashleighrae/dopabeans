@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let description = document.getElementById('desc').value;
 
             if (!image) {
-                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+                image = 'https://images.pexels.com/photos/3109807/pexels-photo-3109807.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
             }
 
             //Save Form Data To Firebase
@@ -574,7 +574,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let description = document.getElementById('desc').value;
 
             if (!image) {
-                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
+                image = 'https://images.pexels.com/photos/3109807/pexels-photo-3109807.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
             }
 
 
@@ -633,10 +633,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // let id = toKebabCase(title);
             let description = document.getElementById('desc').value;
             let link = document.querySelector("#link").value;
-
-            if (!image) {
-                image = 'https://i.some-random-api.ml/onUSIniyyq.png';
-            }
 
 
             // Add the new collection to the collections db 
