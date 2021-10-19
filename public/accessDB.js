@@ -38,8 +38,6 @@ async function populateResources(resource, link, localLink) {
             categoryDiv.appendChild(img);
         }
 
-        console.log(resource.image);
-
         // Add link
         if (resource.link && !resource.image && !resource.description) {
             const linkDiv = document.createElement("div");
@@ -47,6 +45,7 @@ async function populateResources(resource, link, localLink) {
             linkDiv.classList.add("container");
             const linkObject = document.createElement("a");
             linkObject.classList.add("flexyflex");
+            linkObject.target = "_blank";
             linkObject.href = resource.link;
             const icon = document.createElement("i");
             icon.classList.add("fas");
@@ -60,7 +59,6 @@ async function populateResources(resource, link, localLink) {
             linkDiv.appendChild(linkObject);
             categoryDiv.appendChild(linkDiv);
         } else {
-
             // Add container div
             const containerDiv = document.createElement("div");
             containerDiv.classList.add("container");
@@ -94,17 +92,17 @@ async function populateResources(resource, link, localLink) {
             }
 
             categoryDiv.appendChild(containerDiv);
+
+            // Set current collection
+            if (pageLink)
+                pageLink.addEventListener("click", (e) => {
+                    localStorage.setItem(localLink, JSON.stringify(resource));
+                });
         }
 
         // Add collection objects to grid space
         var div = document.getElementsByClassName('grid')[0];
         div.prepend(categoryDiv);
-
-        // Set current collection
-        if (pageLink)
-            pageLink.addEventListener("click", (e) => {
-                localStorage.setItem(localLink, JSON.stringify(resource));
-            });
     }
 }
 
@@ -263,18 +261,30 @@ async function populateResourcePage(datab) {
         const docSnap = await getDoc(docRef);
         const resource = docSnap.data();
 
-        if (resource.title)
+        if (resource.title) {
             document.getElementsByClassName('resourceHeading')[0].innerHTML =
-                resource.title;
-        if (resource.link)
+                resource.title
+        } else {
+            document.getElementsByClassName('resourceHeading')[0].style.display = "none";
+        }
+        if (resource.link) {
             document.getElementsByClassName('resourceLink')[0].href =
                 resource.link;
-        if (resource.image)
+        } else {
+            document.getElementsByClassName('resourceLink')[0].style.display = "none";
+        }
+        if (resource.image) {
             document.getElementsByClassName('resourceImageElement')[0].src =
                 resource.image;
-        if (resource.description)
+        } else {
+            document.getElementsByClassName('resourceImageDiv')[0].style.display = "none";
+        }
+        if (resource.description) {
             document.getElementsByClassName('resourceDescriptionPara')[0].innerHTML =
                 resource.description;
+        } else {
+            document.getElementsByClassName('resourceDescription')[0].style.display = "none";
+        }
     }
 }
 
