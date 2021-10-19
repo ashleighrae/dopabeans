@@ -241,8 +241,7 @@ async function populateResourceIndexPage(datab, link) {
     const resourcesCol = collection(datab, 'resources');
     const queriedCol = query(resourcesCol, orderBy("timestamp"), limit(15));
     const resourcesSnapshot = await getDocs(queriedCol);
-    const rList = resourcesSnapshot.docs.map(doc => doc.data());
-    const resourcesList = rList.reverse();
+    const resourcesList = resourcesSnapshot.docs.map(doc => doc.data());
 
     if (resourcesList) {
         resourcesList.forEach(resource => {
