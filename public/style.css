@@ -235,8 +235,9 @@ a:hover {
 }
 
 .linkIcon {
-  padding: 16px 5px 16px 0px;
-  font-size: 1.5em;
+  padding: 16px 10px 16px 0px;
+  font-size: 1.3em;
+  margin-top: 6px;
 }
 
 @media only screen and (min-width:767px) {
@@ -938,15 +939,14 @@ main, #messages-card {
 }
 
 #user-container #user-pic {
-  /* top: -3px; */
   position: relative;
   display: inline-block;
   background-image: url('/images/profile_placeholder.png');
   background-repeat: no-repeat;
-  width: 35px;
-  height: 35px;
-  background-size: 40px;
   border-radius: 20px;
+  width: 33px;
+  height: 33px;
+  background-size: 33px;
 }
 
 #user-container #user-name {
@@ -958,21 +958,26 @@ main, #messages-card {
 
 #sign-in {
   margin-left: 10px;
-}
-
-#sign-in, #sign-out {
-  background-color: #f8f8f800;
-  padding: 2% 3%;
-  border: 2px solid #f8f8f8;
   color: #f8f8f8;
-  font-weight: 600;
-  font-size: 1em;
+  background-color: #569493;
+  border: 1px solid #569493;
 }
 
 #sign-in:hover {
-  background-color: #569493;
-  border: 2px solid #569493;
-  color: #121212;
+  background-color: #bad9eb;
+  border: 1px solid #bad9eb;
+}
+
+#sign-in, #sign-out {
+  padding: 1.5% 3.5%;
+  font-size: 1em;
+}
+
+#sign-out {
+  border: 1px solid #bad9eb;
+  background-color: #f8f8f800;
+  color: #bad9eb;
+  font-weight: 400;
 }
 
 #submitImage {
@@ -1010,13 +1015,6 @@ main, #messages-card {
 header {
   height: 113px;
   padding-bottom: 80px !important;
-}
-
-#user-container #user-pic {
-  /* top: 2px; */
-  width: 33px;
-  height: 33px;
-  background-size: 33px;
 }
 
 .singleResource {
@@ -1126,4 +1124,26 @@ header {
     padding-top: 5%;
     text-align: left;
   }
+}
+
+.linkSpaces {
+  width: 30%;
+  margin-left: 1%;
+}
+
+.linkSpaces button{
+  padding: 1.5% 3%;
+  color: #f8f8f8;
+  background-color: #569493;
+  border: 2px solid #569493;
+}
+
+.buttonTitle { 
+  display: flex;
+  align-items: center;
+}
+
+.linkSpaces button:hover  {
+  background-color: #bad9eb;
+  border: 2px solid #bad9eb;
 }

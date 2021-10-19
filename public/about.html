@@ -119,27 +119,6 @@
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
   <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
   <script src="masonry.js"></script>
-  <script>
-    function filterSpaces() {
-      // Declare variables
-      var input, filter, ul, li, h3, i, txtValue;
-      input = document.getElementById('searchbar');
-      filter = input.value.toUpperCase();
-      cat = document.getElementsByClassName("category");
-      console.log(cat);
-
-  // Loop through all list items, and hide those who don't match the search query
-      for (i = 0; i < cat.length; i++) {
-        div = cat[i]
-        txtValue = div.textContent || div.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          cat[i].style.display = "";
-        } else {
-          cat[i].style.display = "none";
-        }
-      }
-    }
-  </script>
 </body>
 
 </html>
