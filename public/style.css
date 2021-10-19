@@ -160,10 +160,6 @@ a:hover {
   padding: 2px 16px;
 }
 
-.grid-item h3 {
-  margin: 10px 0;
-}
-
 /* Category Grids */
 .categoryGrid, .categoryGridSpace {
   display: grid;
