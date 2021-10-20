@@ -575,10 +575,11 @@ footer .footermenuitems {
 }
 
 .logoIMG {
-  width: 80%;
+  width: 92%;
   text-align: center;
   padding-bottom: 0;
 }
+
 .logoIMG img {
   height: 130px;
 }
@@ -732,6 +733,10 @@ footer .footermenuitems {
   .modal-content h3 {
     margin-left: 10px;
   }
+
+  .logoIMG {
+    width: 80%;
+  }
 }
 
 @media only screen and (min-width: 1023px) {
@@ -766,6 +771,13 @@ footer .footermenuitems {
   .modal-content div {
     padding: 1%;
   }
+
+}
+
+@media only screen and (min-width: 1700px) {
+  .logoIMG {
+    width: 70%;
+  }
 }
 
 /* SPACES */
@@ -781,6 +793,8 @@ footer .footermenuitems {
   text-align: center;
   width: 100%;
 }
+
+
 
 @media only screen and (min-width:767px) {
   .space h1 {
