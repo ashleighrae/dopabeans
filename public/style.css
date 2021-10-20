@@ -138,6 +138,7 @@ a:hover {
 
 .grid-sizer, .grid-item {
   width: calc(33.33% - 10px);
+  background-color: white;
 
   /* vertical gutter */
   margin-bottom: 10px;
