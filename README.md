@@ -1,5 +1,5 @@
 # Dopabeans
-This github project has been produced as a response to assessment item four in the course DECO3500 - Social &amp; Mobile Computing at the University of Queensland.
+This github project has been produced as a response to Assessment C: Design Prototype Brief in the course DECO3500 - Social &amp; Mobile Computing at the University of Queensland.
 
 From the beginning of this project, our team set out to explore how we could make communication and creation of friendships easier for adults with ASD. As a result, our design team developed what we think to be a viable solution by going through an iterative design and prototype process to understand and build a product based on the needs of our users.
 
