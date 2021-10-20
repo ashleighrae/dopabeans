@@ -188,7 +188,14 @@ async function populateSpacePage(datab, space, docType, link, localLink) {
                 // Add image
                 if (collection.image) {
                     var img = document.createElement('img');
-                    img.src = collection.image;
+                    if (collection.image.includes(".jpeg") ||
+                        collection.image.includes(".jpg") ||
+                        collection.image.includes(".gif") ||
+                        collection.image.includes(".png")) {
+                        img.src = collection.image;
+                    } else {
+                        img.src = 'https://images.pexels.com/photos/3109807/pexels-photo-3109807.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+                    }
                     categoryDiv.appendChild(img);
                 }
 
