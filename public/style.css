@@ -137,8 +137,7 @@ a:hover {
 }
 
 .grid-sizer, .grid-item {
-  /* width: calc(50% - 10px); */
-  width: calc(20% - 10px);
+  width: calc(33.33% - 10px);
 
   /* vertical gutter */
   margin-bottom: 10px;
@@ -789,15 +788,14 @@ footer .footermenuitems {
   }
 }
 
-/* User profile and messaging styling */
-main, #messages-card {
+/* Commenting and messaging styling */
+main, #messages-card, #comments-card {
   height: 100%;
   padding-bottom: 0;
 }
 
 #chatBuddies {
   background-color: #bad9eb;
-  border-radius: 10px;
   padding-top: 5%;
   padding-bottom: 5%;
 }
@@ -807,7 +805,7 @@ main, #messages-card {
 }
 
 
-#messages-card-container {
+#messages-card-container, #comments-card-container {
   height: calc(100% - 35px);
   padding-bottom: 0;
   background-color: #f8f8f8;
@@ -829,14 +827,8 @@ main, #messages-card {
   margin: 0 auto;
 }
 
-.mdl-card__supporting-text {
-  width: auto;
-  height: 100%;
-  padding-top: 0;
-  padding-bottom: 0;
-}
 
-#submit {
+#submit, #submit-comment {
   background-color: #569493;
   border: 2px solid #569493;
   padding: 2% 3%;
@@ -845,34 +837,42 @@ main, #messages-card {
   font-size: 1em;
 }
   
-#submit:hover {
+#submit:hover, #submit-comment:hover {
   background-color: #4c4475;
   border: 2px solid #4c4475;
 }
 
-#messages {
+#messages, #comments {
   overflow-y: auto;
   height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
 }
+
 #message-filler {
   flex-grow: 1;
 }
-.message-container:first-of-type {
+
+.message-container:first-of-type, .comment-container:first-of-type {
   border-top-width: 0;
   padding-top: 5%;
   margin-top: 0;
 }
-.message-container {
+
+.message-container, .comment-container {
   display: block;
   margin-top: 10px;
-  border-top: 1px solid #f8f8f8;
+  border-top: 1px dotted #bad9eb;
   padding: 2% 5% 0 5%;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
-.message-container.visible {
+
+.comment-container {
+  border-top: 1px dotted #6e65a4;
+}
+
+.message-container.visible, .comment-container.visible {
   opacity: 1;
 }
 .message-container .pic {
@@ -883,16 +883,20 @@ main, #messages-card {
   background-size: 30px;
   border-radius: 20px;
 }
+
 .message-container .spacing {
   display: table-cell;
   vertical-align: top;
 }
+
 .message-container .message {
   display: table-cell;
   width: calc(100% - 40px);
   padding: 5px 0 5px 10px;
   font-weight: 500;
+  color: #121212;
 }
+
 .message-container .name {
   display: inline-block;
   width: 100%;
@@ -903,7 +907,30 @@ main, #messages-card {
   box-sizing: border-box;
 }
 
-#message-form {
+.comment-container .spacing {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.comment-container .comment  {
+  display: table-cell;
+  width: calc(100% - 40px);
+  padding: 5px 0 5px 20px;
+  font-weight: 500;
+  color: #121212;
+}
+
+.comment-container .name {
+  display: inline-block;
+  width: 100%;
+  color: #4c4475;
+  font-size: 1em;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#message-form, #comment-form {
   display: flex;
   width: 90%;
   padding: 5% 0% 5% 5%;
@@ -922,10 +949,11 @@ main, #messages-card {
   width: 10%;
   padding: 5% 1% 5% 2%;
 }
-#message-form .mdl-textfield {
+#message-form .mdl-textfield, #comment-form .mdl-textfield {
   width: 100%;
 }
-#message-form button {
+
+#message-form button, #comment-form button {
   margin-left: 15px;
   padding: 1% 2%;
 }
@@ -937,6 +965,7 @@ main, #messages-card {
   background: linear-gradient(white, #f8f8f8);
   justify-content: space-between;
 }
+
 #user-container {
   width: 50%;
   display: flex;
@@ -1098,12 +1127,25 @@ header {
   padding-top: 0;
 }
 
-.comments {
-  width: 100%;
-  height: 500px;
-  background-color: #dfeaf0;
+.commmentSection {
+  padding: 10% 14%;
+  background-color: #6e65a4;
+  width: 72%;
 }
 
+@media only screen and (min-width: 767px) {
+  .commmentSection {
+    padding: 8% 15%;
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1023px) {
+  .commmentSection {
+    padding: 8% 18%;
+    width: 64%;
+  }
+}
 
 /* Descriptions */
 
@@ -1124,8 +1166,7 @@ header {
 
 @media only screen and (min-width:1023px) {
   .category-description {
-    width: 50%;
-    padding: 0 10%;
+    padding: 0 15%;
     padding-top: 5%;
     text-align: left;
   }
