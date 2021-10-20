@@ -483,7 +483,7 @@ var COMMENT_TEMPLATE =
 async function saveComment(commentText) {
     // Add a new comment entry to the Firebase database.
     try {
-        await addDoc(collection(getFirestore(), 'comments'), {
+        await addDoc(collection(db, 'resources', String(getResourceId()), 'comments'), {
             name: getUserName(),
             text: commentText,
             profilePicUrl: getProfilePicUrl(),
@@ -499,7 +499,7 @@ async function saveComment(commentText) {
 function loadComments() {
 
     // Create the query to load the last 12 comments and listen for new ones.
-    const recentCommentsQuery = query(collection(db, 'comments'), orderBy('timestamp', 'desc'), limit(12));
+    const recentCommentsQuery = query(collection(db, 'resources', String(getResourceId()), 'comments'), orderBy('timestamp', 'desc'), limit(12));
 
     // Start listening to the query.
     onSnapshot(recentCommentsQuery, function (snapshot) {
