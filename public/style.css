@@ -585,6 +585,18 @@ footer .footermenuitems {
   height: 130px;
 }
 
+#about-page-content {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+}
+
+#about-page-description {
+  max-width: 800px;
+  text-align: center;
+}
+
 #create-resource-modal-button, #create-collection-modal-button, #create-space-modal-button {
   border: 0;
   font-size: 1em;
