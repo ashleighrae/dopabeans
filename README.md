@@ -1,9 +1,10 @@
-# Cozmos
-DECO3500 - Social &amp; Mobile Computing
+# Dopabeans
+This github project has been produced as a response to assessment item four in the course DECO3500 - Social &amp; Mobile Computing at the University of Queensland.
 
-## Contents Guide
-This file will provide a guide to the contents of the repository, 
-providing a hyperlinked overview for the project and structure of your documentation. 
+From the beginning of this project, our team set out to explore how we could make communication and creation of friendships easier for adults with ASD. As a result, our design team developed what we think to be a viable solution by going through an iterative design and prototype process to understand and build a product based on the needs of our users.
+
+## Project Overview & Struture
+This repository consists of the source code for the prototype showcased at the trade show  and a wiki document where all documentation can be read.
 
 ### Link to Source Code
 https://github.com/ashleighrae/dopabeans
@@ -14,7 +15,7 @@ All wiki links, repository content and tradeshow materials can be accessed via t
 #### Wiki Page
 https://github.com/ashleighrae/dopabeans/wiki/Dopabeans-Wiki-Page
 
-## Deployment 
+## Cozmos Deployment 
 To serve the project on your local computer follow these steps:
 
 Required: 
