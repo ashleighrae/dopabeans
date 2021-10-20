@@ -168,7 +168,7 @@ async function populateSpacePage(datab, space, docType, link, localLink) {
     document.getElementById('pageHeader').innerHTML = space.title;
 
     if (space.description !== "" && space.description) {
-        document.getElementsByClassName('category-description-para')[0].innerHTML = space.description;
+        document.getElementsByClassName('space-description-para')[0].innerHTML = space.description;
     } else {
         document.getElementsByClassName('category-description')[0].style.display = "none";
     }
