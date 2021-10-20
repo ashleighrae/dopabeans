@@ -5,6 +5,15 @@ DECO3500 - Social &amp; Mobile Computing
 This file will provide a guide to the contents of the repository, 
 providing a hyperlinked overview for the project and structure of your documentation. 
 
+### Link to Source Code
+https://github.com/ashleighrae/dopabeans
+
+### Links to Wiki Links, Repository Contents & Tradeshow Material Documentationa 
+All wiki links, repository content and tradeshow materials can be accessed via the wiki link below:
+
+#### Wiki Page
+https://github.com/ashleighrae/dopabeans/wiki/Dopabeans-Wiki-Page
+
 ## Deployment 
 To serve the project on your local computer follow these steps:
 
