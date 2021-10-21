@@ -28,7 +28,7 @@ The following steps will detail how you can host the application on your local c
 ### Cloning the Repository
 1. Open **Git Bash** (or similar application).
 2. Change the current working directory to the location where you want the cloned directory.
-3. Type **git clone**, and then paste the URL you copied earlier:
+3. Add the following code to the command line:
 ```bash
 git clone https://github.com/ashleighrae/dopabeans.git
 ```
