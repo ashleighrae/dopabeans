@@ -239,8 +239,10 @@ async function populateCollectionPage(datab, space, docType, link, localLink, he
     if (headerNeeded) document.getElementById('pageHeader').innerHTML = space.title;
 
     if (space.description !== "" && space.description) {
+        if (document.getElementsByClassName('category-description-para')[0])
         document.getElementsByClassName('category-description-para')[0].innerHTML = space.description;
     } else {
+        if (document.getElementsByClassName('category-description-para')[0])
         document.getElementsByClassName('category-description')[0].style.display = "none";
     }
 

@@ -594,7 +594,7 @@ footer .footermenuitems {
 
 #about-page-description {
   max-width: 800px;
-  text-align: center;
+  text-align: center; 
 }
 
 #create-resource-modal-button, #create-collection-modal-button, #create-space-modal-button {
