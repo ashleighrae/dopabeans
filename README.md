@@ -60,7 +60,7 @@ firebase use --add
 ```bash
 npm run start
 ```
-8. In another terminal tab start the server
+8. In another terminal tab start the server:
 ```bash
 firebase serve --only hosting
 ```
