@@ -9,10 +9,8 @@ This repository consists of the source code for the prototype showcased at the t
 ### Link to Source Code
 https://github.com/ashleighrae/dopabeans
 
-### Links to Wiki Links, Repository Contents & Tradeshow Material Documentation
+### Links to Wiki, Repository Contents & Tradeshow Material Documentation
 All wiki links, repository content and tradeshow materials can be accessed via the wiki link below:
-
-#### Wiki Page
 https://github.com/ashleighrae/dopabeans/wiki/Dopabeans-Wiki-Page
 
 ## Cozmos Deployment 
