@@ -249,6 +249,12 @@ a:hover {
     width: calc(25% - 10px);
   }
 
+  
+  .grid-sizer {
+    z-index: -1;
+  }
+
+
   /* Category Grids */
   .categoryGrid, .categoryGridSpace {
     grid-template-columns: repeat(4, 1fr);
