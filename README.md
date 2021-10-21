@@ -42,7 +42,25 @@ git clone https://github.com/ashleighrae/dopabeans.git
 ```bash
 npm install
 ```
-3. When the installation is complete, run this second command:
+3. Install the CLI by running the following npm command:
 ```bash
-npm run serve
+npm -g install firebase-tools
+```
+4. Authorize the Firebase CLI by running the following command:
+```bash
+firebase login
+```
+5. Associate your app with the dopabeans Firebase project by running the following command:
+```bash
+firebase use --add
+```
+6. Select the dopabeans project (you must first have permissions to acess the firebase project) and chose any alias
+
+7. When the installation is complete, run this command in the dopabeans project folder:
+```bash
+npm run start
+```
+8. In another terminal tab start the server
+```bash
+firebase serve --only hosting
 ```
