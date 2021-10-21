@@ -20,7 +20,7 @@ To serve the project on your local computer follow these steps:
 
 Required: 
 - Node.js installed on your device,
-- Git Bash or any built-in terminal shell that supports Unix-based command line features,
+- Git Bash or any built-in terminal shell that supports Unix-based command line features, and
 - a code editor or IDE.
 
 The following steps will detail how you can host the application on your local computer and view it in your browser (chrome preferred), including the setup for the chrome extension.
